@@ -1,0 +1,5 @@
+1. Finish lay out of each scene (using scenebuilder - different fxml file for each screen)
+	- Home Screen
+	- Game Screen 
+2. Implement a separate controller for each fxml file.
+3. Write CSS and link it to the fxml.
