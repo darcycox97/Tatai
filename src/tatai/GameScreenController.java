@@ -10,12 +10,28 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 public class GameScreenController {
 
 	@FXML
 	private Button returnHome;
+	
+	@FXML
+	private Label questionLabel;
+	
+	@FXML
+	public String generateEasyNumber() {
+		int easyRandom = (int)(Math.random() * 9 + 1);	
+		System.out.print(easyRandom);
+		return String.valueOf(easyRandom);
+	}
+
+	@FXML 
+	public void initialize() {
+		questionLabel.setText(generateEasyNumber());
+	}
 	
 	@FXML
 	public void homeClicked() {

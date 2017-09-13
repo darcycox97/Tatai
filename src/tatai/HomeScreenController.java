@@ -13,19 +13,19 @@ import javafx.scene.layout.BorderPane;
 public class HomeScreenController {
 	
 	@FXML
-	private Button btn1to9;
+	private Button btnEasy;
 	
 	@FXML
-	public void btnClicked() {
+	public void btnStartGame() {
 		BorderPane root;
 		try {
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
-			btn1to9.getScene().setRoot(root);
+			btnEasy.getScene().setRoot(root);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 	
 	

@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
    <center>
-      <Label text="#" BorderPane.alignment="CENTER">
+      <Label fx:id="questionLabel" text="#" BorderPane.alignment="CENTER">
          <font>
-            <Font size="65.0" />
+            <Font size="90.0" />
          </font>
       </Label>
    </center>
