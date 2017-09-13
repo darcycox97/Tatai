@@ -25,8 +25,8 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                <children>
-                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#btnStartGame" prefHeight="60.0" prefWidth="60.0" text="1 - 9" />
-                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#btnStartGame" prefHeight="60.0" prefWidth="60.0" text="1 - 99" />
+                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#startEasyGame" prefHeight="60.0" prefWidth="60.0" text="1 - 9" />
+                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#starHardGame" prefHeight="60.0" prefWidth="60.0" text="1 - 99" />
                </children>
             </HBox>
          </children>

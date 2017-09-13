@@ -15,29 +15,38 @@ import javafx.scene.layout.BorderPane;
 
 public class GameScreenController {
 
+	public enum Difficulty {
+		EASY, HARD
+	}
+	
+	private static final int HARD_RANGE = 99;
+	private static final int EASY_RANGE = 9;
+
+	private static Difficulty difficulty;
+
 	@FXML
 	private Button returnHome;
-	
 	@FXML
 	private Label questionLabel;
-	
-	@FXML
-	public String generateEasyNumber() {
-		int easyRandom = (int)(Math.random() * 9 + 1);	
-		System.out.print(easyRandom);
-		return String.valueOf(easyRandom);
-	}
 
 	@FXML 
 	public void initialize() {
-		questionLabel.setText(generateEasyNumber());
+		if (difficulty != null) {
+			questionLabel.setText(generateNumber());
+		} else {
+			throw new RuntimeException("The difficulty was not set before generating a random number");
+		}
+	}
+	
+	public static void setDifficulty(Difficulty d) {
+		difficulty = d;
 	}
 	
 	@FXML
 	public void homeClicked() {
 		BorderPane root;
 		try {
-			
+
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Exit Confirmation");
 			alert.setContentText("Are you sure?");
@@ -52,14 +61,27 @@ public class GameScreenController {
 				root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
 				returnHome.getScene().setRoot(root);
 			} else {
-			    // ... user chose CANCEL or closed the dialog
+				// ... user chose CANCEL or closed the dialog
 			}
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 	
+	// generates a number in the range specified by the difficulty
+	private String generateNumber() {
+		int random;
+		if (difficulty.equals(Difficulty.EASY)) {
+			random = (int)(Math.random() * EASY_RANGE + 1);	
+		} else {
+			random = (int)(Math.random() * HARD_RANGE + 1);	
+		}
+		System.out.println(random);
+		return String.valueOf(random);
+	}
+	
+
 }
