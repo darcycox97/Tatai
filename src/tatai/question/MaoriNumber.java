@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Class to encapsulate information about a maori number.
  */
-public class MaoriNumber extends Number {
+public class MaoriNumber extends AbstractNumber {
 	
 	private static final File dictionary = new File("resources/dictionary.txt"); // the file containing spelling of maori numbers from 1 to 10.
 
@@ -64,4 +64,5 @@ public class MaoriNumber extends Number {
 			return null; // null is returned if there was an error
 		}
 	}
+
 }
