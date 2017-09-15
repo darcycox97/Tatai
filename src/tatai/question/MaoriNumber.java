@@ -1,4 +1,4 @@
-package tatai;
+package tatai.question;
 
 import java.io.BufferedReader;
 import java.io.File;

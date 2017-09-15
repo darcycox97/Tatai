@@ -1,4 +1,4 @@
-package tatai;
+package tatai.question;
 
 /**
  * Defines general behaviour of numbers in this application. Numbers could be in any language, it is up to sub-classes to determine 
