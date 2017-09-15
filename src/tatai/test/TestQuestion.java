@@ -11,11 +11,11 @@ public class TestQuestion {
 
 	@Test
 	public void testGetHTKWords() {
-		Question mn34 = new MaoriNumber(34);
-		String[] htk34 = mn34.getHTKWords();
-		String[] expected34 ={"toru","tekau","ma","wha"};
+		Question mn14 = new MaoriNumber(14);
+		String[] htk14 = mn14.getHTKWords();
+		String[] expected14 ={"tekau","ma","wha"};
 		
-		assertArrayEquals(expected34, htk34);
+		assertArrayEquals(expected14, htk14);
 		
 		Question mn4 = new MaoriNumber(1);
 		String[] htk4 = mn4.getHTKWords();
@@ -23,11 +23,11 @@ public class TestQuestion {
 		
 		assertArrayEquals(expected4, htk4);
 		
-		Question mn99 = new MaoriNumber(99);
-		String[] htk99 = mn99.getHTKWords();
-		String[] expected99 ={"iwa","tekau","ma","iwa"};
+		Question mn90 = new MaoriNumber(90);
+		String[] htk90 = mn90.getHTKWords();
+		String[] expected90 ={"iwa","tekau"};
 		
-		assertArrayEquals(expected99, htk99);
+		assertArrayEquals(expected90, htk90);
 	}
 	
 	@Test

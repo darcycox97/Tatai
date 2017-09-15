@@ -28,8 +28,10 @@ public class MaoriNumber extends AbstractNumber {
 			int firstDigit = Integer.parseInt(String.valueOf(value).substring(0,1));
 			int secondDigit = Integer.parseInt(String.valueOf(value).substring(1,2));
 			
-			if (firstDigit == 1) {
-				return "tekau ma " + getSpellingOfNumberFrom1to10(value);
+			if (value % 10 == 0) {
+				return getSpellingOfNumberFrom1to10(firstDigit) + " tekau";
+			} else if (firstDigit == 1) {
+				return "tekau ma " + getSpellingOfNumberFrom1to10(secondDigit);
 			} else {
 				return getSpellingOfNumberFrom1to10(firstDigit) + " tekau ma " + getSpellingOfNumberFrom1to10(secondDigit);
 			}

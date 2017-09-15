@@ -15,7 +15,7 @@
       </Label>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" text="Record" BorderPane.alignment="CENTER" />
+      <Button fx:id="recordBtn" mnemonicParsing="false" onAction="#recordClicked" text="Record" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">

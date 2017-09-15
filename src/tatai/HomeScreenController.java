@@ -36,7 +36,7 @@ public class HomeScreenController {
 	}
 	
 	@FXML
-	public void starHardGame(ActionEvent e) {
+	public void startHardGame(ActionEvent e) {
 		BorderPane root;
 		try {
 			GameScreenController.setDifficulty(Difficulty.HARD);
@@ -44,7 +44,7 @@ public class HomeScreenController {
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error starting hard game");
-			e1.printStackTrace();
+			//e1.printStackTrace();
 		}
 
 	}
