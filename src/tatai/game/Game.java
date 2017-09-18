@@ -5,13 +5,16 @@ import java.util.List;
 import tatai.question.Question;
 
 /**
- * General representation of a game. Subclasses will define the number of questions, and the type of questions e.g Numbers or Equations.
+ * General representation of a game. Subclasses will define the type of questions e.g Numbers or Equations.
  */
 public abstract class Game {
 	
 	private static final int DEFAULT_NUM_QUESTIONS = 10;
+	private static final int DEFAULT_RANGE = 10;
 	
 	protected final int NUM_QUESTIONS;
+	
+	protected final int RANGE;
 	
 	private int currentQuestionIndex;
 	
@@ -21,14 +24,15 @@ public abstract class Game {
 	 * Constructor that sets number of questions to default.
 	 */
 	public Game() {
-		this(DEFAULT_NUM_QUESTIONS);
+		this(DEFAULT_NUM_QUESTIONS, DEFAULT_RANGE);
 	}
 
 	/**
 	 * Constructor to specify number of questions in the game
 	 */
-	public Game(int numOfQuestions) {
+	public Game(int numOfQuestions, int range) {
 		this.NUM_QUESTIONS = numOfQuestions;
+		this.RANGE = range;
 		this.questions = initializeQuestions();
 		this.currentQuestionIndex = 0;
 	}
