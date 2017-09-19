@@ -35,9 +35,11 @@ public class GameScreenController {
 	@FXML
 	private Button returnHome;
 	@FXML
-	private Button recordBtn;
+	private Button btnRecord;
 	@FXML
 	private Label questionLabel;
+	@FXML
+	private Button btnNext;
 
 	@FXML 
 	public void initialize() {
@@ -89,11 +91,13 @@ public class GameScreenController {
 	
 	@FXML
 	public void recordClicked() {
+		btnRecord.setVisible(false);
+		btnNext.setVisible(true);
 		questionNumber++;
 		if (questionNumber >= NUM_QUESTIONS) {
 			questionLabel.setText("No More Questions");
 		} else {
-			recordBtn.setText(NEXT_QUESTION);
+			btnRecord.setText(NEXT_QUESTION);
 			displayQuestion(questionNumber);
 		}
 		
