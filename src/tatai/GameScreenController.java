@@ -24,9 +24,11 @@ public class GameScreenController {
 	@FXML
 	private Button returnHome;
 	@FXML
-	private Button recordBtn;
+	private Button btnRecord;
 	@FXML
 	private Label questionLabel;
+	@FXML
+	private Button btnNext;
 
 	@FXML 
 	public void initialize() {
@@ -65,6 +67,7 @@ public class GameScreenController {
 	@FXML
 	public void recordClicked() {
 		// use htk object to record user, compare the htk output with the expected words.
+
 		
 	}
 	

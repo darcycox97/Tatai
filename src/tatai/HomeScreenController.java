@@ -21,9 +21,12 @@ public class HomeScreenController {
 	
 	@FXML
 	private Button btnEasy;
-	
 	@FXML
 	private Button btnHard;
+	@FXML
+	private Button btnHelp;
+	@FXML
+	private Button btnScores;
 	
 	@FXML
 	public void startEasyGame(ActionEvent e) {
