@@ -64,6 +64,12 @@ public class GameScreenController {
 	
 	@FXML
 	public void recordClicked() {
+		// use htk object to record user, compare the htk output with the expected words.
+		
+	}
+	
+	@FXML
+	public void nextQuestion() {
 		if (game.hasNextQuestion()) {
 			displayQuestion(game.nextQuestion());
 		} else {

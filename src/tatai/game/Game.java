@@ -20,6 +20,8 @@ public abstract class Game {
 	
 	private List<Question> questions;
 	
+	private Question currentQuestion;
+	
 	/**
 	 * Constructor that sets number of questions to default.
 	 */
@@ -35,6 +37,7 @@ public abstract class Game {
 		this.RANGE = range;
 		this.questions = initializeQuestions();
 		this.currentQuestionIndex = 0;
+		this.currentQuestion = this.questions.get(0);
 	}
 	
 	/**
@@ -47,9 +50,16 @@ public abstract class Game {
 		return currentQuestionIndex < NUM_QUESTIONS;
 	}
 	
+	/**
+	 * Returns the next question in the list of questions. Stores the current question.
+	 */
 	public Question nextQuestion() {
-		Question nextQ = questions.get(currentQuestionIndex);
+		currentQuestion = questions.get(currentQuestionIndex);
 		currentQuestionIndex++;
-		return nextQ;
+		return currentQuestion;
+	}
+	
+	public Question getCurrentQuestion() {
+		return currentQuestion;
 	}
 }
