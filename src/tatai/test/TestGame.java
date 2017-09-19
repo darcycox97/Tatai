@@ -14,25 +14,27 @@ public class TestGame {
 
 	@Before
 	public void setUp() {
-		game = new NumberGame(10);
+		game = new NumberGame(10,10);
 	}
 
 	@Test
 	public void test() {
 
 		// repeat the test 50 times to increase probability of failure due to random numbers
+		int numQuestions;
 		for (int i = 0; i < 50; i++) {
-			Game game = new NumberGame(10);
-			int numQuestions = 0;
+			game = new NumberGame(10,10);
+			numQuestions = 0;
 			while (game.hasNextQuestion()) {
 				Question q = game.nextQuestion();
 				assertTrue(q.getValue()>0 && q.getValue() <= 10); // check questions are within the specified range
 				numQuestions++;
+				System.out.println(numQuestions);
 			}
+			System.out.println(numQuestions);
+			assertEquals(10,numQuestions); // check all questions are iterated through
 
-			assertTrue(numQuestions == 10); // check all questions are iterated through
-
-			game = new NumberGame(99);
+			game = new NumberGame(10, 99);
 			numQuestions = 0;
 			while (game.hasNextQuestion()) {
 				Question q = game.nextQuestion();
@@ -40,7 +42,7 @@ public class TestGame {
 				numQuestions++;
 			}
 
-			assertTrue(numQuestions == 10); // check all questions are iterated through
+			assertEquals(10,numQuestions);  // check all questions are iterated through
 		}
 	}
 
