@@ -22,6 +22,8 @@ public abstract class Game {
 	
 	private Question currentQuestion;
 	
+	private int score;
+	
 	/**
 	 * Constructor that sets number of questions to default.
 	 */
@@ -38,6 +40,7 @@ public abstract class Game {
 		this.questions = initializeQuestions();
 		this.currentQuestionIndex = 0;
 		this.currentQuestion = this.questions.get(0);
+		this.score = 0;
 	}
 	
 	/**
@@ -61,5 +64,12 @@ public abstract class Game {
 	
 	public Question getCurrentQuestion() {
 		return currentQuestion;
+	}
+	
+	/**
+	 * Returns a string representation of the score that can be used to display in the GUI. e.g "7/10"
+	 */
+	public String getScore() {
+		return score + "/" + currentQuestionIndex;
 	}
 }

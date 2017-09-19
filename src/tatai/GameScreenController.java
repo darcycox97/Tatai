@@ -29,11 +29,15 @@ public class GameScreenController {
 	private Label questionLabel;
 	@FXML
 	private Button btnNext;
+	@FXML
+	private Label lblScore;
 
 	@FXML 
 	public void initialize() {
 		game = GameInstance.getInstance().getCurrentGame();
 		displayQuestion(game.nextQuestion());
+		btnRecord.setVisible(true);
+		btnNext.setVisible(false);
 	}
 	
 	@FXML
@@ -69,15 +73,21 @@ public class GameScreenController {
 		// use htk object to record user, compare the htk output with the expected words.
 
 		
+		
+		btnRecord.setVisible(false);
+		btnNext.setVisible(true);
 	}
 	
 	@FXML
 	public void nextQuestion() {
+		lblScore.setText(game.getScore()); // this must be above the call to game.nextQuestion() or score will be off.
 		if (game.hasNextQuestion()) {
 			displayQuestion(game.nextQuestion());
+			btnRecord.setVisible(true);
 		} else {
 			questionLabel.setText("Game Over");
 		}
+		btnNext.setVisible(false);
 	}
 	
 	private void displayQuestion(Question q) {
