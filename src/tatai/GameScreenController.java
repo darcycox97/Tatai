@@ -70,9 +70,8 @@ public class GameScreenController {
 	
 	@FXML
 	public void recordClicked() {
-		// use htk object to record user, compare the htk output with the expected words.
-
 		
+		game.attemptQuestion();
 		
 		btnRecord.setVisible(false);
 		btnNext.setVisible(true);

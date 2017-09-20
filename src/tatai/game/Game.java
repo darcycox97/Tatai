@@ -2,6 +2,7 @@ package tatai.game;
 
 import java.util.List;
 
+import tatai.htk.HTK;
 import tatai.question.Question;
 
 /**
@@ -24,6 +25,8 @@ public abstract class Game {
 	
 	private int score;
 	
+	private HTK htk;
+	
 	/**
 	 * Constructor that sets number of questions to default.
 	 */
@@ -41,6 +44,7 @@ public abstract class Game {
 		this.currentQuestionIndex = 0;
 		this.currentQuestion = this.questions.get(0);
 		this.score = 0;
+		this.htk = new HTK();
 	}
 	
 	/**
@@ -71,5 +75,12 @@ public abstract class Game {
 	 */
 	public String getScore() {
 		return score + "/" + currentQuestionIndex;
+	}
+	
+	public void attemptQuestion() {
+		boolean correct = htk.recordQuestion(currentQuestion);
+		if (correct) {
+			score++;
+		}
 	}
 }
