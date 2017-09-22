@@ -1,5 +1,6 @@
 package tatai;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import tatai.question.Question;
 import tatai.game.Game;
 import tatai.game.GameInstance;
@@ -20,9 +23,12 @@ import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{
 	
+	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
+	
 	private Game game;
-	//private Question currentQuestion;
-
+	
+	private MediaPlayer player;
+	
 	@FXML
 	private Button returnHome;
 	@FXML
@@ -42,6 +48,7 @@ public class GameScreenController implements HTKListener{
 	public void initialize() {
 		
 		game = GameInstance.getInstance().getCurrentGame();
+		cleanUpForNextQuestion();
 		
 		playerNamePrompt();
 		
@@ -82,6 +89,7 @@ public class GameScreenController implements HTKListener{
 	public void recordClicked() {
 		
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
+		lblOutcome.setText("Recording....");
 		
 		game.attemptQuestion(this);
 		
@@ -95,6 +103,7 @@ public class GameScreenController implements HTKListener{
 		btnRecord.setDisable(false);
 		btnRecord.setVisible(false);
 		btnNext.setVisible(true);
+		btnPlayBack.setVisible(true);
 		
 		displayResults(game.getResult());
 	}
@@ -108,7 +117,17 @@ public class GameScreenController implements HTKListener{
 			questionLabel.setText("Game Over!");
 		}
 		btnNext.setVisible(false);
-		lblOutcome.setText("");
+		btnPlayBack.setVisible(false);
+		
+		cleanUpForNextQuestion();
+	}
+	
+	@FXML
+	public void playbackAudio() {
+		player = new MediaPlayer(new Media(AUDIO.toURI().toString()));
+		player.setVolume(1.0);
+		player.setMute(false);
+		player.play();
 	}
 	
 	
@@ -139,6 +158,12 @@ public class GameScreenController implements HTKListener{
 		}
 		
 		game.setPlayerName(enteredName);
+	}
+	
+	
+	private void cleanUpForNextQuestion() {
+		lblOutcome.setText("");
+		AUDIO.delete();
 	}
 	
 

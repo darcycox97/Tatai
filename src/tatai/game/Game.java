@@ -15,21 +15,14 @@ public abstract class Game {
 	private static final int DEFAULT_RANGE = 9;
 	
 	protected final int NUM_QUESTIONS;
-	
 	protected final int RANGE;
 	
 	private int currentQuestionIndex;
-	
 	private List<Question> questions;
-	
 	private Question currentQuestion;
-	
 	private boolean currentResult; // holds the result of the most recently played question
-	
 	private int score;
-	
 	private HTK htk;
-
 	private String playerName;
 
 	
@@ -86,9 +79,10 @@ public abstract class Game {
 	/**
 
 	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
+	 * @param l The HTKListener that is to be notified when recording is finished
 	 */
-	public void attemptQuestion(HTKListener o) {
-		htk.recordQuestion(currentQuestion, o);
+	public void attemptQuestion(HTKListener l) {
+		htk.recordQuestion(currentQuestion, l);
 		
 	}
 	
@@ -110,6 +104,7 @@ public abstract class Game {
 	public boolean getResult() {
 		return currentResult;
 	}
+	
 
    /**
 	 * Sets the value of the game's playerName field. Used for recording score on leader board.
