@@ -13,7 +13,7 @@ public class TestQuestion {
 	public void testGetHTKWords() {
 		Question mn14 = new MaoriNumber(14);
 		String[] htk14 = mn14.getHTKWords();
-		String[] expected14 ={"tekau","ma","wha"};
+		String[] expected14 ={"tekau", "ma", "wha"};
 		
 		assertArrayEquals(expected14, htk14);
 		

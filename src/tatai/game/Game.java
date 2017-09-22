@@ -24,6 +24,8 @@ public abstract class Game {
 	
 	private int score;
 	
+	private String playerName;
+	
 	/**
 	 * Constructor that sets number of questions to default.
 	 */
@@ -71,5 +73,19 @@ public abstract class Game {
 	 */
 	public String getScore() {
 		return score + "/" + currentQuestionIndex;
+	}
+	
+	/**
+	 * Sets the value of the game's playerName field. Used for recording score on leader board.
+	 */
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+	
+	/**
+	 * Gets the value of the game's playerName field. Used for recording score on leader board.
+	 */
+	public String getPlayerName() {
+		return this.playerName;
 	}
 }
