@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import tatai.question.Question;
 import tatai.game.Game;
@@ -35,7 +36,11 @@ public class GameScreenController implements HTKListener{
 
 	@FXML 
 	public void initialize() {
+		
 		game = GameInstance.getInstance().getCurrentGame();
+		
+		playerNamePrompt();
+		
 		displayQuestion(game.nextQuestion());
 		btnRecord.setVisible(true);
 		btnNext.setVisible(false);
@@ -95,13 +100,28 @@ public class GameScreenController implements HTKListener{
 			displayQuestion(game.nextQuestion());
 			btnRecord.setVisible(true);
 		} else {
-			questionLabel.setText("Game Over");
+			questionLabel.setText("Game Over!");
 		}
 		btnNext.setVisible(false);
 	}
 	
 	private void displayQuestion(Question q) {
 		questionLabel.setText(q.getDisplayText());
+	}
+	
+	private void playerNamePrompt() {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Player Name");
+		dialog.setHeaderText("Enter your name: ");
+		
+		Optional<String> result = dialog.showAndWait();
+		String enteredName = "no name";
+		
+		if (result.isPresent()) {
+			enteredName = result.get();
+		}
+		
+		game.setPlayerName(enteredName);
 	}
 	
 

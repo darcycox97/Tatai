@@ -27,6 +27,9 @@ public abstract class Game {
 	private int score;
 	
 	private HTK htk;
+
+	private String playerName;
+
 	
 	/**
 	 * Constructor that sets number of questions and the range to default.
@@ -79,6 +82,7 @@ public abstract class Game {
 	}
 	
 	/**
+
 	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
 	 */
 	public void attemptQuestion(HTKListener o) {
@@ -94,5 +98,19 @@ public abstract class Game {
 		if (correct) {
 			score++;
 		}
+
+   /**
+	 * Sets the value of the game's playerName field. Used for recording score on leader board.
+	 */
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+	
+	/**
+	 * Gets the value of the game's playerName field. Used for recording score on leader board.
+	 */
+	public String getPlayerName() {
+		return this.playerName;
+
 	}
 }
