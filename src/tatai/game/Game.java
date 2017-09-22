@@ -18,6 +18,7 @@ public abstract class Game {
 	protected final int RANGE;
 	
 	private int currentQuestionIndex;
+	private int attempts;
 	private List<Question> questions;
 	private Question currentQuestion;
 	private boolean currentResult; // holds the result of the most recently played question
@@ -43,6 +44,7 @@ public abstract class Game {
 		this.currentQuestionIndex = 0;
 		this.currentQuestion = this.questions.get(0);
 		this.score = 0;
+		this.attempts = 0;
 		this.htk = new HTK();
 	}
 	
@@ -60,6 +62,7 @@ public abstract class Game {
 	 * Returns the next question in the list of questions. Stores the current question.
 	 */
 	public Question nextQuestion() {
+		attempts = 0; //reset number of attempts because we are moving onto a new question
 		currentQuestion = questions.get(currentQuestionIndex);
 		currentQuestionIndex++;
 		return currentQuestion;
@@ -83,6 +86,7 @@ public abstract class Game {
 	 */
 	public void attemptQuestion(HTKListener l) {
 		htk.recordQuestion(currentQuestion, l);
+		attempts++;
 		
 	}
 	
@@ -96,6 +100,10 @@ public abstract class Game {
 		if (correct) {
 			score++;
 		}
+	}
+	
+	public int numAttempts() {
+		return attempts;
 	}
 	
 	/**

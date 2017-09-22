@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
@@ -18,7 +19,7 @@
          <children>
             <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" text="Quit Game" />
             <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="lblScore" alignment="CENTER" prefHeight="60.0">
+            <Label fx:id="lblScore" alignment="CENTER">
                <font>
                   <Font size="22.0" />
                </font>
@@ -32,11 +33,11 @@
    <center>
       <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="0.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="957.0" minWidth="10.0" prefWidth="957.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="0.0" prefWidth="0.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -49,11 +50,29 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Label fx:id="questionLabel" text="#" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="90.0" />
-               </font>
-            </Label>
+            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <children>
+                  <Label fx:id="questionLabel" text="#" wrapText="true">
+                     <font>
+                        <Font size="90.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="totalScoreBox" alignment="TOP_CENTER" spacing="50.0" visible="false">
+                     <children>
+                        <Label text="Total Score:">
+                           <font>
+                              <Font size="42.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblTotalScore" alignment="CENTER" text="Label">
+                           <font>
+                              <Font size="39.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
          </children>
       </GridPane>
    </center>
@@ -61,8 +80,8 @@
       <GridPane prefHeight="112.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="797.0" minWidth="10.0" prefWidth="688.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="590.0" minWidth="0.0" prefWidth="109.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
@@ -82,6 +101,25 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
+                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="20.0" visible="false">
+                     <children>
+                        <Label text="Try Again?">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnYesTryAgain" mnemonicParsing="false" onAction="#retryQuestion" text="Yes">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnNoTryAgain" mnemonicParsing="false" onAction="#nextQuestion" text="No">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </StackPane>
             <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" text="Listen" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">

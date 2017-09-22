@@ -14,6 +14,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import tatai.question.Question;
@@ -23,12 +25,15 @@ import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{
 	
+	private static final String CORRECT = "Correct!";
+	private static final String INCORRECT = "Incorrect";
+
 	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
-	
+
 	private Game game;
-	
+
 	private MediaPlayer player;
-	
+
 	@FXML
 	private Button returnHome;
 	@FXML
@@ -40,23 +45,33 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	private Button btnPlayBack;
 	@FXML
+	private Button btnYesTryAgain;
+	@FXML
+	private Button btnNoTryAgain;
+	@FXML
+	private HBox tryAgainBox;
+	@FXML
+	private VBox totalScoreBox;
+	@FXML
 	private Label lblOutcome;
 	@FXML
 	private Label lblScore;
+	@FXML
+	private Label lblTotalScore;
 
 	@FXML 
 	public void initialize() {
-		
+
 		game = GameInstance.getInstance().getCurrentGame();
-		cleanUpForNextQuestion();
-		
+		AUDIO.delete(); // clear any previously recorded numbers
+
 		playerNamePrompt();
-		
+
 		displayQuestion(game.nextQuestion());
 		btnRecord.setVisible(true);
 		btnNext.setVisible(false);
 	}
-	
+
 	@FXML
 	public void homeClicked() {
 		BorderPane root;
@@ -80,48 +95,56 @@ public class GameScreenController implements HTKListener{
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void recordClicked() {
-		
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
 		lblOutcome.setText("Recording....");
-		
 		game.attemptQuestion(this);
-		
 	}
-	
+
 	/**
 	 * Defines what the gui should do when the recording has finished
 	 */
 	public void recordingComplete() {
-		
+
 		btnRecord.setDisable(false);
 		btnRecord.setVisible(false);
-		btnNext.setVisible(true);
 		btnPlayBack.setVisible(true);
-		
-		displayResults(game.getResult());
+
+		boolean correct = game.getResult();
+
+		if (correct || game.numAttempts() > 1) {
+			nextQuestionView();
+		} else {
+			// the user only gets to try again if they have made a single attempt
+			tryAgainView();
+		}
 	}
-	
+
+	@FXML
+	public void retryQuestion() {
+		recordView();
+	}
+
 	@FXML
 	public void nextQuestion() {
+		recordView();
 		if (game.hasNextQuestion()) {
 			displayQuestion(game.nextQuestion());
-			btnRecord.setVisible(true);
 		} else {
-			questionLabel.setText("Game Over!");
+			questionLabel.setVisible(false);
+			lblScore.setVisible(false);
+			totalScoreBox.setVisible(true);
+			lblTotalScore.setText(game.getScore());
+			btnRecord.setVisible(false);
 		}
-		btnNext.setVisible(false);
-		btnPlayBack.setVisible(false);
-		
-		cleanUpForNextQuestion();
+
 	}
-	
+
 	@FXML
 	public void playbackAudio() {
 		player = new MediaPlayer(new Media(AUDIO.toURI().toString()));
@@ -129,42 +152,63 @@ public class GameScreenController implements HTKListener{
 		player.setMute(false);
 		player.play();
 	}
-	
-	
+
+
 	private void displayResults(boolean correct) {
 		if (correct) {
-			lblOutcome.setText("Correct!");
+			lblOutcome.setText(CORRECT);
 		} else {
-			lblOutcome.setText("Incorrect");
+			lblOutcome.setText(INCORRECT);
 		}
-		
+
 		lblScore.setText(game.getScore());
 	}
-	
+
 	private void displayQuestion(Question q) {
 		questionLabel.setText(q.getDisplayText());
 	}
-	
+
 	private void playerNamePrompt() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Player Name");
 		dialog.setHeaderText("Enter your name: ");
-		
+
 		Optional<String> result = dialog.showAndWait();
 		String enteredName = "no name";
-		
+
 		if (result.isPresent()) {
 			enteredName = result.get();
 		}
-		
+
 		game.setPlayerName(enteredName);
 	}
-	
-	
-	private void cleanUpForNextQuestion() {
-		lblOutcome.setText("");
+
+	private void recordView() {
 		AUDIO.delete();
+		btnRecord.setVisible(true);
+		tryAgainBox.setVisible(false);
+		btnPlayBack.setVisible(false);
+		btnNext.setVisible(false);
+		lblOutcome.setText("");
 	}
-	
+
+	private void tryAgainView() {
+		btnRecord.setVisible(false);
+		tryAgainBox.setVisible(true);
+		btnPlayBack.setVisible(true);
+		btnNext.setVisible(false);
+		
+		displayResults(game.getResult());
+	}
+
+	private void nextQuestionView() {
+		btnNext.setVisible(true);
+		btnRecord.setVisible(false);
+		tryAgainBox.setVisible(false);
+		btnPlayBack.setVisible(true);
+		
+		displayResults(game.getResult());
+	}
+
 
 }
