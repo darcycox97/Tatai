@@ -98,6 +98,7 @@ public abstract class Game {
 		if (correct) {
 			score++;
 		}
+	}
 
    /**
 	 * Sets the value of the game's playerName field. Used for recording score on leader board.
