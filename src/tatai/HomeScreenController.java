@@ -16,7 +16,7 @@ import tatai.game.NumberGame;
  */
 public class HomeScreenController {
 	private static final int GAME_LENGTH = 10;
-	private static final int EASY_RANGE = 10;
+	private static final int EASY_RANGE = 9;
 	private static final int HARD_RANGE = 99;
 	
 	@FXML

@@ -32,6 +32,10 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	private Button btnNext;
 	@FXML
+	private Button btnPlayBack;
+	@FXML
+	private Label lblOutcome;
+	@FXML
 	private Label lblScore;
 
 	@FXML 
@@ -91,11 +95,12 @@ public class GameScreenController implements HTKListener{
 		btnRecord.setDisable(false);
 		btnRecord.setVisible(false);
 		btnNext.setVisible(true);
+		
+		displayResults(game.getResult());
 	}
 	
 	@FXML
 	public void nextQuestion() {
-		lblScore.setText(game.getScore()); // this must be above the call to game.nextQuestion() or score will be off.
 		if (game.hasNextQuestion()) {
 			displayQuestion(game.nextQuestion());
 			btnRecord.setVisible(true);
@@ -103,6 +108,18 @@ public class GameScreenController implements HTKListener{
 			questionLabel.setText("Game Over!");
 		}
 		btnNext.setVisible(false);
+		lblOutcome.setText("");
+	}
+	
+	
+	private void displayResults(boolean correct) {
+		if (correct) {
+			lblOutcome.setText("Correct!");
+		} else {
+			lblOutcome.setText("Incorrect");
+		}
+		
+		lblScore.setText(game.getScore());
 	}
 	
 	private void displayQuestion(Question q) {

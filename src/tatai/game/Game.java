@@ -12,7 +12,7 @@ import tatai.question.Question;
 public abstract class Game {
 	
 	private static final int DEFAULT_NUM_QUESTIONS = 10;
-	private static final int DEFAULT_RANGE = 10;
+	private static final int DEFAULT_RANGE = 9;
 	
 	protected final int NUM_QUESTIONS;
 	
@@ -23,6 +23,8 @@ public abstract class Game {
 	private List<Question> questions;
 	
 	private Question currentQuestion;
+	
+	private boolean currentResult; // holds the result of the most recently played question
 	
 	private int score;
 	
@@ -95,9 +97,18 @@ public abstract class Game {
 	 * or not the user said the answer correctly
 	 */
 	public void updateScore(boolean correct) {
+		
+		currentResult = correct;
 		if (correct) {
 			score++;
 		}
+	}
+	
+	/**
+	 * Returns a boolean value stating whether or not the most recent attempt was correct.
+	 */
+	public boolean getResult() {
+		return currentResult;
 	}
 
    /**
