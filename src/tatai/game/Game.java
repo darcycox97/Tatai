@@ -2,6 +2,8 @@ package tatai.game;
 
 import java.util.List;
 
+import tatai.htk.HTK;
+import tatai.htk.HTKListener;
 import tatai.question.Question;
 
 /**
@@ -24,10 +26,13 @@ public abstract class Game {
 	
 	private int score;
 	
+	private HTK htk;
+
 	private String playerName;
+
 	
 	/**
-	 * Constructor that sets number of questions to default.
+	 * Constructor that sets number of questions and the range to default.
 	 */
 	public Game() {
 		this(DEFAULT_NUM_QUESTIONS, DEFAULT_RANGE);
@@ -43,6 +48,7 @@ public abstract class Game {
 		this.currentQuestionIndex = 0;
 		this.currentQuestion = this.questions.get(0);
 		this.score = 0;
+		this.htk = new HTK();
 	}
 	
 	/**
@@ -76,6 +82,24 @@ public abstract class Game {
 	}
 	
 	/**
+
+	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
+	 */
+	public void attemptQuestion(HTKListener o) {
+		htk.recordQuestion(currentQuestion, o);
+		
+	}
+	
+	/**
+	 * Called by external classes that handle the recording of a question, once they have calculated whether
+	 * or not the user said the answer correctly
+	 */
+	public void updateScore(boolean correct) {
+		if (correct) {
+			score++;
+		}
+
+   /**
 	 * Sets the value of the game's playerName field. Used for recording score on leader board.
 	 */
 	public void setPlayerName(String playerName) {
@@ -87,5 +111,6 @@ public abstract class Game {
 	 */
 	public String getPlayerName() {
 		return this.playerName;
+
 	}
 }

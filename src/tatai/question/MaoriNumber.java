@@ -31,9 +31,9 @@ public class MaoriNumber extends AbstractNumber {
 			if (value % 10 == 0) {
 				return getSpellingOfNumberFrom1to10(firstDigit) + " tekau";
 			} else if (firstDigit == 1) {
-				return "tekau ma " + getSpellingOfNumberFrom1to10(secondDigit);
+				return "tekau maa " + getSpellingOfNumberFrom1to10(secondDigit);
 			} else {
-				return getSpellingOfNumberFrom1to10(firstDigit) + " tekau ma " + getSpellingOfNumberFrom1to10(secondDigit);
+				return getSpellingOfNumberFrom1to10(firstDigit) + " tekau maa " + getSpellingOfNumberFrom1to10(secondDigit);
 			}
 		}
 	}

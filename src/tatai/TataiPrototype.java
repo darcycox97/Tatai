@@ -23,6 +23,7 @@ public class TataiPrototype extends Application {
 		//  ^^^^^^ use this syntax to load any custom fonts. Place these fonts into the resources folder
 			
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Tatai!");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
