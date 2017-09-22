@@ -3,6 +3,7 @@ package tatai.game;
 import java.util.List;
 
 import tatai.htk.HTK;
+import tatai.htk.HTKListener;
 import tatai.question.Question;
 
 /**
@@ -80,8 +81,8 @@ public abstract class Game {
 	/**
 	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
 	 */
-	public void attemptQuestion() {
-		htk.recordQuestion(currentQuestion);
+	public void attemptQuestion(HTKListener o) {
+		htk.recordQuestion(currentQuestion, o);
 		
 	}
 	

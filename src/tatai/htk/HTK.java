@@ -15,18 +15,17 @@ import tatai.question.Question;
  */
 public class HTK {
 	
-	private Service<Boolean> recordService;
-	
-	public HTK() {}
-	// this points to a script file i wrote that ensures when GoSpeech is run, it has access to the needed subfolders
 	private static final String COMMAND = "resources/HTK/MaoriNumbers/GoSpeech"; 
 	private static final File OUTPUT_FILE = new File("resources/HTK/MaoriNumbers/recout.mlf");
 	
+	private Service<Boolean> recordService;
+	
 	/**
 	 * Method to be called when the user attempts to record themselves saying the answer to a given question.
-	 * Passes the recording onto a background thread
+	 * Passes the recording onto a background thread.
+	 * The object parameter 
 	 */
-	public void recordQuestion(Question q) {
+	public void recordQuestion(Question q, HTKListener l) {
 		
 		recordService = new Service<Boolean>(){
 			@Override
@@ -35,8 +34,10 @@ public class HTK {
 			}
 		};
 		
-		recordService.setOnSucceeded(e ->
-				GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue())
+		recordService.setOnSucceeded(e -> {
+				GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
+				l.recordingComplete();
+				}
 			);
 		
 		recordService.restart();

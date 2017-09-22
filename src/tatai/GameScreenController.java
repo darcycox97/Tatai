@@ -15,8 +15,9 @@ import javafx.scene.layout.BorderPane;
 import tatai.question.Question;
 import tatai.game.Game;
 import tatai.game.GameInstance;
+import tatai.htk.HTKListener;
 
-public class GameScreenController {
+public class GameScreenController implements HTKListener{
 	
 	private Game game;
 	//private Question currentQuestion;
@@ -71,8 +72,18 @@ public class GameScreenController {
 	@FXML
 	public void recordClicked() {
 		
-		game.attemptQuestion();
+		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
 		
+		game.attemptQuestion(this);
+		
+	}
+	
+	/**
+	 * Defines what the gui should do when the recording has finished
+	 */
+	public void recordingComplete() {
+		
+		btnRecord.setDisable(false);
 		btnRecord.setVisible(false);
 		btnNext.setVisible(true);
 	}
