@@ -28,7 +28,7 @@ public abstract class Game {
 	private HTK htk;
 	
 	/**
-	 * Constructor that sets number of questions to default.
+	 * Constructor that sets number of questions and the range to default.
 	 */
 	public Game() {
 		this(DEFAULT_NUM_QUESTIONS, DEFAULT_RANGE);
@@ -77,8 +77,19 @@ public abstract class Game {
 		return score + "/" + currentQuestionIndex;
 	}
 	
+	/**
+	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
+	 */
 	public void attemptQuestion() {
-		boolean correct = htk.recordQuestion(currentQuestion);
+		htk.recordQuestion(currentQuestion);
+		
+	}
+	
+	/**
+	 * Called by external classes that handle the recording of a question, once they have calculated whether
+	 * or not the user said the answer correctly
+	 */
+	public void updateScore(boolean correct) {
 		if (correct) {
 			score++;
 		}
