@@ -11,8 +11,10 @@ import tatai.question.Question;
  */
 public abstract class Game {
 	
-	private static final int DEFAULT_NUM_QUESTIONS = 10;
-	private static final int DEFAULT_RANGE = 9;
+	public static final int EASY_RANGE = 9;
+	public static final int HARD_RANGE = 99;
+	public static final int DEFAULT_NUM_QUESTIONS = 10;
+	public static final int DEFAULT_RANGE = 9;
 	
 	protected final int NUM_QUESTIONS;
 	protected final int RANGE;
@@ -73,10 +75,24 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Returns the range of the current game
+	 */
+	public int getRange() {
+		return RANGE;
+	}
+	
+	/**
 	 * Returns a string representation of the score that can be used to display in the GUI. e.g "7/10"
 	 */
 	public String getScore() {
 		return score + "/" + currentQuestionIndex;
+	}
+	
+	/**
+	 * Returns the integer value of the score
+	 */
+	public int getScoreValue() {
+		return score;
 	}
 	
 	/**

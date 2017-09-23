@@ -21,12 +21,15 @@ import javafx.scene.media.MediaPlayer;
 import tatai.question.Question;
 import tatai.game.Game;
 import tatai.game.GameInstance;
+import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{
 	
 	private static final String CORRECT = "Correct!";
 	private static final String INCORRECT = "Incorrect";
+	private static final String RECORDING = "Recording....";
+	private static final int NEXT_LEVEL_THRESHOLD = 8;
 
 	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
 
@@ -45,11 +48,11 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	private Button btnPlayBack;
 	@FXML
-	private Button btnYesTryAgain;
-	@FXML
-	private Button btnNoTryAgain;
-	@FXML
 	private HBox tryAgainBox;
+	@FXML
+	private HBox gameFinishedGoodScoreOptions;
+	@FXML
+	private HBox gameFinishedBadScoreOptions;
 	@FXML
 	private VBox totalScoreBox;
 	@FXML
@@ -66,10 +69,17 @@ public class GameScreenController implements HTKListener{
 		AUDIO.delete(); // clear any previously recorded numbers
 
 		playerNamePrompt();
-
+		
+		// manage visibility of any components from previous games, to ensure we have a clean start
+		totalScoreBox.setVisible(false);
+		questionLabel.setVisible(true);
+		lblScore.setVisible(true);
+		lblScore.setText("");
+		gameFinishedGoodScoreOptions.setVisible(false);
+		gameFinishedBadScoreOptions.setVisible(false);
+		
+		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
-		btnRecord.setVisible(true);
-		btnNext.setVisible(false);
 	}
 
 	@FXML
@@ -102,7 +112,7 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void recordClicked() {
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
-		lblOutcome.setText("Recording....");
+		lblOutcome.setText(RECORDING);
 		game.attemptQuestion(this);
 	}
 
@@ -128,6 +138,7 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void retryQuestion() {
 		recordView();
+		recordClicked();
 	}
 
 	@FXML
@@ -135,12 +146,8 @@ public class GameScreenController implements HTKListener{
 		recordView();
 		if (game.hasNextQuestion()) {
 			displayQuestion(game.nextQuestion());
-		} else {
-			questionLabel.setVisible(false);
-			lblScore.setVisible(false);
-			totalScoreBox.setVisible(true);
-			lblTotalScore.setText(game.getScore());
-			btnRecord.setVisible(false);
+		} else {	
+			gameFinished();		
 		}
 
 	}
@@ -151,6 +158,25 @@ public class GameScreenController implements HTKListener{
 		player.setVolume(1.0);
 		player.setMute(false);
 		player.play();
+	}
+	
+	@FXML
+	public void playAgain() {
+		int currentRange = game.getRange();
+		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,currentRange));
+		initialize();
+	}
+	
+	@FXML
+	public void startEasyGame() {
+		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.EASY_RANGE));
+		initialize();
+	}
+	
+	@FXML
+	public void startHardGame() {
+		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.HARD_RANGE));
+		initialize();
 	}
 
 
@@ -182,6 +208,9 @@ public class GameScreenController implements HTKListener{
 
 		game.setPlayerName(enteredName);
 	}
+	
+	
+	/*********** Helper methods to set up the gui for a certain state ***************/
 
 	private void recordView() {
 		AUDIO.delete();
@@ -208,6 +237,26 @@ public class GameScreenController implements HTKListener{
 		btnPlayBack.setVisible(true);
 		
 		displayResults(game.getResult());
+	}
+	
+	private void gameFinished() {
+		btnNext.setVisible(false);
+		btnRecord.setVisible(false);
+		tryAgainBox.setVisible(false);
+		btnPlayBack.setVisible(false);
+		questionLabel.setVisible(false);
+		lblScore.setVisible(false);
+		totalScoreBox.setVisible(true);
+		lblTotalScore.setText(game.getScore());
+		
+		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
+			lblOutcome.setText("That's a great score! What would you like to do now?");
+			gameFinishedGoodScoreOptions.setVisible(true);
+		} else {
+			lblOutcome.setText("Nice try! What would you like to do now?");
+			gameFinishedBadScoreOptions.setVisible(true);
+		}
+	
 	}
 
 
