@@ -66,18 +66,8 @@ public class GameScreenController implements HTKListener{
 	public void initialize() {
 
 		game = GameInstance.getInstance().getCurrentGame();
-		AUDIO.delete(); // clear any previously recorded numbers
-
 		playerNamePrompt();
-		
-		// manage visibility of any components from previous games, to ensure we have a clean start
-		totalScoreBox.setVisible(false);
-		questionLabel.setVisible(true);
-		lblScore.setVisible(true);
 		lblScore.setText("");
-		gameFinishedGoodScoreOptions.setVisible(false);
-		gameFinishedBadScoreOptions.setVisible(false);
-		
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
 	}
@@ -122,8 +112,6 @@ public class GameScreenController implements HTKListener{
 	public void recordingComplete() {
 
 		btnRecord.setDisable(false);
-		btnRecord.setVisible(false);
-		btnPlayBack.setVisible(true);
 
 		boolean correct = game.getResult();
 
@@ -155,8 +143,6 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void playbackAudio() {
 		player = new MediaPlayer(new Media(AUDIO.toURI().toString()));
-		player.setVolume(1.0);
-		player.setMute(false);
 		player.play();
 	}
 	
@@ -215,26 +201,42 @@ public class GameScreenController implements HTKListener{
 	private void recordView() {
 		AUDIO.delete();
 		btnRecord.setVisible(true);
-		tryAgainBox.setVisible(false);
 		btnPlayBack.setVisible(false);
+		tryAgainBox.setVisible(false);
+		questionLabel.setVisible(true);
 		btnNext.setVisible(false);
 		lblOutcome.setText("");
+		gameFinishedGoodScoreOptions.setVisible(false);
+		gameFinishedBadScoreOptions.setVisible(false);
+		totalScoreBox.setVisible(false);
+		lblScore.setVisible(true);
 	}
 
 	private void tryAgainView() {
+		
 		btnRecord.setVisible(false);
-		tryAgainBox.setVisible(true);
 		btnPlayBack.setVisible(true);
+		tryAgainBox.setVisible(true);
+		questionLabel.setVisible(true);
 		btnNext.setVisible(false);
+		gameFinishedGoodScoreOptions.setVisible(false);
+		gameFinishedBadScoreOptions.setVisible(false);
+		totalScoreBox.setVisible(false);
+		lblScore.setVisible(true);
 		
 		displayResults(game.getResult());
 	}
 
 	private void nextQuestionView() {
-		btnNext.setVisible(true);
 		btnRecord.setVisible(false);
-		tryAgainBox.setVisible(false);
 		btnPlayBack.setVisible(true);
+		tryAgainBox.setVisible(false);
+		questionLabel.setVisible(true);
+		btnNext.setVisible(true);
+		gameFinishedGoodScoreOptions.setVisible(false);
+		gameFinishedBadScoreOptions.setVisible(false);
+		totalScoreBox.setVisible(false);
+		lblScore.setVisible(true);
 		
 		displayResults(game.getResult());
 	}
@@ -250,11 +252,19 @@ public class GameScreenController implements HTKListener{
 		lblTotalScore.setText(game.getScore());
 		
 		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
-			lblOutcome.setText("That's a great score! What would you like to do now?");
-			gameFinishedGoodScoreOptions.setVisible(true);
+			if (game.getRange() == Game.EASY_RANGE) {
+				gameFinishedGoodScoreOptions.setVisible(true);
+				gameFinishedBadScoreOptions.setVisible(false);
+			} else {
+				gameFinishedBadScoreOptions.setVisible(true);
+				gameFinishedGoodScoreOptions.setVisible(false);
+			}
+			lblOutcome.setText("That's a great score!");
+			
 		} else {
-			lblOutcome.setText("Nice try! What would you like to do now?");
+			lblOutcome.setText("Nice try!");
 			gameFinishedBadScoreOptions.setVisible(true);
+			gameFinishedGoodScoreOptions.setVisible(false);
 		}
 	
 	}
