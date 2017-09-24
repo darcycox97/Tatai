@@ -96,7 +96,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRecord" mnemonicParsing="false" onAction="#recordClicked" text="Record">
+                  <Button fx:id="btnRecord" mnemonicParsing="false" onAction="#startRecording" text="Record">
                      <font>
                         <Font size="22.0" />
                      </font>

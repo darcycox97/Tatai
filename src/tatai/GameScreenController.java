@@ -100,7 +100,7 @@ public class GameScreenController implements HTKListener{
 	}
 
 	@FXML
-	public void recordClicked() {
+	public void startRecording() {
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
 		lblOutcome.setText(RECORDING);
 		game.attemptQuestion(this);
@@ -125,8 +125,8 @@ public class GameScreenController implements HTKListener{
 
 	@FXML
 	public void retryQuestion() {
-		recordView();
-		recordClicked();
+		recordView(); // put gui into ready to record state
+		startRecording(); // start recording
 	}
 
 	@FXML
@@ -137,7 +137,6 @@ public class GameScreenController implements HTKListener{
 		} else {	
 			gameFinished();		
 		}
-
 	}
 
 	@FXML
@@ -166,6 +165,8 @@ public class GameScreenController implements HTKListener{
 	}
 
 
+	/**************** Helpers ********************/
+	
 	private void displayResults(boolean correct) {
 		if (correct) {
 			lblOutcome.setText(CORRECT);
