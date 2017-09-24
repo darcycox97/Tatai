@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -45,11 +47,25 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lblOutcome" alignment="CENTER" contentDisplay="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
+            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <Label fx:id="lblGamePrompts" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" wrapText="true">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCorrectOutcome" text="Correct!" visible="false">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblIncorrectOutcome" text="Incorrect!" visible="false">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
             <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
                   <Label fx:id="questionLabel" text="#" wrapText="true">
@@ -96,27 +112,48 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRecord" mnemonicParsing="false" onAction="#startRecording" text="Record">
+                  <Button fx:id="btnRecord" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#startRecording">
                      <font>
                         <Font size="22.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icons/record.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="20.0" visible="false">
                      <children>
                         <Label text="Try Again?">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="27.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#retryQuestion" text="Yes">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/icons/tick.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#nextQuestion" text="No">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/icons/cross.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </HBox>
@@ -155,10 +192,17 @@
                   </HBox>
                </children>
             </StackPane>
-            <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" text="Listen" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/icons/speaker.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </GridPane>

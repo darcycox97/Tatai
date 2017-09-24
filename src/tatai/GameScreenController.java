@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -13,8 +14,11 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -27,7 +31,7 @@ import tatai.htk.HTKListener;
 public class GameScreenController implements HTKListener{
 	
 	private static final String CORRECT = "Correct!";
-	private static final String INCORRECT = "Incorrect";
+	private static final String INCORRECT = "Incorrect!";
 	private static final String RECORDING = "Recording....";
 	private static final int NEXT_LEVEL_THRESHOLD = 8;
 
@@ -56,7 +60,11 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	private VBox totalScoreBox;
 	@FXML
-	private Label lblOutcome;
+	private Label lblGamePrompts;
+	@FXML
+	private Label lblCorrectOutcome;
+	@FXML
+	private Label lblIncorrectOutcome;
 	@FXML
 	private Label lblScore;
 	@FXML
@@ -102,7 +110,7 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void startRecording() {
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
-		lblOutcome.setText(RECORDING);
+		lblGamePrompts.setText(RECORDING);
 		game.attemptQuestion(this);
 	}
 
@@ -169,9 +177,11 @@ public class GameScreenController implements HTKListener{
 	
 	private void displayResults(boolean correct) {
 		if (correct) {
-			lblOutcome.setText(CORRECT);
+			lblCorrectOutcome.setVisible(true);
+			lblIncorrectOutcome.setVisible(false);
 		} else {
-			lblOutcome.setText(INCORRECT);
+			lblIncorrectOutcome.setVisible(true);
+			lblCorrectOutcome.setVisible(false);
 		}
 
 		lblScore.setText(game.getScore());
@@ -206,7 +216,10 @@ public class GameScreenController implements HTKListener{
 		tryAgainBox.setVisible(false);
 		questionLabel.setVisible(true);
 		btnNext.setVisible(false);
-		lblOutcome.setText("");
+		lblIncorrectOutcome.setVisible(false);
+		lblCorrectOutcome.setVisible(false);
+		lblGamePrompts.setVisible(true);
+		lblGamePrompts.setText("");
 		gameFinishedGoodScoreOptions.setVisible(false);
 		gameFinishedBadScoreOptions.setVisible(false);
 		totalScoreBox.setVisible(false);
@@ -215,6 +228,9 @@ public class GameScreenController implements HTKListener{
 
 	private void tryAgainView() {
 		
+		lblCorrectOutcome.setVisible(false);
+		lblIncorrectOutcome.setVisible(false);
+		lblGamePrompts.setVisible(false);
 		btnRecord.setVisible(false);
 		btnPlayBack.setVisible(true);
 		tryAgainBox.setVisible(true);
@@ -229,6 +245,9 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void nextQuestionView() {
+		lblCorrectOutcome.setVisible(false);
+		lblIncorrectOutcome.setVisible(false);
+		lblGamePrompts.setVisible(false);
 		btnRecord.setVisible(false);
 		btnPlayBack.setVisible(true);
 		tryAgainBox.setVisible(false);
@@ -260,10 +279,10 @@ public class GameScreenController implements HTKListener{
 				gameFinishedBadScoreOptions.setVisible(true);
 				gameFinishedGoodScoreOptions.setVisible(false);
 			}
-			lblOutcome.setText("That's a great score!");
+			lblGamePrompts.setText("That's a great score!");
 			
 		} else {
-			lblOutcome.setText("Nice try!");
+			lblGamePrompts.setText("Nice try!");
 			gameFinishedBadScoreOptions.setVisible(true);
 			gameFinishedGoodScoreOptions.setVisible(false);
 		}

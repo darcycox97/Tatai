@@ -16,7 +16,7 @@ public class TataiPrototype extends Application {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
 			Scene scene = new Scene(root,700,600);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("TataiStyle.css").toExternalForm());
 			
 			
 		//	Font.loadFont("file:resources/font.ttf", 10);

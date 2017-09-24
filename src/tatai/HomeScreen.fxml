@@ -17,20 +17,26 @@
       </Label>
    </center>
    <bottom>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <Label alignment="CENTER" text="Select the difficulty level" textAlignment="CENTER">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="170.0">
+            <HBox alignment="CENTER" spacing="170.0">
                <children>
-                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#startEasyGame" prefHeight="60.0" prefWidth="60.0" text="Easy" />
-                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#startHardGame" prefHeight="60.0" prefWidth="60.0" text="Hard" />
+                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#startEasyGame" text="Easy">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#startHardGame" text="Hard">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+            <HBox alignment="CENTER" spacing="50.0">
                <children>
                   <Label text="Numbers from 1 to 9">
                      <font>
