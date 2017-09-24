@@ -11,23 +11,21 @@ import tatai.question.Question;
  */
 public abstract class Game {
 	
-	private static final int DEFAULT_NUM_QUESTIONS = 10;
-	private static final int DEFAULT_RANGE = 10;
+	public static final int EASY_RANGE = 9;
+	public static final int HARD_RANGE = 99;
+	public static final int DEFAULT_NUM_QUESTIONS = 10;
+	public static final int DEFAULT_RANGE = 9;
 	
 	protected final int NUM_QUESTIONS;
-	
 	protected final int RANGE;
 	
 	private int currentQuestionIndex;
-	
+	private int attempts;
 	private List<Question> questions;
-	
 	private Question currentQuestion;
-	
+	private boolean currentResult; // holds the result of the most recently played question
 	private int score;
-	
 	private HTK htk;
-
 	private String playerName;
 
 	
@@ -48,6 +46,7 @@ public abstract class Game {
 		this.currentQuestionIndex = 0;
 		this.currentQuestion = this.questions.get(0);
 		this.score = 0;
+		this.attempts = 0;
 		this.htk = new HTK();
 	}
 	
@@ -65,6 +64,7 @@ public abstract class Game {
 	 * Returns the next question in the list of questions. Stores the current question.
 	 */
 	public Question nextQuestion() {
+		attempts = 0; //reset number of attempts because we are moving onto a new question
 		currentQuestion = questions.get(currentQuestionIndex);
 		currentQuestionIndex++;
 		return currentQuestion;
@@ -75,6 +75,13 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Returns the range of the current game
+	 */
+	public int getRange() {
+		return RANGE;
+	}
+	
+	/**
 	 * Returns a string representation of the score that can be used to display in the GUI. e.g "7/10"
 	 */
 	public String getScore() {
@@ -82,11 +89,20 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Returns the integer value of the score
+	 */
+	public int getScoreValue() {
+		return score;
+	}
+	
+	/**
 
 	 * Simply passes the job onto htk, which will take care of the recording in a background thread.
+	 * @param l The HTKListener that is to be notified when recording is finished
 	 */
-	public void attemptQuestion(HTKListener o) {
-		htk.recordQuestion(currentQuestion, o);
+	public void attemptQuestion(HTKListener l) {
+		htk.recordQuestion(currentQuestion, l);
+		attempts++;
 		
 	}
 	
@@ -95,10 +111,24 @@ public abstract class Game {
 	 * or not the user said the answer correctly
 	 */
 	public void updateScore(boolean correct) {
+		
+		currentResult = correct;
 		if (correct) {
 			score++;
 		}
 	}
+	
+	public int numAttempts() {
+		return attempts;
+	}
+	
+	/**
+	 * Returns a boolean value stating whether or not the most recent attempt was correct.
+	 */
+	public boolean getResult() {
+		return currentResult;
+	}
+	
 
    /**
 	 * Sets the value of the game's playerName field. Used for recording score on leader board.

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import tatai.game.Game;
 import tatai.game.GameInstance;
 import tatai.game.NumberGame;
 
@@ -16,8 +17,6 @@ import tatai.game.NumberGame;
  */
 public class HomeScreenController {
 	private static final int GAME_LENGTH = 10;
-	private static final int EASY_RANGE = 10;
-	private static final int HARD_RANGE = 99;
 	
 	@FXML
 	private Button btnEasy;
@@ -32,7 +31,7 @@ public class HomeScreenController {
 	public void startEasyGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameInstance.getInstance().setCurrentGame(new NumberGame(GAME_LENGTH,EASY_RANGE));
+			GameInstance.getInstance().setCurrentGame(new NumberGame(GAME_LENGTH,Game.EASY_RANGE));
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
@@ -46,7 +45,7 @@ public class HomeScreenController {
 	public void startHardGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameInstance.getInstance().setCurrentGame(new NumberGame(GAME_LENGTH, HARD_RANGE));
+			GameInstance.getInstance().setCurrentGame(new NumberGame(GAME_LENGTH, Game.HARD_RANGE));
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {

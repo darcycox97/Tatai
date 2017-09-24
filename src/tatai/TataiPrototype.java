@@ -24,6 +24,7 @@ public class TataiPrototype extends Application {
 			
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Tatai!");
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
