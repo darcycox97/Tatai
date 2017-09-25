@@ -100,10 +100,16 @@ public class LeaderboardController {
 			while ((inputLine = in.readLine()) != null) {
 
 				String[] getName = inputLine.split(" ");
-				String name = getName[0];
+				String name = "";
+				
+				for (String word : getName) {
+					if (!word.contains("/")) {
+						name = name + word + " ";
+					}
+				}
 
 				if (getName.length > 1) {
-					String[] getScore = getName[1].split("/");
+					String[] getScore = getName[getName.length - 1].split("/");
 					Integer score = Integer.valueOf(getScore[0]);
 					Leader leader = new Leader(name, score);
 					leaders.add(leader);
