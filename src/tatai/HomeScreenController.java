@@ -91,6 +91,16 @@ public class HomeScreenController {
 		}
 	}
 	
-	
+	@FXML
+	public void viewHelpScreen(ActionEvent e) {
+		BorderPane root;
+		try {
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("HelpScreen.fxml"));
+			((Node) e.getSource()).getScene().setRoot(root);
+		} catch (IOException e1) {
+			System.out.println("Error entering help screen");
+			e1.printStackTrace();
+		}
+	}
 	
 }

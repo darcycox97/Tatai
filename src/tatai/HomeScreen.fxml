@@ -56,8 +56,8 @@
    <top>
       <HBox spacing="30.0">
          <children>
-            <Button fx:id="btnHelp" mnemonicParsing="false" styleClass="home-buttons" text="Help" />
-            <Button fx:id="btnScores" mnemonicParsing="false" styleClass="home-buttons" onAction="#viewLeaderboard" text="Leaderboard" />
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#viewHelpScreen" styleClass="home-buttons" text="Help" />
+            <Button fx:id="btnScores" mnemonicParsing="false" onAction="#viewLeaderboard" styleClass="home-buttons" text="Leaderboard" />
          </children>
          <BorderPane.margin>
             <Insets />
