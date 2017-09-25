@@ -10,9 +10,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.HomeScreenController">
    <center>
-      <Label text="Welcome to Tatai!" BorderPane.alignment="CENTER">
+      <Label styleClass="welcome-label" text="Welcome to Tātai!" BorderPane.alignment="CENTER">
          <font>
-            <Font size="65.0" />
+            <Font name="Noto Sans CJK SC Bold" size="65.0" />
          </font>
       </Label>
    </center>
@@ -26,11 +26,11 @@
             </Label>
             <HBox alignment="CENTER" spacing="170.0">
                <children>
-                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#startEasyGame" text="Easy">
+                  <Button fx:id="btnEasy" mnemonicParsing="false" onAction="#startEasyGame" styleClass="home-buttons" text="Easy">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#startHardGame" text="Hard">
+                  <Button fx:id="btnHard" mnemonicParsing="false" onAction="#startHardGame" styleClass="home-buttons" text="Hard">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -56,8 +56,8 @@
    <top>
       <HBox spacing="30.0">
          <children>
-            <Button fx:id="btnHelp" mnemonicParsing="false" text="Help" />
-            <Button fx:id="btnScores" mnemonicParsing="false" text="Leaderboard" />
+            <Button fx:id="btnHelp" mnemonicParsing="false" styleClass="home-buttons" text="Help" />
+            <Button fx:id="btnScores" mnemonicParsing="false" styleClass="home-buttons" text="Leaderboard" />
          </children>
          <BorderPane.margin>
             <Insets />

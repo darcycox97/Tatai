@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -14,11 +13,8 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,8 +26,6 @@ import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{
 	
-	private static final String CORRECT = "Correct!";
-	private static final String INCORRECT = "Incorrect!";
 	private static final String RECORDING = "Recording....";
 	private static final int NEXT_LEVEL_THRESHOLD = 8;
 
@@ -47,6 +41,8 @@ public class GameScreenController implements HTKListener{
 	private Button btnRecord;
 	@FXML
 	private Label questionLabel;
+	@FXML
+	private Label lblQuestionNumber;
 	@FXML
 	private Button btnNext;
 	@FXML
@@ -149,6 +145,9 @@ public class GameScreenController implements HTKListener{
 
 	@FXML
 	public void playbackAudio() {
+		if (player != null) {
+			player.stop();
+		}
 		player = new MediaPlayer(new Media(AUDIO.toURI().toString()));
 		player.play();
 	}
@@ -189,6 +188,7 @@ public class GameScreenController implements HTKListener{
 
 	private void displayQuestion(Question q) {
 		questionLabel.setText(q.getDisplayText());
+		lblQuestionNumber.setText("Question #" + game.getQuestionNumber());
 	}
 
 	private void playerNamePrompt() {
@@ -218,6 +218,7 @@ public class GameScreenController implements HTKListener{
 		btnNext.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
 		lblCorrectOutcome.setVisible(false);
+		lblQuestionNumber.setVisible(true);
 		lblGamePrompts.setVisible(true);
 		lblGamePrompts.setText("");
 		gameFinishedGoodScoreOptions.setVisible(false);
@@ -228,6 +229,7 @@ public class GameScreenController implements HTKListener{
 
 	private void tryAgainView() {
 		
+		lblQuestionNumber.setVisible(true);
 		lblCorrectOutcome.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
 		lblGamePrompts.setVisible(false);
@@ -245,6 +247,7 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void nextQuestionView() {
+		lblQuestionNumber.setVisible(true);
 		lblCorrectOutcome.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
 		lblGamePrompts.setVisible(false);
@@ -262,11 +265,15 @@ public class GameScreenController implements HTKListener{
 	}
 	
 	private void gameFinished() {
+		lblGamePrompts.setVisible(true);
+		lblCorrectOutcome.setVisible(false);
+		lblIncorrectOutcome.setVisible(false);
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
 		tryAgainBox.setVisible(false);
 		btnPlayBack.setVisible(false);
 		questionLabel.setVisible(false);
+		lblQuestionNumber.setVisible(false);
 		lblScore.setVisible(false);
 		totalScoreBox.setVisible(true);
 		lblTotalScore.setText(game.getScore());

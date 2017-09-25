@@ -82,10 +82,17 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Returns the number of the question that we are currently attempting
+	 */
+	public int getQuestionNumber() {
+		return currentQuestionIndex;
+	}
+	
+	/**
 	 * Returns a string representation of the score that can be used to display in the GUI. e.g "7/10"
 	 */
 	public String getScore() {
-		return score + "/" + currentQuestionIndex;
+		return score + "/" + NUM_QUESTIONS;
 	}
 	
 	/**

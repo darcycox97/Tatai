@@ -66,7 +66,7 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
                   <Label fx:id="questionLabel" text="#" wrapText="true">
                      <font>
@@ -89,11 +89,16 @@
                   </VBox>
                </children>
             </StackPane>
+            <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </center>
    <bottom>
-      <GridPane prefHeight="112.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="137.0" prefWidth="1005.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="797.0" minWidth="10.0" prefWidth="688.0" />
@@ -112,26 +117,19 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRecord" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#startRecording">
+                  <Button fx:id="btnRecord" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startRecording" text="Record">
                      <font>
                         <Font size="22.0" />
                      </font>
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/icons/record.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Button>
-                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="20.0" visible="false">
+                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="10.0" visible="false">
                      <children>
                         <Label text="Try Again?">
                            <font>
                               <Font size="27.0" />
                            </font>
                         </Label>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion" styleClass="icon-buttons">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -143,7 +141,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion" styleClass="icon-buttons">
                            <font>
                               <Font size="20.0" />
                            </font>
