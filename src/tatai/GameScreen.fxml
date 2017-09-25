@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
@@ -45,19 +48,33 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lblOutcome" alignment="CENTER" contentDisplay="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <Label fx:id="lblGamePrompts" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" wrapText="true">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCorrectOutcome" text="Correct!" visible="false">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblIncorrectOutcome" text="Incorrect!" visible="false">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
                   <Label fx:id="questionLabel" text="#" wrapText="true">
                      <font>
                         <Font size="90.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="totalScoreBox" alignment="TOP_CENTER" spacing="40.0" visible="false">
+                  <VBox fx:id="totalScoreBox" alignment="CENTER" spacing="40.0" visible="false">
                      <children>
                         <Label text="Total Score:">
                            <font>
@@ -73,11 +90,34 @@
                   </VBox>
                </children>
             </StackPane>
+            <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <children>
+                  <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Circle fx:id="circle1" fill="WHITE" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </GridPane>
    </center>
    <bottom>
-      <GridPane prefHeight="112.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="137.0" prefWidth="1005.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="797.0" minWidth="10.0" prefWidth="688.0" />
@@ -96,27 +136,41 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnRecord" mnemonicParsing="false" onAction="#startRecording" text="Record">
+                  <Button fx:id="btnRecord" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startRecording" text="Record">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="20.0" visible="false">
+                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="10.0" visible="false">
                      <children>
                         <Label text="Try Again?">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="27.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#retryQuestion" text="Yes">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion" styleClass="icon-buttons">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/icons/tick.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#nextQuestion" text="No">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion" styleClass="icon-buttons">
                            <font>
                               <Font size="20.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/icons/cross.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                   </HBox>
@@ -155,10 +209,17 @@
                   </HBox>
                </children>
             </StackPane>
-            <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" text="Listen" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/icons/speaker.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </GridPane>

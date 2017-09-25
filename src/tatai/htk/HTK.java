@@ -64,11 +64,10 @@ public class HTK {
 			}
 			
 			String[] wordsToMatch = qToMatch.getHTKWords();
-			String firstWord = wordsToMatch[0];
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_FILE));
 				String line = reader.readLine();
-				while (line != null && !line.equals(firstWord)) {
+				while (line != null && !line.equals("sil")) {
 					line = reader.readLine();
 				}
 				
@@ -78,18 +77,26 @@ public class HTK {
 					return false;
 				}
 				
-				// line now equals the first HTK word. we need to iterate through the remaining words and check the file has them
-				for (int i = 1; i < wordsToMatch.length; i++) {
+				// The next lines will be the words spoken. we need to iterate through the remaining words and check the file has the right ones
+				for (int i = 0; i < wordsToMatch.length; i++) {
 					line = reader.readLine(); // move on to the next word
+					if (line == null) {
+						return false;
+					}
 					if (!line.equals(wordsToMatch[i])) {
 						reader.close();
 						return false;
 					}
 				}
 				
-				// if we got to this point, then all words matched
+				// if we got to this point, then all words matched, check that there are no words other than "sil" after this
+				if (reader.readLine().equals("sil")) {
 				reader.close();
-				return true;
+					return true;
+				} else {
+					reader.close();
+					return false;
+				}
 				
 			} catch (IOException e) {
 				System.out.println("Error reading output file");

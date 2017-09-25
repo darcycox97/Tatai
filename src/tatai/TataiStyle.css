@@ -1,0 +1,50 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.text {
+	/*-fx-font-family : 'fontname'; This is how to set fonts*/
+}
+
+.root {
+	-fx-background-image : url('../../resources/tatai-background-lighter.jpg');
+}
+
+.circle {
+	-fx-border-color:transparent;
+}
+
+.home-buttons {
+	-fx-font-size: 18px;
+}
+
+.label {
+	-fx-font-weight : bold;
+}
+
+.button {
+	-fx-border-radius:60;
+	-fx-border-color:#468499;
+	-fx-border-width:2px;
+	-fx-background-radius:60;
+}
+
+#questionLabel {
+	-fx-padding:40px;
+}
+
+#lblIncorrectOutcome {
+	-fx-background-color : #F93930;
+	-fx-padding : 20px; 
+}
+
+#btnRecord {
+	-fx-background-color : #FF2700;
+	-fx-text-fill : #EEEEFF;
+	-fx-border-color : transparent;
+}
+
+#lblCorrectOutcome {
+	-fx-background-color : #1DAD0C;
+	-fx-padding : 20px;
+
+}
