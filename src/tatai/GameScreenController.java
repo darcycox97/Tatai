@@ -1,6 +1,7 @@
 package tatai;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
@@ -27,7 +28,7 @@ import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{
-	
+
 	private static final String RECORDING = "Recording....";
 	private static final int NEXT_LEVEL_THRESHOLD = 8;
 	private static final String CORRECT_COLOR = "#1DAD0C";
@@ -94,7 +95,6 @@ public class GameScreenController implements HTKListener{
 
 	@FXML 
 	public void initialize() {
-
 		game = GameInstance.getInstance().getCurrentGame();
 		playerNamePrompt();
 		lblScore.setText("");
@@ -193,20 +193,20 @@ public class GameScreenController implements HTKListener{
 		player = new MediaPlayer(new Media(AUDIO.toURI().toString()));
 		player.play();
 	}
-	
+
 	@FXML
 	public void playAgain() {
 		int currentRange = game.getRange();
 		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,currentRange));
 		initialize();
 	}
-	
+
 	@FXML
 	public void startEasyGame() {
 		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.EASY_RANGE));
 		initialize();
 	}
-	
+
 	@FXML
 	public void startHardGame() {
 		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.HARD_RANGE));
@@ -215,7 +215,7 @@ public class GameScreenController implements HTKListener{
 
 
 	/**************** Helpers ********************/
-	
+
 	private void displayResults(boolean correct) {
 		int circleNumber = game.getQuestionNumber();
 		Circle circleToChange = circleMap.get(circleNumber);
@@ -251,8 +251,8 @@ public class GameScreenController implements HTKListener{
 
 		game.setPlayerName(enteredName);
 	}
-	
-	
+
+
 	/*********** Helper methods to set up the gui for a certain state ***************/
 
 	private void recordView() {
@@ -309,9 +309,18 @@ public class GameScreenController implements HTKListener{
 		
 		displayResults(game.getCurrentResult());
 	}
-	
+
 	private void gameFinished() {
-		lblGamePrompts.setVisible(true);
+    
+		if (game.getRange() == Game.EASY_RANGE) {
+			appendToLeaderboard("EasyAllTime");
+			appendToLeaderboard("EasyCurrent");
+		} else {
+			appendToLeaderboard("HardAllTime");
+			appendToLeaderboard("HardCurrent");
+		}
+    
+    lblGamePrompts.setVisible(true);
 		lblCorrectOutcome.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
 		btnNext.setVisible(false);
@@ -323,7 +332,7 @@ public class GameScreenController implements HTKListener{
 		lblScore.setVisible(false);
 		totalScoreBox.setVisible(true);
 		lblTotalScore.setText(game.getScore());
-		
+
 		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
 			if (game.getRange() == Game.EASY_RANGE) {
 				gameFinishedGoodScoreOptions.setVisible(true);
@@ -332,6 +341,7 @@ public class GameScreenController implements HTKListener{
 				gameFinishedBadScoreOptions.setVisible(true);
 				gameFinishedGoodScoreOptions.setVisible(false);
 			}
+
 			lblGamePrompts.setText("That's a great score!");
 			
 		} else {
@@ -339,7 +349,21 @@ public class GameScreenController implements HTKListener{
 			gameFinishedBadScoreOptions.setVisible(true);
 			gameFinishedGoodScoreOptions.setVisible(false);
 		}
+
+	}
 	
+	private void appendToLeaderboard(String level) {
+		
+		String command = "echo " + game.getPlayerName() + 
+				" " + game.getScore() + ">> .leaderboard" + level;
+		ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+		try {
+			pb.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
