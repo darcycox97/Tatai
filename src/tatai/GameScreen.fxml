@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
@@ -73,7 +74,7 @@
                         <Font size="90.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="totalScoreBox" alignment="TOP_CENTER" spacing="40.0" visible="false">
+                  <VBox fx:id="totalScoreBox" alignment="CENTER" spacing="40.0" visible="false">
                      <children>
                         <Label text="Total Score:">
                            <font>
@@ -89,11 +90,29 @@
                   </VBox>
                </children>
             </StackPane>
-            <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Label>
+            <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+               <children>
+                  <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Circle fx:id="circle1" fill="WHITE" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </GridPane>
    </center>

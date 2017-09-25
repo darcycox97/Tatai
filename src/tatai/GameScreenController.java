@@ -2,6 +2,7 @@ package tatai;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Circle;
 import tatai.question.Question;
 import tatai.game.Game;
 import tatai.game.GameInstance;
@@ -28,6 +30,8 @@ public class GameScreenController implements HTKListener{
 	
 	private static final String RECORDING = "Recording....";
 	private static final int NEXT_LEVEL_THRESHOLD = 8;
+	private static final String CORRECT_COLOR = "#1DAD0C";
+	private static final String INCORRECT_COLOR = "#F93930";
 
 	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
 
@@ -65,6 +69,28 @@ public class GameScreenController implements HTKListener{
 	private Label lblScore;
 	@FXML
 	private Label lblTotalScore;
+	
+	@FXML
+	Circle circle1;
+	@FXML
+	Circle circle2;
+	@FXML
+	Circle circle3;
+	@FXML
+	Circle circle4;
+	@FXML
+	Circle circle5;
+	@FXML
+	Circle circle6;
+	@FXML
+	Circle circle7;
+	@FXML
+	Circle circle8;
+	@FXML
+	Circle circle9;
+	@FXML
+	Circle circle10;
+	HashMap<Integer,Circle> circleMap;
 
 	@FXML 
 	public void initialize() {
@@ -74,6 +100,22 @@ public class GameScreenController implements HTKListener{
 		lblScore.setText("");
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
+		
+		// set up hashmap for circles and set their fill to transparent
+		circleMap = new HashMap<Integer,Circle>();
+		circleMap.put(1, circle1);
+		circleMap.put(2, circle2);
+		circleMap.put(3, circle3);
+		circleMap.put(4, circle4);
+		circleMap.put(5, circle5);
+		circleMap.put(6, circle6);
+		circleMap.put(7, circle7);
+		circleMap.put(8, circle8);
+		circleMap.put(9, circle9);
+		circleMap.put(10, circle10);
+		for (int i = 1; i <= 10; i++) {
+			circleMap.get(i).setStyle("-fx-fill:transparent;");
+		}
 	}
 
 	@FXML
@@ -117,7 +159,7 @@ public class GameScreenController implements HTKListener{
 
 		btnRecord.setDisable(false);
 
-		boolean correct = game.getResult();
+		boolean correct = game.getCurrentResult();
 
 		if (correct || game.numAttempts() > 1) {
 			nextQuestionView();
@@ -175,12 +217,16 @@ public class GameScreenController implements HTKListener{
 	/**************** Helpers ********************/
 	
 	private void displayResults(boolean correct) {
+		int circleNumber = game.getQuestionNumber();
+		Circle circleToChange = circleMap.get(circleNumber);
 		if (correct) {
 			lblCorrectOutcome.setVisible(true);
 			lblIncorrectOutcome.setVisible(false);
+			circleToChange.setStyle("-fx-fill:" + CORRECT_COLOR + ";");
 		} else {
 			lblIncorrectOutcome.setVisible(true);
 			lblCorrectOutcome.setVisible(false);
+			circleToChange.setStyle("-fx-fill:" + INCORRECT_COLOR + ";");
 		}
 
 		lblScore.setText(game.getScore());
@@ -243,7 +289,7 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 		
-		displayResults(game.getResult());
+		displayResults(game.getCurrentResult());
 	}
 
 	private void nextQuestionView() {
@@ -261,7 +307,7 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 		
-		displayResults(game.getResult());
+		displayResults(game.getCurrentResult());
 	}
 	
 	private void gameFinished() {

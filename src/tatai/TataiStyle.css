@@ -6,7 +6,11 @@
 }
 
 .root {
-	-fx-background-image : url('../../resources/tatai-background.jpg');
+	-fx-background-image : url('../../resources/tatai-background-lighter.jpg');
+}
+
+.circle {
+	-fx-border-color:transparent;
 }
 
 .home-buttons {
@@ -35,16 +39,12 @@
 
 #btnRecord {
 	-fx-background-color : #FF2700;
-	-fx-border-color : black;
-	-fx-border-width : 4px;
+	-fx-text-fill : #EEEEFF;
+	-fx-border-color : transparent;
 }
 
 #lblCorrectOutcome {
 	-fx-background-color : #1DAD0C;
 	-fx-padding : 20px;
 
-}
-
-.icon-buttons {
-	/*-fx-background-color : transparent;*/
 }

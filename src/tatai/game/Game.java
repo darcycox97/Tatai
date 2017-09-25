@@ -132,7 +132,7 @@ public abstract class Game {
 	/**
 	 * Returns a boolean value stating whether or not the most recent attempt was correct.
 	 */
-	public boolean getResult() {
+	public boolean getCurrentResult() {
 		return currentResult;
 	}
 	
