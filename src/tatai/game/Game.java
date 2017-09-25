@@ -91,7 +91,7 @@ public abstract class Game {
 	/**
 	 * Returns the integer value of the score
 	 */
-	public int getScoreValue() {
+	public Integer getScoreValue() {
 		return score;
 	}
 	

@@ -51,7 +51,7 @@
       <HBox spacing="30.0">
          <children>
             <Button fx:id="btnHelp" mnemonicParsing="false" text="Help" />
-            <Button fx:id="btnScores" mnemonicParsing="false" text="Leaderboard" />
+            <Button fx:id="btnScores" mnemonicParsing="false" onAction="#viewLeaderboard" text="Leaderboard" />
          </children>
          <BorderPane.margin>
             <Insets />

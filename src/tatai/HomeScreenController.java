@@ -1,6 +1,9 @@
 package tatai;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +29,27 @@ public class HomeScreenController {
 	private Button btnHelp;
 	@FXML
 	private Button btnScores;
+	
+	@FXML 
+	public void initialize() {
+
+		String dir = System.getProperty("user.dir");
+		File easyAllTime = new File(dir, ".leaderboardEasyAllTime");
+		File hardAllTime = new File(dir, ".leaderboardHardAllTime");
+		File easyCurrent = new File(dir, ".leaderboardEasyCurrent");
+		File hardCurrent = new File(dir, ".leaderboardHardCurrent");
+		
+		try {
+			easyAllTime.createNewFile();
+			hardAllTime.createNewFile();
+			easyCurrent.createNewFile();
+			hardCurrent.createNewFile();
+		} catch (IOException e) {
+			System.out.println("Error trying to create file");
+			e.printStackTrace();
+		}
+		
+	}
 	
 	@FXML
 	public void startEasyGame(ActionEvent e) {
@@ -53,6 +77,18 @@ public class HomeScreenController {
 			//e1.printStackTrace();
 		}
 
+	}
+	
+	@FXML
+	public void viewLeaderboard(ActionEvent e) {
+		BorderPane root;
+		try {
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("LeaderboardScreen.fxml"));
+			((Node) e.getSource()).getScene().setRoot(root);
+		} catch (IOException e1) {
+			System.out.println("Error entering leaderboard screen");
+			e1.printStackTrace();
+		}
 	}
 	
 	

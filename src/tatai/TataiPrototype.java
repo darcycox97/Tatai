@@ -1,6 +1,9 @@
 package tatai;
 	
+import java.io.File;
+
 import javafx.application.Application;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -26,9 +29,18 @@ public class TataiPrototype extends Application {
 			primaryStage.setTitle("Tatai!");
 			primaryStage.setResizable(false);
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void stop() {
+		File easyCurrent = new File(".leaderboardEasyCurrent");
+		easyCurrent.delete();
+		File hardCurrent = new File(".leaderboardHardCurrent");
+		hardCurrent.delete();
 	}
 	
 	public static void main(String[] args) {
