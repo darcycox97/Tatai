@@ -20,7 +20,7 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" text="Quit Game" />
+            <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" text="Home" />
             <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
