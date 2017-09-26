@@ -6,7 +6,7 @@
 }
 
 .root {
-	-fx-background-image : url('../../resources/tatai-background-lighter.jpg');
+	-fx-background-image : url('file:resources/tatai-background-lighter.jpg');
 }
 
 .circle {
@@ -41,6 +41,10 @@
 	-fx-background-color : #FF2700;
 	-fx-text-fill : #EEEEFF;
 	-fx-border-color : transparent;
+}
+
+#btnRecord:hover {
+	-fx-opacity:0.5;
 }
 
 #lblCorrectOutcome {
