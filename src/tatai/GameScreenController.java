@@ -96,7 +96,7 @@ public class GameScreenController implements HTKListener{
 	@FXML 
 	public void initialize() {
 		game = GameInstance.getInstance().getCurrentGame();
-		playerNamePrompt();
+		
 		lblScore.setText("");
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
@@ -312,12 +312,14 @@ public class GameScreenController implements HTKListener{
 
 	private void gameFinished() {
     
+		playerNamePrompt();
+		
+		Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
+		
 		if (game.getRange() == Game.EASY_RANGE) {
-			appendToLeaderboard("EasyAllTime");
-			appendToLeaderboard("EasyCurrent");
+			appendToEasyLeaderboard(leader);
 		} else {
-			appendToLeaderboard("HardAllTime");
-			appendToLeaderboard("HardCurrent");
+			appendToHardLeaderboard(leader);
 		}
     
     lblGamePrompts.setVisible(true);
@@ -352,19 +354,12 @@ public class GameScreenController implements HTKListener{
 
 	}
 	
-	private void appendToLeaderboard(String level) {
-		
-		String command = "echo " + game.getPlayerName() + 
-				" " + game.getScore() + ">> .leaderboard" + level;
-		ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
-
-		try {
-			pb.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void appendToEasyLeaderboard(Leader leader) {
+		LeadersInstance.addLeaderEasy(leader);
 	}
 
-
+	private void appendToHardLeaderboard(Leader leader) {
+		LeadersInstance.addLeaderHard(leader);
+	}
+	
 }
