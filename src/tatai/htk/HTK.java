@@ -81,6 +81,7 @@ public class HTK {
 				for (int i = 0; i < wordsToMatch.length; i++) {
 					line = reader.readLine(); // move on to the next word
 					if (line == null) {
+						reader.close();
 						return false;
 					}
 					if (!line.equals(wordsToMatch[i])) {

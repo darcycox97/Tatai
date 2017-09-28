@@ -1,4 +1,4 @@
-package tatai;
+package Leaders;
 
 public class Leader {
 	
@@ -6,8 +6,15 @@ public class Leader {
 	private String _name;
 	private Integer _rank;
 
-	Leader(String name, Integer score) {
-		_name = name;
+	public Leader(String name, Integer score) {
+		
+		String withoutSpaces = name.replace(" ", "");
+		
+		if (!withoutSpaces.isEmpty()) {
+			_name = name;
+		} else {
+			_name = "Anonymous";
+		}
 		_score = score;
 	}
 	

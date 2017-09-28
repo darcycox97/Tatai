@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 
+import Leaders.Leader;
+import Leaders.LeadersInstance;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -243,13 +245,14 @@ public class GameScreenController implements HTKListener{
 		dialog.setHeaderText("Enter your name: ");
 
 		Optional<String> result = dialog.showAndWait();
-		String enteredName = "no name";
+		String enteredName = "Anonymous";
 
 		if (result.isPresent()) {
 			enteredName = result.get();
 		}
-
+		
 		game.setPlayerName(enteredName);
+		
 	}
 
 

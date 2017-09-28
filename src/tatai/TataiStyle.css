@@ -6,7 +6,7 @@
 }
 
 .root {
-	-fx-background-image : url('../../resources/tatai-background-lighter.jpg');
+	-fx-background-image : url('file:resources/tatai-background-lighter.jpg');
 }
 
 .circle {
@@ -26,7 +26,7 @@
 	-fx-border-color:#468499;
 	-fx-border-width:2px;
 	-fx-background-radius:60;
-}
+	}
 
 #questionLabel {
 	-fx-padding:40px;
@@ -41,6 +41,10 @@
 	-fx-background-color : #FF2700;
 	-fx-text-fill : #EEEEFF;
 	-fx-border-color : transparent;
+}
+
+#btnRecord:hover {
+	-fx-opacity:0.5;
 }
 
 #lblCorrectOutcome {

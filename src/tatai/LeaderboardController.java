@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 
+import Leaders.Leader;
+import Leaders.LeadersInstance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,17 +75,17 @@ public class LeaderboardController {
 
 	@FXML
 	public void loadLeaderboard(ActionEvent e) {
-		
+
 		String level = selectLevel.getValue();
-		
+
 		if (level == "Easy") {
 			showEasyLeaders();
 		} else {
 			showHardLeaders();
 		}
-		
+
 		leaderboardTitle.setText("Scores for '" + level + "' Level");
-		
+
 		Collections.sort(leaders, new Comparator<Leader>(){
 			public int compare(Leader o1, Leader o2){
 				return o2.getScore() - o1.getScore();
@@ -104,13 +106,16 @@ public class LeaderboardController {
 
 		TableColumn<Leader,Integer> rankCol = new TableColumn<Leader,Integer>("Rank");
 		rankCol.setCellValueFactory(new PropertyValueFactory<Leader,Integer>("rank"));
+		rankCol.setSortable(false);
 
 		TableColumn<Leader,String> nameCol = new TableColumn<Leader,String>("Player Name");
 		nameCol.setCellValueFactory(new PropertyValueFactory<Leader,String>("name"));
+		nameCol.setSortable(false);
 
 		TableColumn<Leader,Integer> scoreCol = new TableColumn<Leader,Integer>("Score / " + range);
 		scoreCol.setCellValueFactory(new PropertyValueFactory<Leader,Integer>("score"));
-
+		scoreCol.setSortable(false);
+		
 		leadersList.getColumns().setAll(rankCol, nameCol, scoreCol);
 
 	}
