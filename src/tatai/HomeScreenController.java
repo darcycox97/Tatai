@@ -26,8 +26,6 @@ public class HomeScreenController {
 	@FXML
 	private Button btnHard;
 	@FXML
-	private Button btnHelp;
-	@FXML
 	private Button btnScores;
 	
 	@FXML
@@ -66,18 +64,6 @@ public class HomeScreenController {
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error entering leaderboard screen");
-			e1.printStackTrace();
-		}
-	}
-	
-	@FXML
-	public void viewHelpScreen(ActionEvent e) {
-		BorderPane root;
-		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getResource("HelpScreen.fxml"));
-			((Node) e.getSource()).getScene().setRoot(root);
-		} catch (IOException e1) {
-			System.out.println("Error entering help screen");
 			e1.printStackTrace();
 		}
 	}
