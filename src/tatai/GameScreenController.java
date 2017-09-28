@@ -8,8 +8,6 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import Leaders.Leader;
-import Leaders.LeadersInstance;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -30,6 +28,8 @@ import tatai.game.Game;
 import tatai.game.GameInstance;
 import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
+import tatai.leaders.Leader;
+import tatai.leaders.LeadersInstance;
 
 public class GameScreenController implements HTKListener{
 

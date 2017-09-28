@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 
-import Leaders.Leader;
-import Leaders.LeadersInstance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import tatai.leaders.Leader;
+import tatai.leaders.LeadersInstance;
 
 /**
  *	Defines the event handlers for the controls on the Tatai leaderboard screen.
@@ -73,6 +73,7 @@ public class LeaderboardController {
 		leaders = LeadersInstance.getLeadersListHard();
 	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void loadLeaderboard(ActionEvent e) {
 

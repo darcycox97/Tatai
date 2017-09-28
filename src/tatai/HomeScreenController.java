@@ -1,9 +1,6 @@
 package tatai;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,7 +48,7 @@ public class HomeScreenController {
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error starting hard game");
-			//e1.printStackTrace();
+			e1.printStackTrace();
 		}
 
 	}
