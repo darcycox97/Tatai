@@ -14,7 +14,7 @@
    <top>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnExit" mnemonicParsing="false" onAction="#returnHomeScreen" text="Home">
+            <Button fx:id="btnExit" mnemonicParsing="false" onAction="#returnHomeScreen" styleClass="home-buttons" text="Home">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
