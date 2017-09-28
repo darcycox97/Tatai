@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import Leaders.Leader;
 import Leaders.LeadersInstance;
 import javafx.fxml.FXML;
@@ -72,7 +74,7 @@ public class GameScreenController implements HTKListener{
 	private Label lblScore;
 	@FXML
 	private Label lblTotalScore;
-	
+
 	@FXML
 	Circle circle1;
 	@FXML
@@ -102,7 +104,7 @@ public class GameScreenController implements HTKListener{
 		lblScore.setText("");
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
-		
+
 		// set up hashmap for circles and set their fill to transparent
 		circleMap = new HashMap<Integer,Circle>();
 		circleMap.put(1, circle1);
@@ -240,9 +242,32 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void playerNamePrompt() {
+		
+		// display text dialog for user to enter their name in
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Player Name");
 		dialog.setHeaderText("Enter your name: ");
+
+		// whenever the input text changes, check if it is valid and set the disabled property of the button
+		dialog.getEditor().textProperty().addListener( e-> {
+
+			SimpleBooleanProperty disabled = new SimpleBooleanProperty(false); // becomes false when invalid input is given.
+			dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(disabled); // the button becomes disabled on invalid input
+
+			String currentInput = dialog.getEditor().getText();
+			
+			boolean valid;
+			if (currentInput.length() == 0) {
+				// empty input counts as a valid name
+				valid = true;
+			} else {
+				// allow alphanumeric, hyphens, and underscores
+				valid = Pattern.matches("[\\w\\-]+", currentInput); 
+			}
+			
+			disabled.setValue(!valid);
+
+		});
 
 		Optional<String> result = dialog.showAndWait();
 		String enteredName = "Anonymous";
@@ -277,7 +302,7 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void tryAgainView() {
-		
+
 		lblQuestionNumber.setVisible(true);
 		lblCorrectOutcome.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
@@ -291,7 +316,7 @@ public class GameScreenController implements HTKListener{
 		gameFinishedBadScoreOptions.setVisible(false);
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
-		
+
 		displayResults(game.getCurrentResult());
 	}
 
@@ -309,23 +334,23 @@ public class GameScreenController implements HTKListener{
 		gameFinishedBadScoreOptions.setVisible(false);
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
-		
+
 		displayResults(game.getCurrentResult());
 	}
 
 	private void gameFinished() {
-    
-		playerNamePrompt();
+  
+  	playerNamePrompt();
 		
 		Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
-		
+    
 		if (game.getRange() == Game.EASY_RANGE) {
 			appendToEasyLeaderboard(leader);
 		} else {
 			appendToHardLeaderboard(leader);
 		}
-    
-    lblGamePrompts.setVisible(true);
+
+		lblGamePrompts.setVisible(true);
 		lblCorrectOutcome.setVisible(false);
 		lblIncorrectOutcome.setVisible(false);
 		btnNext.setVisible(false);
@@ -348,7 +373,7 @@ public class GameScreenController implements HTKListener{
 			}
 
 			lblGamePrompts.setText("That's a great score!");
-			
+
 		} else {
 			lblGamePrompts.setText("Nice try!");
 			gameFinishedBadScoreOptions.setVisible(true);
