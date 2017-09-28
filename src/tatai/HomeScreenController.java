@@ -26,30 +26,7 @@ public class HomeScreenController {
 	@FXML
 	private Button btnHard;
 	@FXML
-	private Button btnHelp;
-	@FXML
 	private Button btnScores;
-	
-	@FXML 
-	public void initialize() {
-
-		String dir = System.getProperty("user.dir");
-		File easyAllTime = new File(dir, ".leaderboardEasyAllTime");
-		File hardAllTime = new File(dir, ".leaderboardHardAllTime");
-		File easyCurrent = new File(dir, ".leaderboardEasyCurrent");
-		File hardCurrent = new File(dir, ".leaderboardHardCurrent");
-		
-		try {
-			easyAllTime.createNewFile();
-			hardAllTime.createNewFile();
-			easyCurrent.createNewFile();
-			hardCurrent.createNewFile();
-		} catch (IOException e) {
-			System.out.println("Error trying to create file");
-			e.printStackTrace();
-		}
-		
-	}
 	
 	@FXML
 	public void startEasyGame(ActionEvent e) {
@@ -90,7 +67,5 @@ public class HomeScreenController {
 			e1.printStackTrace();
 		}
 	}
-	
-	
 	
 }
