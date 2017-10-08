@@ -20,7 +20,7 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" text="Home" styleClass="home-buttons"/>
+            <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" styleClass="home-buttons" text="Home" />
             <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
@@ -50,7 +50,7 @@
          <children>
             <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
-                  <Label fx:id="lblGamePrompts" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" wrapText="true">
+                  <Label fx:id="lblGamePrompts" contentDisplay="RIGHT" graphicTextGap="0.0" wrapText="true">
                      <font>
                         <Font size="25.0" />
                      </font>
