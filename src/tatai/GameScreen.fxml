@@ -50,11 +50,20 @@
          <children>
             <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
-                  <Label fx:id="lblGamePrompts" contentDisplay="RIGHT" graphicTextGap="0.0" wrapText="true">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="lblGamePrompts" contentDisplay="RIGHT" graphicTextGap="0.0" wrapText="true">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblTimer">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </StackPane>
             <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
