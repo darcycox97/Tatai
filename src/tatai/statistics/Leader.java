@@ -1,4 +1,4 @@
-package tatai.leaders;
+package tatai.statistics;
 
 public class Leader {
 	

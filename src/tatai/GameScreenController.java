@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,78 +25,57 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import tatai.question.Question;
+import tatai.statistics.Leader;
+import tatai.statistics.LeadersInstance;
 import tatai.game.Game;
 import tatai.game.GameInstance;
 import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
-import tatai.leaders.Leader;
-import tatai.leaders.LeadersInstance;
 
 public class GameScreenController implements HTKListener{
-
-	private static final String RECORDING = "Recording....";
+	
+	private static final String RECORDING = "Recording";
+	
 	private static final int NEXT_LEVEL_THRESHOLD = 8;
+	
 	private static final String CORRECT_COLOR = "#1DAD0C";
 	private static final String INCORRECT_COLOR = "#F93930";
+	private static final String CORRECT = "Correct!";
+	private static final String INCORRECT = "Incorrect!";
 
 	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
 
 	private Game game;
 
 	private MediaPlayer player;
+	private Animation recordingAnimation;
 
-	@FXML
-	private Button returnHome;
-	@FXML
-	private Button btnRecord;
-	@FXML
-	private Label questionLabel;
-	@FXML
-	private Label lblQuestionNumber;
-	@FXML
-	private Button btnNext;
-	@FXML
-	private Button btnPlayBack;
-	@FXML
-	private HBox tryAgainBox;
-	@FXML
-	private HBox gameFinishedGoodScoreOptions;
-	@FXML
-	private HBox gameFinishedBadScoreOptions;
-	@FXML
-	private VBox totalScoreBox;
-	@FXML
-	private Label lblGamePrompts;
-	@FXML
-	private Label lblCorrectOutcome;
-	@FXML
-	private Label lblIncorrectOutcome;
-	@FXML
-	private Label lblScore;
-	@FXML
-	private Label lblTotalScore;
+	@FXML private Button returnHome;
+	@FXML private Button btnRecord;
+	@FXML private Label questionLabel;
+	@FXML private Label lblQuestionNumber;
+	@FXML private Button btnNext;
+	@FXML private Button btnPlayBack;
+	@FXML private HBox tryAgainBox;
+	@FXML private HBox gameFinishedGoodScoreOptions;
+	@FXML private HBox gameFinishedBadScoreOptions;
+	@FXML private VBox totalScoreBox;
+	@FXML private Label lblGamePrompts;
+	@FXML private Label lblScore;
+	@FXML private Label lblTotalScore;
 
-	@FXML
-	Circle circle1;
-	@FXML
-	Circle circle2;
-	@FXML
-	Circle circle3;
-	@FXML
-	Circle circle4;
-	@FXML
-	Circle circle5;
-	@FXML
-	Circle circle6;
-	@FXML
-	Circle circle7;
-	@FXML
-	Circle circle8;
-	@FXML
-	Circle circle9;
-	@FXML
-	Circle circle10;
+	@FXML private Circle circle1;
+	@FXML private Circle circle2;
+	@FXML private Circle circle3;
+	@FXML private Circle circle4;
+	@FXML private Circle circle5;
+	@FXML private Circle circle6;
+	@FXML private Circle circle7;
+	@FXML private Circle circle8;
+	@FXML private Circle circle9;
+	@FXML private Circle circle10;
 	HashMap<Integer,Circle> circleMap;
 
 	@FXML 
@@ -120,6 +101,8 @@ public class GameScreenController implements HTKListener{
 		for (int i = 1; i <= 10; i++) {
 			circleMap.get(i).setStyle("-fx-fill:transparent;");
 		}
+		
+		recordingAnimation = getRecordAnimation();
 	}
 
 	@FXML
@@ -141,7 +124,7 @@ public class GameScreenController implements HTKListener{
 				root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
 				returnHome.getScene().setRoot(root);
 			} else {
-				// ... user chose CANCEL or closed the dialog
+				// ... user chose CANCEL or closed the dialog. stay on the game screen
 			}
 
 		} catch (IOException e) {
@@ -152,7 +135,11 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void startRecording() {
 		btnRecord.setDisable(true);// record button should remain disabled until recording is finished
+		
+		// initiate recording animation
 		lblGamePrompts.setText(RECORDING);
+		recordingAnimation.playFromStart();
+		
 		game.attemptQuestion(this);
 	}
 
@@ -162,6 +149,7 @@ public class GameScreenController implements HTKListener{
 	public void recordingComplete() {
 
 		btnRecord.setDisable(false);
+		recordingAnimation.stop();
 
 		boolean correct = game.getCurrentResult();
 
@@ -221,16 +209,22 @@ public class GameScreenController implements HTKListener{
 	/**************** Helpers ********************/
 
 	private void displayResults(boolean correct) {
+		
 		int circleNumber = game.getQuestionNumber();
 		Circle circleToChange = circleMap.get(circleNumber);
+		
 		if (correct) {
-			lblCorrectOutcome.setVisible(true);
-			lblIncorrectOutcome.setVisible(false);
+			
+			lblGamePrompts.setText(CORRECT);
+			lblGamePrompts.setStyle("-fx-background-color:" + CORRECT_COLOR + ";");
 			circleToChange.setStyle("-fx-fill:" + CORRECT_COLOR + ";");
+			
 		} else {
-			lblIncorrectOutcome.setVisible(true);
-			lblCorrectOutcome.setVisible(false);
+			
+			lblGamePrompts.setText(INCORRECT);
+			lblGamePrompts.setStyle("-fx-background-color:" + INCORRECT_COLOR + ";");
 			circleToChange.setStyle("-fx-fill:" + INCORRECT_COLOR + ";");
+			
 		}
 
 		lblScore.setText(game.getScore());
@@ -279,6 +273,26 @@ public class GameScreenController implements HTKListener{
 		game.setPlayerName(enteredName);
 		
 	}
+	
+	private Animation getRecordAnimation() {
+		
+		FadeTransition recording = new FadeTransition(Duration.millis(700), lblGamePrompts);
+		recording.setFromValue(0);
+		recording.setToValue(100);
+		recording.setAutoReverse(true);
+		recording.setCycleCount(5);
+		recording.setOnFinished(e -> System.out.println("Finsihed"));
+		
+		// opacity is set to full when recording is complete (and animation is stopped)
+		recording.statusProperty().addListener(e -> {
+			if (recording.statusProperty().get().equals(Animation.Status.STOPPED)) {
+				lblGamePrompts.setOpacity(1.0);
+			}
+		});
+		
+		
+		return recording;
+	}
 
 
 	/*********** Helper methods to set up the gui for a certain state ***************/
@@ -290,11 +304,10 @@ public class GameScreenController implements HTKListener{
 		tryAgainBox.setVisible(false);
 		questionLabel.setVisible(true);
 		btnNext.setVisible(false);
-		lblIncorrectOutcome.setVisible(false);
-		lblCorrectOutcome.setVisible(false);
 		lblQuestionNumber.setVisible(true);
 		lblGamePrompts.setVisible(true);
 		lblGamePrompts.setText("");
+		lblGamePrompts.setStyle("-fx-background-color:transparent;");
 		gameFinishedGoodScoreOptions.setVisible(false);
 		gameFinishedBadScoreOptions.setVisible(false);
 		totalScoreBox.setVisible(false);
@@ -304,9 +317,7 @@ public class GameScreenController implements HTKListener{
 	private void tryAgainView() {
 
 		lblQuestionNumber.setVisible(true);
-		lblCorrectOutcome.setVisible(false);
-		lblIncorrectOutcome.setVisible(false);
-		lblGamePrompts.setVisible(false);
+		lblGamePrompts.setVisible(true);
 		btnRecord.setVisible(false);
 		btnPlayBack.setVisible(true);
 		tryAgainBox.setVisible(true);
@@ -322,9 +333,7 @@ public class GameScreenController implements HTKListener{
 
 	private void nextQuestionView() {
 		lblQuestionNumber.setVisible(true);
-		lblCorrectOutcome.setVisible(false);
-		lblIncorrectOutcome.setVisible(false);
-		lblGamePrompts.setVisible(false);
+		lblGamePrompts.setVisible(true);
 		btnRecord.setVisible(false);
 		btnPlayBack.setVisible(true);
 		tryAgainBox.setVisible(false);
@@ -351,8 +360,6 @@ public class GameScreenController implements HTKListener{
 		}
 
 		lblGamePrompts.setVisible(true);
-		lblCorrectOutcome.setVisible(false);
-		lblIncorrectOutcome.setVisible(false);
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
 		tryAgainBox.setVisible(false);
