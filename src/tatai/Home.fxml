@@ -1,32 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.HomeController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="65.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblMain" text="Tātai!">
+            <Label fx:id="lblMain" text="Welcome to Tātai!">
                <font>
                   <Font size="37.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" styleClass="home-buttons" text="Games" />
-            <Button mnemonicParsing="false" styleClass="home-buttons" text="Practice" />
-            <Button mnemonicParsing="false" styleClass="home-buttons" text="Statistics" />
+            <Button fx:id="btnGames" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openGames" text="Games">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                     <image>
+                        <Image url="file:resources/icons/dice.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="home-buttons" />
+                  <String fx:value="main-buttons" />
+               </styleClass></Button>
+            <Button fx:id="btnPractice" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openPractice" text="Practice">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                     <image>
+                        <Image url="file:resources/icons/practice.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="home-buttons" />
+                  <String fx:value="main-buttons" />
+               </styleClass></Button>
+            <Button fx:id="btnStatistics" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openStatistics" text="Statistics">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                     <image>
+                        <Image url="file:resources/icons/graph.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="home-buttons" />
+                  <String fx:value="main-buttons" />
+               </styleClass></Button>
          </children>
+         <padding>
+            <Insets top="40.0" />
+         </padding>
       </VBox>
    </center>
    <top>
-      <MenuButton fx:id="menuUser" alignment="CENTER" mnemonicParsing="false" styleClass="home-buttons" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
+      <MenuButton fx:id="menuUser" alignment="CENTER" mnemonicParsing="false" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />

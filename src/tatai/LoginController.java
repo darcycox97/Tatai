@@ -85,7 +85,7 @@ public class LoginController {
 		
 		// load the home screen
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Home.fxml"));
 			Scene scene = new Scene(root,700,600);
 			scene.getStylesheets().add(getClass().getResource("TataiStyle.css").toExternalForm());
 			((Stage)btnLogin.getScene().getWindow()).setScene(scene);
