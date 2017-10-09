@@ -35,7 +35,7 @@ public class HTK {
 		};
 		
 		recordService.setOnSucceeded(e -> {
-				GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
+				GameInstance.getInstance().getCurrentGame().isAnswerCorrect(recordService.getValue());
 				l.recordingComplete();
 				}
 			);

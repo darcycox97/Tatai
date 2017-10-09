@@ -163,9 +163,9 @@ public class GameScreenController implements HTKListener{
 			a.stop();
 		}
 
-		boolean correct = game.getCurrentResult();
+		boolean correct = game.getLatestResult();
 
-		if (correct || game.numAttempts() > 1) {
+		if (correct || game.getNumAttempts() > 1) {
 			nextQuestionView();
 		} else {
 			// the user only gets to try again if they have made a single attempt
@@ -202,19 +202,19 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void playAgain() {
 		int currentRange = game.getRange();
-		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,currentRange));
+		GameInstance.getInstance().setCurrentGame(new NumberGame(currentRange));
 		initialize();
 	}
 
 	@FXML
 	public void startEasyGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.EASY_RANGE));
+		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.EASY_RANGE));
 		initialize();
 	}
 
 	@FXML
 	public void startHardGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.DEFAULT_NUM_QUESTIONS,Game.HARD_RANGE));
+		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.HARD_RANGE));
 		initialize();
 	}
 
@@ -283,7 +283,7 @@ public class GameScreenController implements HTKListener{
 			enteredName = result.get();
 		}
 		
-		game.setPlayerName(enteredName);
+	//	game.setPlayerName(enteredName);
 		
 	}
 	
@@ -364,7 +364,7 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 
-		displayResults(game.getCurrentResult());
+		displayResults(game.getLatestResult());
 	}
 
 	private void nextQuestionView() {
@@ -381,19 +381,19 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 
-		displayResults(game.getCurrentResult());
+		displayResults(game.getLatestResult());
 	}
 
 	private void gameFinished() {
   
   	playerNamePrompt();
 		
-		Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
+	//	Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
     
 		if (game.getRange() == Game.EASY_RANGE) {
-			appendToEasyLeaderboard(leader);
+//			appendToEasyLeaderboard(leader);
 		} else {
-			appendToHardLeaderboard(leader);
+//			appendToHardLeaderboard(leader);
 		}
 
 		lblGamePrompts.setVisible(true);
