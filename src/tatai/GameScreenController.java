@@ -3,12 +3,17 @@ package tatai;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +55,7 @@ public class GameScreenController implements HTKListener{
 	private Game game;
 
 	private MediaPlayer player;
-	private Animation recordingAnimation;
+	private List<Animation> recordingAnimations;
 
 	@FXML private Button returnHome;
 	@FXML private Button btnRecord;
@@ -65,6 +70,7 @@ public class GameScreenController implements HTKListener{
 	@FXML private Label lblGamePrompts;
 	@FXML private Label lblScore;
 	@FXML private Label lblTotalScore;
+	@FXML private Label lblTimer;
 
 	@FXML private Circle circle1;
 	@FXML private Circle circle2;
@@ -102,7 +108,7 @@ public class GameScreenController implements HTKListener{
 			circleMap.get(i).setStyle("-fx-fill:transparent;");
 		}
 		
-		recordingAnimation = getRecordAnimation();
+		recordingAnimations = getRecordAnimations();
 	}
 
 	@FXML
@@ -138,7 +144,10 @@ public class GameScreenController implements HTKListener{
 		
 		// initiate recording animation
 		lblGamePrompts.setText(RECORDING);
-		recordingAnimation.playFromStart();
+		
+		for(Animation a : recordingAnimations) {
+			a.playFromStart();
+		}
 		
 		game.attemptQuestion(this);
 	}
@@ -149,7 +158,10 @@ public class GameScreenController implements HTKListener{
 	public void recordingComplete() {
 
 		btnRecord.setDisable(false);
-		recordingAnimation.stop();
+		
+		for (Animation a : recordingAnimations) {
+			a.stop();
+		}
 
 		boolean correct = game.getCurrentResult();
 
@@ -159,6 +171,7 @@ public class GameScreenController implements HTKListener{
 			// the user only gets to try again if they have made a single attempt
 			tryAgainView();
 		}
+		
 	}
 
 	@FXML
@@ -274,7 +287,9 @@ public class GameScreenController implements HTKListener{
 		
 	}
 	
-	private Animation getRecordAnimation() {
+	private List<Animation> getRecordAnimations() {
+		
+		List<Animation> animations = new ArrayList<Animation>();
 		
 		FadeTransition recording = new FadeTransition(Duration.millis(700), lblGamePrompts);
 		recording.setFromValue(0);
@@ -290,8 +305,26 @@ public class GameScreenController implements HTKListener{
 			}
 		});
 		
+		animations.add(recording);
 		
-		return recording;
+		Timeline countdown = new Timeline(
+			new KeyFrame(
+				Duration.millis(0),
+				new KeyValue(lblTimer.textProperty(),"3")
+			),
+			new KeyFrame(
+				Duration.millis(1000),
+				new KeyValue(lblTimer.textProperty(),"2")
+			),
+			new KeyFrame(
+				Duration.millis(2000),
+				new KeyValue(lblTimer.textProperty(),"1")
+			)
+		);
+		
+		animations.add(countdown);
+		
+		return animations;
 	}
 
 
@@ -308,6 +341,8 @@ public class GameScreenController implements HTKListener{
 		lblGamePrompts.setVisible(true);
 		lblGamePrompts.setText("");
 		lblGamePrompts.setStyle("-fx-background-color:transparent;");
+		lblTimer.setVisible(true);
+		lblTimer.setText("");
 		gameFinishedGoodScoreOptions.setVisible(false);
 		gameFinishedBadScoreOptions.setVisible(false);
 		totalScoreBox.setVisible(false);
@@ -316,6 +351,7 @@ public class GameScreenController implements HTKListener{
 
 	private void tryAgainView() {
 
+		lblTimer.setVisible(false);
 		lblQuestionNumber.setVisible(true);
 		lblGamePrompts.setVisible(true);
 		btnRecord.setVisible(false);
@@ -332,6 +368,7 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void nextQuestionView() {
+		lblTimer.setVisible(false);
 		lblQuestionNumber.setVisible(true);
 		lblGamePrompts.setVisible(true);
 		btnRecord.setVisible(false);
