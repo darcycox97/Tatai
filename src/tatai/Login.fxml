@@ -6,34 +6,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.LoginController">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Select your username to get started!">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <ComboBox fx:id="comboUsers" prefWidth="150.0" />
-                  <TextField fx:id="txtUserName" maxWidth="120.0" />
+                  <VBox alignment="CENTER" spacing="20.0" GridPane.halignment="CENTER">
+                     <children>
+                        <ComboBox fx:id="comboUsers" promptText="Select Username" styleClass="login-prompts" />
+                        <TextField fx:id="txtUserName" alignment="CENTER" maxWidth="170.0" promptText="Enter Username" styleClass="login-prompts" />
+                     </children>
+                  </VBox>
                </children>
-            </HBox>
-            <Button fx:id="btnLogin" mnemonicParsing="false" text="Log In">
+            </GridPane>
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" text="Log In">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
          </children>
          <BorderPane.margin>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="60.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </BorderPane.margin>
       </VBox>
    </center>

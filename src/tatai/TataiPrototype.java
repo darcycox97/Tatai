@@ -14,8 +14,8 @@ public class TataiPrototype extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-			Scene scene = new Scene(root,700,600);
+			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Login.fxml"));
+			Scene scene = new Scene(root,700,300);
 			scene.getStylesheets().add(getClass().getResource("TataiStyle.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Tātai!");

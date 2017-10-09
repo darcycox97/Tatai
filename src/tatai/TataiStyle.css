@@ -46,3 +46,7 @@
 #lblGamePrompts {
 	-fx-padding:20px;
 }
+
+.login-prompts {
+	-fx-font-size : 18px;
+}
