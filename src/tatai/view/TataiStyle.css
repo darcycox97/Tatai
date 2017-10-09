@@ -6,7 +6,7 @@
 }
 
 .root {
-	-fx-background-image : url('file:resources/tatai-background-lighter.jpg');
+	-fx-background-image : url('tatai-background-lighter.jpg');
 }
 
 .circle {

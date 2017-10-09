@@ -1,4 +1,4 @@
-package tatai;
+package tatai.controller;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -49,10 +49,9 @@ public class HomeController {
 			
 			if (result.isPresent() && result.get().equals(ButtonType.YES)) {
 				try {	
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Login.fxml"));
 					Parent root = loader.load();
 					Scene scene = new Scene(root,700,300);
-					scene.getStylesheets().add(getClass().getResource("TataiStyle.css").toExternalForm());
 					((Stage)menuUser.getScene().getWindow()).setScene(scene);
 					
 				} catch (IOException e1) {
@@ -71,7 +70,7 @@ public class HomeController {
 	public void openGames() {
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("GameMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameMenu.fxml"));
 			Parent root = loader.load();
 			btnGames.getScene().setRoot(root);
 		} catch (IOException e) {

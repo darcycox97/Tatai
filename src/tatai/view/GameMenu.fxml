@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.GameMenuController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="70.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,7 +39,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:resources/icons/help.png" />
+                                    <Image url="@icons/help.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -53,7 +53,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:resources/icons/help.png" />
+                                    <Image url="@icons/help.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -67,7 +67,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:resources/icons/help.png" />
+                                    <Image url="@icons/help.png" />
                                  </image>
                               </ImageView>
                            </graphic>

@@ -1,4 +1,4 @@
-package tatai;
+package tatai.controller;
 
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ public class HomeScreenController {
 		BorderPane root;
 		try {
 			GameInstance.getInstance().setCurrentGame(new NumberGame(FiniteGame.EASY_RANGE));
-			root = (BorderPane)FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error starting easy game");
@@ -43,7 +43,7 @@ public class HomeScreenController {
 		BorderPane root;
 		try {
 			GameInstance.getInstance().setCurrentGame(new NumberGame(FiniteGame.HARD_RANGE));
-			root = (BorderPane)FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error starting hard game");
@@ -56,7 +56,7 @@ public class HomeScreenController {
 	public void viewLeaderboard(ActionEvent e) {
 		BorderPane root;
 		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getResource("LeaderboardScreen.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/LeaderboardScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error entering leaderboard screen");

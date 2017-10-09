@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.HomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.HomeController">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="65.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="680.0" spacing="65.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblMain" text="Welcome to Tātai!">
                <font>
@@ -25,7 +25,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
-                        <Image url="file:resources/icons/dice.png" />
+                        <Image url="@icons/dice.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -40,7 +40,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
-                        <Image url="file:resources/icons/practice.png" />
+                        <Image url="@icons/practice.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -55,7 +55,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
-                        <Image url="file:resources/icons/graph.png" />
+                        <Image url="@icons/graph.png" />
                      </image>
                   </ImageView>
                </graphic>

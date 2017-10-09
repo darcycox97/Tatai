@@ -1,4 +1,4 @@
-package tatai;
+package tatai.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

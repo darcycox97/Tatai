@@ -1,4 +1,4 @@
-package tatai;
+package tatai.controller;
 
 import java.io.File;
 
@@ -127,7 +127,7 @@ public class GameScreenController implements HTKListener{
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == buttonTypeYes){
-				root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/HomeScreen.fxml"));
 				returnHome.getScene().setRoot(root);
 			} else {
 				// ... user chose CANCEL or closed the dialog. stay on the game screen
