@@ -17,8 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import tatai.leaders.Leader;
-import tatai.leaders.LeadersInstance;
+import tatai.statistics.Leader;
+import tatai.statistics.LeadersInstance;
 
 /**
  *	Defines the event handlers for the controls on the Tatai leaderboard screen.

@@ -1,4 +1,4 @@
-package tatai.leaders;
+package tatai.statistics;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

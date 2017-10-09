@@ -32,10 +32,6 @@
 	-fx-padding:40px;
 }
 
-#lblIncorrectOutcome {
-	-fx-background-color : #F93930;
-	-fx-padding : 20px; 
-}
 
 #btnRecord {
 	-fx-background-color : #FF2700;
@@ -44,11 +40,9 @@
 }
 
 #btnRecord:hover {
-	-fx-opacity:0.5;
+	-fx-opacity:0.6;
 }
 
-#lblCorrectOutcome {
-	-fx-background-color : #1DAD0C;
-	-fx-padding : 20px;
-
+#lblGamePrompts {
+	-fx-padding:20px;
 }

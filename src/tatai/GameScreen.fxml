@@ -55,16 +55,6 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCorrectOutcome" text="Correct!" visible="false">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblIncorrectOutcome" text="Incorrect!" visible="false">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
                </children>
             </StackPane>
             <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
