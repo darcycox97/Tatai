@@ -31,7 +31,7 @@
                <children>
                   <VBox alignment="CENTER" spacing="20.0" GridPane.halignment="CENTER">
                      <children>
-                        <ComboBox fx:id="comboUsers" promptText="Select Username" styleClass="login-prompts" />
+                        <ComboBox fx:id="comboUsers" promptText="Select Username" styleClass="login-prompts" visibleRowCount="4" />
                         <TextField fx:id="txtUserName" alignment="CENTER" maxWidth="170.0" promptText="Enter Username" styleClass="login-prompts" />
                      </children>
                   </VBox>

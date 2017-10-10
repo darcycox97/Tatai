@@ -14,14 +14,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.HomeController">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="680.0" spacing="65.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="680.0" spacing="55.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblMain" text="Welcome to Tātai!">
                <font>
                   <Font size="37.0" />
                </font>
             </Label>
-            <Button fx:id="btnGames" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openGames" text="Games">
+            <Button fx:id="btnGames" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openGames" text="Games">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
@@ -36,7 +36,7 @@
                   <String fx:value="home-buttons" />
                   <String fx:value="main-buttons" />
                </styleClass></Button>
-            <Button fx:id="btnPractice" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openPractice" text="Practice">
+            <Button fx:id="btnPractice" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openPractice" text="Practice">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
@@ -51,7 +51,7 @@
                   <String fx:value="home-buttons" />
                   <String fx:value="main-buttons" />
                </styleClass></Button>
-            <Button fx:id="btnStatistics" contentDisplay="RIGHT" graphicTextGap="10.0" minWidth="180.0" mnemonicParsing="false" onAction="#openStatistics" text="Statistics">
+            <Button fx:id="btnStatistics" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openStatistics" text="Statistics">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
                      <image>
@@ -81,6 +81,9 @@
          <BorderPane.margin>
             <Insets right="20.0" top="20.0" />
          </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
       </MenuButton>
    </top>
 </BorderPane>

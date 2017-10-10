@@ -28,20 +28,22 @@ public class LoginController {
 
 		txtUserName.setVisible(false); // becomes visible when new user is selected
 
-		//TODO: populate combobox with list of all users
-		comboUsers.getItems().addAll("Bob","Darcy");
-
 		// add option for new user, and set up to show text field if selected
 		comboUsers.getItems().add(NEW_USER);
 		comboUsers.getSelectionModel().selectedItemProperty().addListener(e -> {
-			if (comboUsers.getSelectionModel().getSelectedItem().equals(NEW_USER)) {
-				txtUserName.setVisible(true);
-				btnLogin.setDisable(true);
-			} else {
-				txtUserName.setVisible(false);
-				btnLogin.setDisable(false);
-			}
+		if (comboUsers.getSelectionModel().getSelectedItem().equals(NEW_USER)) {
+			txtUserName.setVisible(true);
+			btnLogin.setDisable(true);
+		} else {
+			txtUserName.setVisible(false);
+			btnLogin.setDisable(false);
+		}
 		});
+		
+		
+		//TODO: populate combobox with list of all users
+		comboUsers.getItems().addAll("Bob","Darcy","Anon1","Anon2");
+
 
 		// apply a regex to the text field so we can only login if valid input is supplied
 		// only allow hyphens underscores and alphanumerics

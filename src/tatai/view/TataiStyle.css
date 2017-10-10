@@ -66,5 +66,15 @@
 
 .main-buttons {
 	-fx-font-size : 28px;
-	-fx-min-width : 250px;
+	-fx-min-width : 350px;
 }
+
+.title-label {
+	-fx-font-weight : bold;
+	-fx-font-size : 30px;
+}
+
+
+
+
+
