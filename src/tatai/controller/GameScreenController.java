@@ -120,7 +120,8 @@ public class GameScreenController implements HTKListener{
 
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Exit Confirmation");
-			alert.setContentText("Are you sure?");
+			alert.setHeaderText("Are you sure you wish to exit?");
+			alert.setContentText("All progress will be lost.");
 
 			ButtonType buttonTypeYes = new ButtonType("Yes");
 			ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
