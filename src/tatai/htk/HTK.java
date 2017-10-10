@@ -35,10 +35,9 @@ public class HTK {
 		};
 		
 		recordService.setOnSucceeded(e -> {
-				GameInstance.getInstance().getCurrentGame().isAnswerCorrect(recordService.getValue());
-				l.recordingComplete();
-				}
-			);
+			GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
+			l.recordingComplete();
+		});
 		
 		recordService.restart();
 	}
@@ -64,6 +63,7 @@ public class HTK {
 			}
 			
 			String[] wordsToMatch = qToMatch.getHTKWords();
+			
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_FILE));
 				String line = reader.readLine();

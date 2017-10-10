@@ -19,8 +19,9 @@ public abstract class  Game {
 	private List<Question> questions;
 	private Question currentQuestion;
 	private HTK htk;
-	private boolean currentResult;
 	
+	protected boolean currentResult;
+	protected GameDifficulty difficulty;
 	protected double score;
 	protected int attempts;
 	protected int questionIndex;
@@ -30,14 +31,25 @@ public abstract class  Game {
 	 * Game constructor.
 	 * @param RANGE the range of numbers 
 	 */
-	public Game(int range) {
-		RANGE = range;
-		questions = initializeQuestions(range);
+	public Game(GameDifficulty difficulty) {
+		this.difficulty = difficulty;
+		if (difficulty.equals(GameDifficulty.EASY)) {
+			RANGE = EASY_RANGE;
+		} else {
+			RANGE = HARD_RANGE;
+		}
+		questions = initializeQuestions(RANGE);
 		questionIndex = 0;
 		attempts = 0;
-		currentQuestion = questions.get(questionIndex);
+		currentQuestion = null; // becomes not null when nextQuestion() is called.
 		htk = new HTK();
 	}
+	
+	
+	/**
+	 * Used to specify the game mode, so classes using Game know what type of game this is.
+	 */
+	public abstract GameMode getGameMode();
 	
 	/**
 	 * Sets up the list of questions for the game, with all answers from 1 
@@ -55,10 +67,11 @@ public abstract class  Game {
 	 * this question.
 	 */
 	public Question nextQuestion() {
-		Question q = questions.get(questionIndex);
-		questionIndex++;
 		attempts = 0;
-		return q;
+		currentQuestion = questions.get(questionIndex);
+		
+		questionIndex++;
+		return currentQuestion;
 	}
 	/**
 	 * Passes the job on to HTK, which will check the correctness and update the score 
@@ -74,7 +87,7 @@ public abstract class  Game {
 	 * To be called by external classes to notify the game object whether a question attempt
 	 * was correct(true) or incorrect(false)
 	 */
-	public abstract void isAnswerCorrect(boolean correct);
+	public abstract void updateScore(boolean correct);
 	
 	public int getQuestionNumber() {
 		return questionIndex;
@@ -111,6 +124,13 @@ public abstract class  Game {
 	 */
 	public int getRange() {
 		return RANGE;
+	}
+	
+	/**
+	 * Returns the difficulty of the game
+	 */
+	public GameDifficulty getDifficulty() {
+		return difficulty;
 	}
 	
 }

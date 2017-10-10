@@ -48,7 +48,7 @@
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-buttons" text="Regular Game" />
+                        <Button fx:id="btnRegularGame" minWidth="200.0" mnemonicParsing="false" onAction="#startRegularGame" styleClass="main-buttons" text="Regular Game" />
                         <Label fx:id="lblHelp" contentDisplay="RIGHT">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">

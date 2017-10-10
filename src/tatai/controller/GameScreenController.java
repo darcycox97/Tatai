@@ -35,6 +35,7 @@ import tatai.question.Question;
 import tatai.statistics.Leader;
 import tatai.statistics.LeadersInstance;
 import tatai.game.Game;
+import tatai.game.GameDifficulty;
 import tatai.game.GameInstance;
 import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
@@ -47,6 +48,7 @@ public class GameScreenController implements HTKListener{
 	
 	private static final String CORRECT_COLOR = "#1DAD0C";
 	private static final String INCORRECT_COLOR = "#F93930";
+	private static final String HALF_MARK_COLOR = "#FFA500";
 	private static final String CORRECT = "Correct!";
 	private static final String INCORRECT = "Incorrect!";
 
@@ -127,7 +129,7 @@ public class GameScreenController implements HTKListener{
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == buttonTypeYes){
-				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/HomeScreen.fxml"));
+				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
 				returnHome.getScene().setRoot(root);
 			} else {
 				// ... user chose CANCEL or closed the dialog. stay on the game screen
@@ -201,20 +203,20 @@ public class GameScreenController implements HTKListener{
 
 	@FXML
 	public void playAgain() {
-		int currentRange = game.getRange();
-		GameInstance.getInstance().setCurrentGame(new NumberGame(currentRange));
+		GameDifficulty currentDifficulty = game.getDifficulty();
+		GameInstance.getInstance().setCurrentGame(new NumberGame(currentDifficulty));
 		initialize();
 	}
 
 	@FXML
 	public void startEasyGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.EASY_RANGE));
+		GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.EASY));
 		initialize();
 	}
 
 	@FXML
 	public void startHardGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(Game.HARD_RANGE));
+		GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.HARD));
 		initialize();
 	}
 
@@ -230,7 +232,12 @@ public class GameScreenController implements HTKListener{
 			
 			lblGamePrompts.setText(CORRECT);
 			lblGamePrompts.setStyle("-fx-background-color:" + CORRECT_COLOR + ";");
-			circleToChange.setStyle("-fx-fill:" + CORRECT_COLOR + ";");
+			
+			if (game.getNumAttempts() == 1) {
+				circleToChange.setStyle("-fx-fill:" + CORRECT_COLOR + ";");
+			} else {
+				circleToChange.setStyle("-fx-fill:" + HALF_MARK_COLOR + ";");
+			}
 			
 		} else {
 			
@@ -390,7 +397,7 @@ public class GameScreenController implements HTKListener{
 		
 	//	Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
     
-		if (game.getRange() == Game.EASY_RANGE) {
+		if (game.getDifficulty().equals(GameDifficulty.EASY)) {
 //			appendToEasyLeaderboard(leader);
 		} else {
 //			appendToHardLeaderboard(leader);
@@ -408,7 +415,7 @@ public class GameScreenController implements HTKListener{
 		lblTotalScore.setText(game.getScore());
 
 		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
-			if (game.getRange() == Game.EASY_RANGE) {
+			if (game.getDifficulty().equals(GameDifficulty.EASY)) {
 				gameFinishedGoodScoreOptions.setVisible(true);
 				gameFinishedBadScoreOptions.setVisible(false);
 			} else {

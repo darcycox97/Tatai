@@ -8,8 +8,8 @@ public abstract class FiniteGame extends Game {
 	
 	protected static final int NUM_QUESTIONS = 10;
 
-	public FiniteGame(int range) {
-		super(range);
+	public FiniteGame(GameDifficulty difficulty) {
+		super(difficulty);
 	}
 
 	@Override
@@ -18,12 +18,16 @@ public abstract class FiniteGame extends Game {
 	}
 
 	@Override
-	public void isAnswerCorrect(boolean correct) {
+	public void updateScore(boolean correct) {
+		
+		// update current result
+		currentResult = correct;
+		
 		// give a full mark if a single attempt was made, otherwise half a mark
 		if (correct) {
 			if (attempts == 1) {
 				score = score + 1;
-			} else {
+			} else if (attempts == 2) {
 				score = score + 0.5;
 			}
 		}

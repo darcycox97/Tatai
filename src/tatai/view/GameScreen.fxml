@@ -215,7 +215,7 @@
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:resources/icons/speaker.png" />
+                        <Image url="@icons/speaker.png" />
                      </image>
                   </ImageView>
                </graphic>

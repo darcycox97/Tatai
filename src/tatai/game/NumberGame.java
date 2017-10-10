@@ -8,8 +8,8 @@ import tatai.question.Question;
 
 public class NumberGame extends FiniteGame {
 	
-	public NumberGame(int range) {
-		super(range);
+	public NumberGame(GameDifficulty difficulty) {
+		super(difficulty);
 	}
 	
 	protected List<Question> initializeQuestions(int range) {
@@ -23,6 +23,11 @@ public class NumberGame extends FiniteGame {
 	private int generateNumber(int range) {
 		int random = (int)(Math.random() * range + 1);
 		return random;
+	}
+
+	@Override
+	public GameMode getGameMode() {
+		return GameMode.PRACTICE;
 	}
 
 }
