@@ -1,4 +1,4 @@
-package tatai;
+package tatai.controller;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -55,7 +55,7 @@ public class LeaderboardController {
 	public void returnHomeScreen(ActionEvent e) {
 		BorderPane root;
 		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/HomeScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
 			System.out.println("Error exiting leaderboard");

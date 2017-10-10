@@ -12,6 +12,8 @@ public class LeadersInstance {
 
 	private static LeadersInstance instance = new LeadersInstance();
 	
+	private LeadersInstance() {}
+	
 	private static ObservableList<Leader> leadersListEasy = FXCollections.observableArrayList();
 	
 	private static ObservableList<Leader> leadersListHard = FXCollections.observableArrayList();

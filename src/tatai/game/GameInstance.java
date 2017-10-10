@@ -10,6 +10,8 @@ public class GameInstance {
 	
 	private static Game currentGame;
 	
+	private GameInstance() {}
+	
 	public static GameInstance getInstance() {
 		return instance;
 	}

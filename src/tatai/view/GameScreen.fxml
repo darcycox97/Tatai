@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.GameScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.GameScreenController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -154,7 +154,7 @@
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:resources/icons/tick.png" />
+                                    <Image url="@icons/tick.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -166,7 +166,7 @@
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="file:resources/icons/cross.png" />
+                                    <Image url="@icons/cross.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -215,7 +215,7 @@
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:resources/icons/speaker.png" />
+                        <Image url="@icons/speaker.png" />
                      </image>
                   </ImageView>
                </graphic>

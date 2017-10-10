@@ -6,7 +6,7 @@
 }
 
 .root {
-	-fx-background-image : url('file:resources/tatai-background-lighter.jpg');
+	-fx-background-image : url('tatai-background-lighter.jpg');
 }
 
 .circle {
@@ -46,3 +46,35 @@
 #lblGamePrompts {
 	-fx-padding:20px;
 }
+
+.login-prompts {
+	-fx-font-size : 18px;
+}
+
+#btnLogin {
+	-fx-font-size : 25px;
+}
+
+#lblMain {
+	-fx-font-size : 50px;
+}
+
+.home-screen-images {
+	-fx-min-width : 100px;
+	
+}
+
+.main-buttons {
+	-fx-font-size : 28px;
+	-fx-min-width : 350px;
+}
+
+.title-label {
+	-fx-font-weight : bold;
+	-fx-font-size : 30px;
+}
+
+
+
+
+
