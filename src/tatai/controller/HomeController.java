@@ -86,6 +86,13 @@ public class HomeController {
 	@FXML
 	public void openStatistics() {
 		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsMenu.fxml"));
+			Parent root = loader.load();
+			btnGames.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
