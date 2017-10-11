@@ -32,8 +32,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import tatai.question.Question;
+import tatai.statistics.CSVFile;
 import tatai.statistics.Leader;
 import tatai.statistics.LeadersInstance;
+import tatai.statistics.User;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameInstance;
@@ -403,6 +405,8 @@ public class GameScreenController implements HTKListener{
 		} else {
 //			appendToHardLeaderboard(leader);
 		}
+		
+		CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
 
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);
