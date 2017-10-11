@@ -192,12 +192,16 @@ public class GameScreenController implements HTKListener{
 	 * Defines what the gui should do when the recording has finished
 	 */
 	public void recordingComplete() {
-
+		
 		btnRecord.setDisable(false);
 		btnSkip.setDisable(false);
 		
 		for (Animation a : recordingAnimations) {
 			a.stop();
+		}
+		
+		if (game.getFinished()) {
+			return;
 		}
 
 		boolean correct = game.getLatestResult();
@@ -262,7 +266,7 @@ public class GameScreenController implements HTKListener{
 		
 		// update circles if we are in a finite game mode
 		
-		boolean finiteGame = gamemode.equals(GameMode.TEN_QUESTIONS);
+		boolean finiteGame = ((gamemode.equals(GameMode.TEN_QUESTIONS)) || (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)));
 		
 		if (correct) {
 			
@@ -343,28 +347,44 @@ public class GameScreenController implements HTKListener{
 	
 	private void startTimer(int upOrDown) {
 		
-		gameDuration = new SimpleDoubleProperty(0);
-		countingAnimation = new Timeline(
-			new KeyFrame(
-				Duration.millis(10),
-				e -> {
-					double currentTime = gameDuration.get();
-					currentTime += 0.01;
-					gameDuration.set(currentTime);
-				}
-			)
-		);
-		
 		// start timer and either have it counting up or down
 		if (upOrDown == COUNT_UP) {
 			
+			gameDuration = new SimpleDoubleProperty(0);
+			countingAnimation = new Timeline(
+				new KeyFrame(
+					Duration.millis(10),
+					e -> {
+						double currentTime = gameDuration.get();
+						currentTime += 0.01;
+						gameDuration.set(currentTime);
+					}
+				)
+			);
+			
+			// timer will count up indefinitely, until stopped by the game ending
+			countingAnimation.setCycleCount(Animation.INDEFINITE);
 			
 		} else {
 			
+			gameDuration = new SimpleDoubleProperty(60);
+			countingAnimation = new Timeline(
+				new KeyFrame(
+					Duration.millis(10),
+					e -> {
+						double currentTime = gameDuration.get();
+						currentTime -= 0.01;
+						gameDuration.set(currentTime);
+					}
+				)
+			);
+			
+			// timer will stop when it reaches zero (after one minute), and end the game.
+			countingAnimation.setCycleCount(6000);
+			countingAnimation.setOnFinished(e -> gameFinished());
 		}
 		
 		lblScore.textProperty().bind(gameDuration.asString("%.2f"));
-		countingAnimation.setCycleCount(Animation.INDEFINITE);
 		countingAnimation.playFromStart();
 		
 		countingAnimation.statusProperty().addListener(e -> {
@@ -442,13 +462,21 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void gameFinished() {
+		
+		game.setFinished(true);
 
-		if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ) || gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
+		if (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
 			// stop timer 
 			countingAnimation.stop();
+			game.setScoreValue(gameDuration.get());
+			lblScoreTitle.setText("Your Time:");
+		} else if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ)) {
+			lblScoreTitle.setText("Time up! Your score:");
+		} else {
+			lblScoreTitle.setText("Total Score:");
 		}
 		
-		lblGamePrompts.setVisible(true);
+		lblGamePrompts.setVisible(false);
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
 		tryAgainBox.setVisible(false);
@@ -456,9 +484,14 @@ public class GameScreenController implements HTKListener{
 		questionLabel.setVisible(false);
 		lblQuestionNumber.setVisible(false);
 		lblScore.setVisible(false);
+		btnSkip.setVisible(false);
+		lblRecordTimer.setVisible(false);
+		
 		totalScoreBox.setVisible(true);
-		lblTotalScore.setText(game.getScore());
 		gameFinishedBox.setVisible(true);
+		
+		lblTotalScore.setText(game.getScore());
+	
 		
 		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
 			lblGamePrompts.setText("That's a great score!");

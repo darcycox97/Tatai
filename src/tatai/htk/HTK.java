@@ -27,6 +27,7 @@ public class HTK {
 	 */
 	public void recordQuestion(Question q, HTKListener l) {
 		
+		System.out.println("Answer: " + q.getValue());
 		recordService = new Service<Boolean>(){
 			@Override
 			protected Task<Boolean> createTask() {
@@ -36,7 +37,9 @@ public class HTK {
 		
 		recordService.setOnSucceeded(e -> {
 			GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
-			l.recordingComplete();
+			if (l != null) {
+				l.recordingComplete();
+			}
 		});
 		
 		recordService.restart();

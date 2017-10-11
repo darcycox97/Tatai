@@ -1,6 +1,7 @@
 package tatai.game;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 
 import tatai.question.Equation;
@@ -27,6 +28,14 @@ public class TimedEquationGame extends FiniteGame {
 		}
 		
 		return questions;
+	}
+	
+	@Override
+	public String getScore() {
+		// format time as 2 d.p
+		Formatter f = new Formatter();
+		f.format("%1$.2f", score);
+		return f.toString() + " seconds";
 	}
 
 }

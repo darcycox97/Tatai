@@ -27,5 +27,10 @@ public class OneMinuteEquationGame extends InfiniteGame {
 		
 		return questions;
 	}
+	
+	@Override
+	public String getScore() {
+		return (int) score + "";
+	}
 
 }

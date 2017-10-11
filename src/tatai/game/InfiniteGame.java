@@ -1,9 +1,14 @@
 package tatai.game;
 
+import java.util.Formatter;
 import java.util.List;
 
 import tatai.question.Question;
 
+/**
+ * Game that can generate an infinite number of questions.
+ * In particular, the hasNextQuestion method will always return true.
+ */
 public abstract class InfiniteGame extends Game {
 
 	protected static final int NUM_ELS_IN_LIST = 100;
@@ -33,6 +38,8 @@ public abstract class InfiniteGame extends Game {
 
 	@Override
 	public void updateScore(boolean correct) {
+		currentResult = correct;
+		
 		if (correct) {
 			score++;
 		}
@@ -44,7 +51,10 @@ public abstract class InfiniteGame extends Game {
 		 int numAttempted = NUM_ELS_IN_LIST * numTimesListRegenerated + questionIndex;
 		 double percentCorrect = numCorrect / numAttempted;
 		 
-		 return percentCorrect + "% correct";
+		 Formatter f = new Formatter();
+		 f.format("%1$.2f", percentCorrect);
+		 
+		 return f.toString() + "% correct";
 	}
 	
 	// override this method so question number doesn't roll back to 1.
