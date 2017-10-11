@@ -43,7 +43,7 @@ public class LoginController {
 
 
 		//TODO: populate combobox with list of all users
-		for (String name : CSVFile.getInstance().getNames()) {
+		for (String name : CSVFile.getNames()) {
 			comboUsers.getItems().add(name);
 		}
 		

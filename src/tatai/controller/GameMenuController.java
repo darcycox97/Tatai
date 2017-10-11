@@ -29,7 +29,7 @@ public class GameMenuController {
 	@FXML
 	public void loadHomeScreen() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Home.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
