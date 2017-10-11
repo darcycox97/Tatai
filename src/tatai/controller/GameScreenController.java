@@ -257,45 +257,6 @@ public class GameScreenController implements HTKListener{
 		questionLabel.setText(q.getDisplayText());
 		lblQuestionNumber.setText("Question #" + game.getQuestionNumber());
 	}
-
-	private void playerNamePrompt() {
-		
-		// display text dialog for user to enter their name in
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Player Name");
-		dialog.setHeaderText("Enter your name: ");
-
-		// whenever the input text changes, check if it is valid and set the disabled property of the button
-		dialog.getEditor().textProperty().addListener( e-> {
-
-			SimpleBooleanProperty disabled = new SimpleBooleanProperty(false); // becomes false when invalid input is given.
-			dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(disabled); // the button becomes disabled on invalid input
-
-			String currentInput = dialog.getEditor().getText();
-			
-			boolean valid;
-			if (currentInput.length() == 0) {
-				// empty input counts as a valid name
-				valid = true;
-			} else {
-				// allow alphanumeric, hyphens, and underscores
-				valid = Pattern.matches("[\\w\\-]+", currentInput); 
-			}
-			
-			disabled.setValue(!valid);
-
-		});
-
-		Optional<String> result = dialog.showAndWait();
-		String enteredName = "Anonymous";
-
-		if (result.isPresent()) {
-			enteredName = result.get();
-		}
-		
-	//	game.setPlayerName(enteredName);
-		
-	}
 	
 	private List<Animation> getRecordAnimations() {
 		
@@ -395,16 +356,6 @@ public class GameScreenController implements HTKListener{
 	}
 
 	private void gameFinished() {
-  
-  	playerNamePrompt();
-		
-	//	Leader leader = new Leader(game.getPlayerName(), game.getScoreValue());
-    
-		if (game.getDifficulty().equals(GameDifficulty.EASY)) {
-//			appendToEasyLeaderboard(leader);
-		} else {
-//			appendToHardLeaderboard(leader);
-		}
 		
 		CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
 

@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -120,12 +124,12 @@ public class CSVFile {
 			String line = br.readLine();
 			String newLine = "";
 			int index = 1;
-			
+
 			while (line != null) {
 				String[] lineArray = line.split(",");
-				
+
 				if (lineArray[0].equals(username)) {
-					
+
 					if (gamemode.equals("TEN_QUESTIONS")) {
 						index = 1;
 					} else if (gamemode.equals("TEN_QUESTIONS_TIMED")){
@@ -133,30 +137,30 @@ public class CSVFile {
 					} else if (gamemode.equals("ONE_MINUTE_BLITZ")){
 						index = 3;
 					}
-					
+
 					for (int i = 0; i < index; i++) {
 						newLine += lineArray[i] + ",";
 					}
-					
+
 					newLine += String.valueOf(average) + ",";
-					
+
 					for (int i = index + 1; i < lineArray.length; i++) {
 						newLine += lineArray[i] + ",";
 					}
-					
+
 					bw.write(newLine);
 					bw.newLine();
 					line = br.readLine();
-					
+
 				} else {
-					
+
 					bw.write(line);
 					bw.newLine();
 					line = br.readLine();
 				}
-				
+
 			}
-			
+
 			bw.close(); br.close();
 
 			// Delete the old version of the file
@@ -176,6 +180,35 @@ public class CSVFile {
 		}
 
 	}
+
+	public static String getAverage(String username, String gamemode) {
+
+		setAverage(username, gamemode);
+		String average = "not set";
+		
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
+
+			String line = br.readLine();
+
+			while (line != null) {
+				String[] lineArray = line.split(",");
+				if (lineArray[0].equals(username)) {
+					average = lineArray[1];
+				}
+				line = br.readLine();
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return average;
+
+	}
+
 
 	private static double calculateAverage(String username, String gamemode) {
 
@@ -201,6 +234,7 @@ public class CSVFile {
 				line = br.readLine();
 			}
 
+			br.close();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -214,6 +248,40 @@ public class CSVFile {
 		average = scores / scoreCount;
 
 		return average;
+	}
+
+	public static Series<String, Double> getData(String username, String gamemode) {
+
+		XYChart.Series data = new XYChart.Series<>();
+		int gameNumber = 1;
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
+			String line = br.readLine();
+
+			while (line != null) {
+				String[] lineArray = line.split(",");
+				if (lineArray[0].equals(username)) {
+					for (int i = 0; i < lineArray.length - 1; i++) {
+						if (lineArray[i].equals(gamemode)) {
+							data.getData().add(new XYChart.Data(gameNumber, Double.parseDouble(lineArray[i+1])));
+							gameNumber++;
+						}
+					}
+				}
+				line = br.readLine();
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return data;
 	}
 
 }
