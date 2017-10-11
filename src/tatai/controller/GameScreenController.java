@@ -162,6 +162,8 @@ public class GameScreenController implements HTKListener{
 					countingAnimation.stop();
 				}
 				
+				game.setFinished(true);
+				
 				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
 				returnHome.getScene().setRoot(root);
 			} else {
@@ -180,6 +182,7 @@ public class GameScreenController implements HTKListener{
 		
 		// initiate recording animation
 		lblGamePrompts.setText(RECORDING);
+		lblGamePrompts.setStyle("-fx-background-color:transparent;");
 		
 		for(Animation a : recordingAnimations) {
 			a.playFromStart();
@@ -200,19 +203,42 @@ public class GameScreenController implements HTKListener{
 			a.stop();
 		}
 		
+		// do not proceed if game was finished during recording process.
 		if (game.getFinished()) {
 			return;
 		}
 
 		boolean correct = game.getLatestResult();
 
-		if (correct || game.getNumAttempts() > 1) {
+		if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ)) {
+			// for this game mode, don't allow second attempts
 			nextQuestionView();
+			
+		} else if (gamemode.equals(GameMode.PRACTICE)) {
+			if (correct) {
+				nextQuestionView();
+			} else {
+				tryAgainView(); // allow infinite attempts in practice mode
+			}
+			
+		} else if (gamemode.equals(GameMode.TEN_QUESTIONS)) {
+			if (correct || game.getNumAttempts() > 1) {
+				nextQuestionView();
+			} else {
+				// the user only gets to try again if they have made a single attempt
+				tryAgainView();
+			}
+			
 		} else {
-			// the user only gets to try again if they have made a single attempt
-			tryAgainView();
+			// game mode is TEN_QUESTIONS_TIMED
+			if (correct) {
+				nextQuestionView();
+			} else {
+				// do not let user move on until correct.
+				displayResults(correct);
+				recordView();
+			}
 		}
-		
 	}
 
 	@FXML
@@ -406,9 +432,19 @@ public class GameScreenController implements HTKListener{
 		lblRecordTimer.setVisible(true);
 		lblGamePrompts.setVisible(true);
 		
-		lblGamePrompts.setText("");
-		lblGamePrompts.setStyle("-fx-background-color:transparent;");
 		lblRecordTimer.setText("");
+		
+		if (!gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
+			
+			lblGamePrompts.setText("");
+			lblGamePrompts.setStyle("-fx-background-color:transparent;");
+		} else {
+			
+			if (game.getLatestResult()) {
+				lblGamePrompts.setText("");
+				lblGamePrompts.setStyle("-fx-background-color:transparent;");
+			}
+		}
 		
 		btnPlayBack.setVisible(false);
 		tryAgainBox.setVisible(false);
@@ -463,6 +499,11 @@ public class GameScreenController implements HTKListener{
 
 	private void gameFinished() {
 		
+		// stop recording animation in case it was still going
+		for (Animation a : recordingAnimations) {
+			a.stop();
+		}
+		
 		game.setFinished(true);
 
 		if (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
@@ -476,7 +517,7 @@ public class GameScreenController implements HTKListener{
 			lblScoreTitle.setText("Total Score:");
 		}
 		
-		lblGamePrompts.setVisible(false);
+		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
 		tryAgainBox.setVisible(false);
