@@ -48,7 +48,7 @@
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button fx:id="btnRegularGame" minWidth="200.0" mnemonicParsing="false" onAction="#startRegularGame" styleClass="main-buttons" text="Regular Game" />
+                        <Button fx:id="btnClassic" minWidth="200.0" mnemonicParsing="false" onAction="#startClassicGame" styleClass="main-buttons" text="Classic" />
                         <Label fx:id="lblHelp" contentDisplay="RIGHT">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -65,7 +65,7 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-buttons" text="One Minute Blitz" />
+                        <Button fx:id="btnArcade" minWidth="200.0" mnemonicParsing="false" onAction="#startArcadeGame" styleClass="main-buttons" text="Arcade" />
                         <Label contentDisplay="GRAPHIC_ONLY" text="Label">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -82,7 +82,7 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-buttons" text="Ten Question - timed" />
+                        <Button fx:id="btnTimeAttack" minWidth="200.0" mnemonicParsing="false" onAction="#startTimeAttackGame" styleClass="main-buttons" text="Time Attack" />
                         <Label contentDisplay="GRAPHIC_ONLY" text="Label">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">

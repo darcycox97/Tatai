@@ -16,10 +16,10 @@ public abstract class  Game {
 	public static final int EASY_RANGE = 9;
 	public static final int HARD_RANGE = 99;
 	
-	private List<Question> questions;
 	private Question currentQuestion;
 	private HTK htk;
 	
+	protected List<Question> questions;
 	protected boolean currentResult;
 	protected GameDifficulty difficulty;
 	protected double score;
