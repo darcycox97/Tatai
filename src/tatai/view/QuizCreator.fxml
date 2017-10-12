@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.QuizCreatorController">
    <top>
       <AnchorPane>
          <children>
@@ -39,7 +38,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="btnGoBack" layoutX="57.0" layoutY="20.0" mnemonicParsing="false" styleClass="home-buttons" text="Go Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <Button fx:id="btnGoBack" layoutX="57.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadTeacherMenu" styleClass="home-buttons" text="Go Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
          </children>
       </AnchorPane>
    </top>
@@ -133,7 +132,7 @@
                   <Font size="17.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSaveQuiz" mnemonicParsing="false" text="Save Quiz">
+            <Button fx:id="btnSaveQuiz" mnemonicParsing="false" onAction="#saveQuiz" text="Save Quiz">
                <font>
                   <Font size="18.0" />
                </font>

@@ -67,6 +67,8 @@ public class LoginController {
 	@FXML
 	public void login() {
 
+		//TODO: password protect teacher login.
+		
 		// determine if username provided, and if so set the current user for the session
 
 		String username;
