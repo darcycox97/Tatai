@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.StatsScreenController">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="170.0" styleClass="home-buttons" text="Home" />
+            <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="modeComboBox" prefWidth="250.0" promptText="Select a Game Mode" />
+            <Label fx:id="lblScore" alignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false" BorderPane.alignment="CENTER">
+        <xAxis>
+          <NumberAxis label="Time" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="20.0" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" autoRanging="false" label="Score" minorTickCount="0" side="LEFT" tickLabelGap="1.0" tickUnit="2.0" upperBound="20.0" />
+        </yAxis>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="40.0" />
+         </padding>
+      </LineChart>
+   </center>
+</BorderPane>

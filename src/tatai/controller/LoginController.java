@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 
 public class LoginController {
@@ -31,19 +32,21 @@ public class LoginController {
 		// add option for new user, and set up to show text field if selected
 		comboUsers.getItems().add(NEW_USER);
 		comboUsers.getSelectionModel().selectedItemProperty().addListener(e -> {
-		if (comboUsers.getSelectionModel().getSelectedItem().equals(NEW_USER)) {
-			txtUserName.setVisible(true);
-			btnLogin.setDisable(true);
-		} else {
-			txtUserName.setVisible(false);
-			btnLogin.setDisable(false);
-		}
+			if (comboUsers.getSelectionModel().getSelectedItem().equals(NEW_USER)) {
+				txtUserName.setVisible(true);
+				btnLogin.setDisable(true);
+			} else {
+				txtUserName.setVisible(false);
+				btnLogin.setDisable(false);
+			}
 		});
-		
-		
-		//TODO: populate combobox with list of all users
-		comboUsers.getItems().addAll("Bob","Darcy","Anon1","Anon2");
 
+
+		//TODO: populate combobox with list of all users
+		for (String name : CSVFile.getNames()) {
+			comboUsers.getItems().add(name);
+		}
+		
 
 		// apply a regex to the text field so we can only login if valid input is supplied
 		// only allow hyphens underscores and alphanumerics
@@ -61,20 +64,20 @@ public class LoginController {
 
 	@FXML
 	public void login() {
-		
+
 		// determine if username provided, and if so set the current user for the session
-		
+
 		String username;
 		String selected = comboUsers.getSelectionModel().getSelectedItem();
 		if (selected == null) {
-			
+
 			Alert alert = new Alert(
-				AlertType.INFORMATION,
-				"Please select a username before logging in"
-			);
+					AlertType.INFORMATION,
+					"Please select a username before logging in"
+					);
 			alert.showAndWait();
 			return;
-			
+
 		} else if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
@@ -82,9 +85,9 @@ public class LoginController {
 			// pre existing username is selected
 			username = selected;
 		}
-		
+
 		User.getInstance().setName(username);
-		
+
 		// load the home screen
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/Home.fxml"));

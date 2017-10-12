@@ -31,6 +31,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import tatai.question.Question;
+import tatai.statistics.CSVFile;
+import tatai.statistics.Leader;
+import tatai.statistics.LeadersInstance;
+import tatai.statistics.User;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
@@ -140,8 +144,9 @@ public class GameScreenController implements HTKListener{
 
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Exit Confirmation");
-			alert.setContentText("Are you sure you want to quit?\n" +
-								"You will lose all progress in the current game.");
+
+			alert.setHeaderText("Are you sure you wish to exit?");
+			alert.setContentText("All progress will be lost.");
 
 			ButtonType buttonTypeYes = new ButtonType("Yes");
 			ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
@@ -506,6 +511,8 @@ public class GameScreenController implements HTKListener{
 			lblScoreTitle.setText("Total Score:");
 		}
 		
+		CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
+
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
