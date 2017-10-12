@@ -23,10 +23,7 @@ public class CSVFile {
 	private static final String STATS_FILE_NAME = "resources/statistics.csv";
 	private static final String TEMP_FILE_NAME = "resources/temporary.csv";
 
-	public static void appendToCSV(String username, String gamemode, String scoreString) {
-
-		String[] scoreArray = scoreString.split("/");
-		double score = Double.parseDouble(scoreArray[0]);
+	public static void appendToCSV(String username, String gamemode, String score) {
 
 		try {
 
@@ -60,7 +57,7 @@ public class CSVFile {
 
 			// If the user is new, create a new line of data
 			if (found == false) {
-				bw.write(username + ",0,0,0," + gamemode + "," + score);
+				bw.write(username + "," + gamemode + "," + score);
 			}
 
 			bw.close(); br.close();
@@ -77,9 +74,6 @@ public class CSVFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		setAverage(username, gamemode);
-
 	}
 
 	public static List<String> getNames() {
@@ -112,176 +106,95 @@ public class CSVFile {
 		return names;
 	}
 
-	public static void setAverage(String username, String gamemode) {
-
-		double average = calculateAverage(username, gamemode);
-
-		try {
-
-			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
-			BufferedWriter bw = new BufferedWriter(new FileWriter(TEMP_FILE_NAME));
-
-			String line = br.readLine();
-			String newLine = "";
-			int index = 1;
-
-			while (line != null) {
-				String[] lineArray = line.split(",");
-
-				if (lineArray[0].equals(username)) {
-
-					if (gamemode.equals("TEN_QUESTIONS")) {
-						index = 1;
-					} else if (gamemode.equals("TEN_QUESTIONS_TIMED")){
-						index = 2;
-					} else if (gamemode.equals("ONE_MINUTE_BLITZ")){
-						index = 3;
-					}
-
-					for (int i = 0; i < index; i++) {
-						newLine += lineArray[i] + ",";
-					}
-
-					newLine += String.valueOf(average) + ",";
-
-					for (int i = index + 1; i < lineArray.length; i++) {
-						newLine += lineArray[i] + ",";
-					}
-
-					bw.write(newLine);
-					bw.newLine();
-					line = br.readLine();
-
-				} else {
-
-					bw.write(line);
-					bw.newLine();
-					line = br.readLine();
-				}
-
-			}
-
-			bw.close(); br.close();
-
-			// Delete the old version of the file
-			File oldFile = new File(STATS_FILE_NAME);
-			oldFile.delete();
-
-			// Rename the temporary file to "statistics.csv"
-			File newFile = new File(TEMP_FILE_NAME);
-			newFile.renameTo(new File(STATS_FILE_NAME));
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
 	public static String getAverage(String username, String gamemode) {
-
-		setAverage(username, gamemode);
-		String average = "not set";
-		
-		try {
-
-			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
-
-			String line = br.readLine();
-
-			while (line != null) {
-				String[] lineArray = line.split(",");
-				if (lineArray[0].equals(username)) {
-					average = lineArray[1];
-				}
-				line = br.readLine();
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return average;
-
-	}
-
-
-	private static double calculateAverage(String username, String gamemode) {
 
 		double scores = 0;
 		int scoreCount = 0;
 		double average = 0;
 
-		try {
+		String[] userData = getUserData(username);
 
-			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
-			String line = br.readLine();
-
-			while (line != null) {
-				String[] lineArray = line.split(",");
-				if (lineArray[0].equals(username)) {
-					for (int i = 0; i < lineArray.length - 1; i++) {
-						if (lineArray[i].equals(gamemode)) {
-							scoreCount++;
-							scores += Double.parseDouble(lineArray[i + 1]);
-						}
-					}
-				}
-				line = br.readLine();
+		for (int i = 0; i < userData.length - 1; i++) {
+			if (userData[i].equals(gamemode)) {
+				scoreCount++;
+				scores += Double.parseDouble(userData[i + 1]);
 			}
-
-			br.close();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
-		average = scores / scoreCount;
+		average = Math.round((scores * 10)/ scoreCount);
+		average = average / 10;
 
-		return average;
+		return String.valueOf(average);
 	}
 
+	public static String getBest(String username, String gamemode) {
+
+		String[] userData = getUserData(username);
+		double best = 0;
+		if (gamemode.equals("TIME_ATTACK")) {
+			best = Double.parseDouble(userData[userData.length - 1]);
+			for (int i = 0; i < userData.length - 1; i++) {
+				if (userData[i].equals(gamemode)) {
+					double score = Double.parseDouble(userData[i+1]);
+					if (score < best) {
+						best = score;
+					}
+				}
+			}
+		} else {
+			for (int i = 0; i < userData.length - 1; i++) {
+				if (userData[i].equals(gamemode)) {
+					double score = Double.parseDouble(userData[i+1]);
+					if (score > best) {
+						best = score;
+					}
+				}
+			}
+		}
+
+			return String.valueOf(best);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Series<String, Double> getData(String username, String gamemode) {
 
 		XYChart.Series data = new XYChart.Series<>();
 		int gameNumber = 1;
+		String[] userData = getUserData(username);
+
+		for (int i = 0; i < userData.length - 1; i++) {
+			if (userData[i].equals(gamemode)) {
+				data.getData().add(new XYChart.Data(gameNumber, Double.parseDouble(userData[i+1])));
+				gameNumber++;
+			}
+		}
+
+		return data;
+	}
+
+	private static String[] getUserData(String username) {
+
+		String[] userData = null;
+		String line;
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
-			String line = br.readLine();
-
+			line = br.readLine();
 			while (line != null) {
 				String[] lineArray = line.split(",");
 				if (lineArray[0].equals(username)) {
-					for (int i = 0; i < lineArray.length - 1; i++) {
-						if (lineArray[i].equals(gamemode)) {
-							data.getData().add(new XYChart.Data(gameNumber, Double.parseDouble(lineArray[i+1])));
-							gameNumber++;
-						}
-					}
+					userData = lineArray;
 				}
 				line = br.readLine();
 			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
+			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return data;
+		return userData;
+
 	}
 
 }
