@@ -11,8 +11,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
+import tatai.game.GameMode;
+import tatai.game.OneMinuteEquationGame;
 import tatai.game.RegularEquationGame;
+import tatai.game.TimedEquationGame;
 
 public class GameMenuController {
 	
@@ -22,14 +25,16 @@ public class GameMenuController {
 	@FXML private Tooltip tooltipTest;
 	@FXML private Label lblHelp;
 	@FXML private Button btnHome;
-	@FXML private Button btnRegularGame;
+	@FXML private Button btnClassic;
+	@FXML private Button btnArcade;
+	@FXML private Button btnTimeAttack;
 
 	public void initialize() {}
 	
 	@FXML
 	public void loadHomeScreen() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Home.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -39,13 +44,13 @@ public class GameMenuController {
 	}
 	
 	@FXML
-	public void startRegularGame() {
+	public void startClassicGame() {
 		
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameInstance.getInstance().setCurrentGame(new RegularEquationGame(GameDifficulty.EASY));
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.EASY);
 		} else {
-			GameInstance.getInstance().setCurrentGame(new RegularEquationGame(GameDifficulty.HARD));
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.HARD);
 		}
 		
 		// load the game screen
@@ -56,5 +61,47 @@ public class GameMenuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void startArcadeGame() {
+
+		// determine what difficulty the game should be in
+		if (toggleEasy.isSelected()) {
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.EASY);
+		} else {
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.HARD);
+		}
+		
+		// load the game screen
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			Parent root = loader.load();
+			btnHome.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@FXML
+	public void startTimeAttackGame() {
+		
+		// determine what difficulty the game should be in
+		if (toggleEasy.isSelected()) {
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.EASY);
+		} else {
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.HARD);
+		}
+		
+		// load the game screen
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			Parent root = loader.load();
+			btnHome.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

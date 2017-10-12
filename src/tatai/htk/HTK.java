@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
 import tatai.question.Question;
 
 /**
@@ -27,6 +27,7 @@ public class HTK {
 	 */
 	public void recordQuestion(Question q, HTKListener l) {
 		
+		System.out.println("Answer: " + q.getValue());
 		recordService = new Service<Boolean>(){
 			@Override
 			protected Task<Boolean> createTask() {
@@ -35,8 +36,10 @@ public class HTK {
 		};
 		
 		recordService.setOnSucceeded(e -> {
-			GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
-			l.recordingComplete();
+			GameFactory.getInstance().getCurrentGame().updateScore(recordService.getValue());
+			if (l != null) {
+				l.recordingComplete();
+			}
 		});
 		
 		recordService.restart();
