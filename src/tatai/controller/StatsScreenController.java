@@ -17,6 +17,7 @@ public class StatsScreenController {
 	@FXML private NumberAxis xAxis;
 	@FXML private NumberAxis yAxis;
 	@FXML private Button btnHome;
+	@FXML private Button btnBack;
 
 	@FXML
 	public void initialize() {
@@ -32,7 +33,17 @@ public class StatsScreenController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	@FXML
+	public void loadStatsMenu() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsMenu.fxml"));
+			Parent root = loader.load();
+			btnHome.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
