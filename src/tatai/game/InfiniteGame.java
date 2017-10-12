@@ -49,7 +49,7 @@ public abstract class InfiniteGame extends Game {
 	public String getScore() {
 		 double numCorrect = getScoreValue();
 		 int numAttempted = NUM_ELS_IN_LIST * numTimesListRegenerated + questionIndex;
-		 double percentCorrect = numCorrect / numAttempted;
+		 double percentCorrect = numCorrect / numAttempted * 100;
 		 
 		 Formatter f = new Formatter();
 		 f.format("%1$.2f", percentCorrect);
