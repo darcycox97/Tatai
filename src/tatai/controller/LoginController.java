@@ -23,12 +23,15 @@ public class LoginController {
 	@FXML private TextField txtUserName;
 
 	private static final String NEW_USER = "New User";
+	private static final String TEACHER = "Teacher";
 
 	@FXML
 	public void initialize() {
 
 		txtUserName.setVisible(false); // becomes visible when new user is selected
 
+		comboUsers.getItems().add(TEACHER);
+		
 		// add option for new user, and set up to show text field if selected
 		comboUsers.getItems().add(NEW_USER);
 		comboUsers.getSelectionModel().selectedItemProperty().addListener(e -> {
@@ -42,7 +45,6 @@ public class LoginController {
 		});
 
 
-		//TODO: populate combobox with list of all users
 		for (String name : CSVFile.getNames()) {
 			comboUsers.getItems().add(name);
 		}
@@ -88,14 +90,25 @@ public class LoginController {
 
 		User.getInstance().setName(username);
 
-		// load the home screen
-		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
-			Scene scene = new Scene(root,700,600);
-			scene.getStylesheets().add(getClass().getResource("../view/TataiStyle.css").toExternalForm());
-			((Stage)btnLogin.getScene().getWindow()).setScene(scene);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (username.equals(TEACHER)) {
+			// load teacher menu
+			try {
+				BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/TeacherMenu.fxml"));
+				Scene scene = new Scene(root,700,600);
+				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			// load the home screen
+			try {
+				BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+				Scene scene = new Scene(root,700,600);
+				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
