@@ -6,13 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
-import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
-import tatai.game.RegularEquationGame;
 
 public class StatsMenuController {
 	
