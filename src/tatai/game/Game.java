@@ -16,10 +16,11 @@ public abstract class  Game {
 	public static final int EASY_RANGE = 9;
 	public static final int HARD_RANGE = 99;
 	
-	private List<Question> questions;
 	private Question currentQuestion;
 	private HTK htk;
+	private boolean finished;
 	
+	protected List<Question> questions;
 	protected boolean currentResult;
 	protected GameDifficulty difficulty;
 	protected double score;
@@ -101,6 +102,13 @@ public abstract class  Game {
 	}
 	
 	/**
+	 * Set the raw value of the score.
+	 */
+	public void setScoreValue(double score) {
+		this.score = score;
+	}
+	
+	/**
 	 * Returns formatted string representation of the score
 	 */
 	public abstract String getScore();
@@ -133,4 +141,14 @@ public abstract class  Game {
 		return difficulty;
 	}
 	
+	/**
+	 * Returns true if the game is finished, false if not
+	 */
+	public boolean getFinished() {
+		return finished;
+	}
+	
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
 }
