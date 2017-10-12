@@ -14,7 +14,7 @@ public class OneMinuteEquationGame extends InfiniteGame {
 	
 	@Override
 	public GameMode getGameMode() {
-		return GameMode.ONE_MINUTE_BLITZ;
+		return GameMode.ARCADE;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
 import tatai.question.Question;
 
 /**
@@ -36,7 +36,7 @@ public class HTK {
 		};
 		
 		recordService.setOnSucceeded(e -> {
-			GameInstance.getInstance().getCurrentGame().updateScore(recordService.getValue());
+			GameFactory.getInstance().getCurrentGame().updateScore(recordService.getValue());
 			if (l != null) {
 				l.recordingComplete();
 			}

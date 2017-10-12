@@ -16,7 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
+import tatai.game.GameMode;
 import tatai.game.PracticeEquationGame;
 import tatai.statistics.User;
 
@@ -84,7 +85,7 @@ public class HomeController {
 	@FXML
 	public void openPractice() {
 		
-		GameInstance.getInstance().setCurrentGame(new PracticeEquationGame(GameDifficulty.HARD));
+		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY);
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));

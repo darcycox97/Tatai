@@ -15,7 +15,7 @@ public class TimedEquationGame extends FiniteGame {
 
 	@Override
 	public GameMode getGameMode() {
-		return GameMode.TEN_QUESTIONS_TIMED;
+		return GameMode.TIME_ATTACK;
 	}
 
 	@Override

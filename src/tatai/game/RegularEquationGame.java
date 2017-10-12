@@ -27,7 +27,7 @@ public class RegularEquationGame extends FiniteGame {
 
 	@Override
 	public GameMode getGameMode() {
-		return GameMode.TEN_QUESTIONS;
+		return GameMode.CLASSIC;
 	}
 
 }

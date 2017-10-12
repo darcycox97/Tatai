@@ -11,7 +11,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
+import tatai.game.GameMode;
 import tatai.game.OneMinuteEquationGame;
 import tatai.game.RegularEquationGame;
 import tatai.game.TimedEquationGame;
@@ -47,9 +48,9 @@ public class GameMenuController {
 		
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameInstance.getInstance().setCurrentGame(new RegularEquationGame(GameDifficulty.EASY));
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.EASY);
 		} else {
-			GameInstance.getInstance().setCurrentGame(new RegularEquationGame(GameDifficulty.HARD));
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.HARD);
 		}
 		
 		// load the game screen
@@ -67,9 +68,9 @@ public class GameMenuController {
 
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameInstance.getInstance().setCurrentGame(new OneMinuteEquationGame(GameDifficulty.EASY));
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.EASY);
 		} else {
-			GameInstance.getInstance().setCurrentGame(new OneMinuteEquationGame(GameDifficulty.HARD));
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.HARD);
 		}
 		
 		// load the game screen
@@ -88,9 +89,9 @@ public class GameMenuController {
 		
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameInstance.getInstance().setCurrentGame(new TimedEquationGame(GameDifficulty.EASY));
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.EASY);
 		} else {
-			GameInstance.getInstance().setCurrentGame(new TimedEquationGame(GameDifficulty.HARD));
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.HARD);
 		}
 		
 		// load the game screen

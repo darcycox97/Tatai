@@ -33,7 +33,7 @@ import javafx.util.Duration;
 import tatai.question.Question;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
 import tatai.game.GameMode;
 import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
@@ -94,20 +94,20 @@ public class GameScreenController implements HTKListener{
 	@FXML 
 	public void initialize() {
 		
-		game = GameInstance.getInstance().getCurrentGame();
+		game = GameFactory.getInstance().getCurrentGame();
 		gamemode = game.getGameMode();
 		
 		lblScore.setText("");
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
 		
-		if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ)) {
+		if (gamemode.equals(GameMode.ARCADE)) {
 			startTimer(COUNT_DOWN);
-		} else if (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
+		} else if (gamemode.equals(GameMode.TIME_ATTACK)) {
 			startTimer(COUNT_UP);
 		}
 
-		if (gamemode.equals(GameMode.TEN_QUESTIONS) || (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED))) {
+		if (gamemode.equals(GameMode.CLASSIC) || (gamemode.equals(GameMode.TIME_ATTACK))) {
 			// set up hashmap for circles and set their fill to transparent
 			circleMap = new HashMap<Integer,Circle>();
 			circleMap.put(1, circle1);
@@ -210,7 +210,7 @@ public class GameScreenController implements HTKListener{
 
 		boolean correct = game.getLatestResult();
 
-		if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ)) {
+		if (gamemode.equals(GameMode.ARCADE)) {
 			// for this game mode, don't allow second attempts
 			nextQuestionView();
 			
@@ -221,7 +221,7 @@ public class GameScreenController implements HTKListener{
 				tryAgainView(); // allow infinite attempts in practice mode
 			}
 			
-		} else if (gamemode.equals(GameMode.TEN_QUESTIONS)) {
+		} else if (gamemode.equals(GameMode.CLASSIC)) {
 			if (correct || game.getNumAttempts() > 1) {
 				nextQuestionView();
 			} else {
@@ -230,7 +230,7 @@ public class GameScreenController implements HTKListener{
 			}
 			
 		} else {
-			// game mode is TEN_QUESTIONS_TIMED
+			// game mode is TIME_ATTACK
 			if (correct) {
 				nextQuestionView();
 			} else {
@@ -269,19 +269,8 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void playAgain() {
 		GameDifficulty currentDifficulty = game.getDifficulty();
-		GameInstance.getInstance().setCurrentGame(new NumberGame(currentDifficulty));
-		initialize();
-	}
-
-	@FXML
-	public void startEasyGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.EASY));
-		initialize();
-	}
-
-	@FXML
-	public void startHardGame() {
-		GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.HARD));
+		GameMode currentMode = game.getGameMode();
+		GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty);
 		initialize();
 	}
 
@@ -292,7 +281,7 @@ public class GameScreenController implements HTKListener{
 		
 		// update circles if we are in a finite game mode
 		
-		boolean finiteGame = ((gamemode.equals(GameMode.TEN_QUESTIONS)) || (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)));
+		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)));
 		
 		if (correct) {
 			
@@ -322,7 +311,7 @@ public class GameScreenController implements HTKListener{
 			
 		}
 
-		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.TEN_QUESTIONS)) {
+		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.CLASSIC)) {
 			lblScore.setText(game.getScore());
 		}
 	}
@@ -434,7 +423,7 @@ public class GameScreenController implements HTKListener{
 		
 		lblRecordTimer.setText("");
 		
-		if (!gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
+		if (!gamemode.equals(GameMode.TIME_ATTACK)) {
 			
 			lblGamePrompts.setText("");
 			lblGamePrompts.setStyle("-fx-background-color:transparent;");
@@ -453,7 +442,7 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 		
-		if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ) || gamemode.equals(GameMode.PRACTICE)) {
+		if (gamemode.equals(GameMode.ARCADE) || gamemode.equals(GameMode.PRACTICE)) {
 			btnSkip.setVisible(true);
 		} else {
 			btnSkip.setVisible(false);
@@ -506,12 +495,12 @@ public class GameScreenController implements HTKListener{
 		
 		game.setFinished(true);
 
-		if (gamemode.equals(GameMode.TEN_QUESTIONS_TIMED)) {
+		if (gamemode.equals(GameMode.TIME_ATTACK)) {
 			// stop timer 
 			countingAnimation.stop();
 			game.setScoreValue(gameDuration.get());
 			lblScoreTitle.setText("Your Time:");
-		} else if (gamemode.equals(GameMode.ONE_MINUTE_BLITZ)) {
+		} else if (gamemode.equals(GameMode.ARCADE)) {
 			lblScoreTitle.setText("Time up! Your score:");
 		} else {
 			lblScoreTitle.setText("Total Score:");

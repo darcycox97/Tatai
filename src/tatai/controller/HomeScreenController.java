@@ -9,7 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import tatai.game.GameDifficulty;
-import tatai.game.GameInstance;
+import tatai.game.GameFactory;
+import tatai.game.GameMode;
 import tatai.game.NumberGame;
 
 /**
@@ -25,7 +26,7 @@ public class HomeScreenController {
 	public void startEasyGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.EASY));
+			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY);
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
@@ -39,7 +40,7 @@ public class HomeScreenController {
 	public void startHardGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameInstance.getInstance().setCurrentGame(new NumberGame(GameDifficulty.HARD));
+			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.HARD);
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
