@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.GameMenuController">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="55.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="30.0">
                <children>
@@ -44,7 +44,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER" spacing="60.0">
+            <VBox alignment="CENTER" spacing="40.0">
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
@@ -93,6 +93,23 @@
                            </graphic>
                            <tooltip>
                               <Tooltip prefHeight="100.0" prefWidth="200.0" text="Put your speed to the test!&#10;There are ten questions. &#10;You must complete them as fast as you can! " wrapText="true" />
+                           </tooltip>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btnCustom" minWidth="200.0" mnemonicParsing="false" onAction="#openCustomQuizzes" styleClass="main-buttons" text="Custom Quizzes" />
+                        <Label fx:id="lblHelp1" contentDisplay="RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="See what quizzes your teacher has made.&#10;Customised just for you!" wrapText="true" />
                            </tooltip>
                         </Label>
                      </children>

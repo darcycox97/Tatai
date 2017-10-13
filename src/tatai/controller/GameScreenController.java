@@ -111,7 +111,7 @@ public class GameScreenController implements HTKListener{
 			startTimer(COUNT_UP);
 		}
 
-		if (gamemode.equals(GameMode.CLASSIC) || (gamemode.equals(GameMode.TIME_ATTACK))) {
+		if (gamemode.equals(GameMode.CLASSIC) || (gamemode.equals(GameMode.TIME_ATTACK)) || (gamemode.equals(GameMode.CUSTOM))) {
 			// set up hashmap for circles and set their fill to transparent
 			circleMap = new HashMap<Integer,Circle>();
 			circleMap.put(1, circle1);
@@ -142,37 +142,53 @@ public class GameScreenController implements HTKListener{
 		BorderPane root;
 		try {
 
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Exit Confirmation");
+			if (!game.getFinished()) {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Exit Confirmation");
 
-			alert.setHeaderText("Are you sure you wish to exit?");
-			alert.setContentText("All progress will be lost.");
+				alert.setHeaderText("Are you sure you wish to exit?");
+				alert.setContentText("All progress will be lost.");
 
-			ButtonType buttonTypeYes = new ButtonType("Yes");
-			ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
+				ButtonType buttonTypeYes = new ButtonType("Yes");
+				ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
 
-			alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
+				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
 
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == buttonTypeYes){
-				// stop the animations
-				
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == buttonTypeYes){
+					// stop the animations
+
+					if (recordingAnimations != null) {
+						for (Animation a : recordingAnimations) {
+							a.stop();
+						}
+					}
+
+					if (countingAnimation != null) {
+						countingAnimation.stop();
+					}
+
+					game.setFinished(true);
+
+					root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
+					returnHome.getScene().setRoot(root);
+				} else {
+					// ... user chose CANCEL or closed the dialog. stay on the game screen
+				}
+			} else {
+				// no warning
 				if (recordingAnimations != null) {
 					for (Animation a : recordingAnimations) {
 						a.stop();
 					}
 				}
-				
+
 				if (countingAnimation != null) {
 					countingAnimation.stop();
 				}
 				
-				game.setFinished(true);
-				
 				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
 				returnHome.getScene().setRoot(root);
-			} else {
-				// ... user chose CANCEL or closed the dialog. stay on the game screen
 			}
 
 		} catch (IOException e) {
@@ -226,7 +242,7 @@ public class GameScreenController implements HTKListener{
 				tryAgainView(); // allow infinite attempts in practice mode
 			}
 			
-		} else if (gamemode.equals(GameMode.CLASSIC)) {
+		} else if (gamemode.equals(GameMode.CLASSIC) || gamemode.equals(GameMode.CUSTOM)) {
 			if (correct || game.getNumAttempts() > 1) {
 				nextQuestionView();
 			} else {
@@ -275,7 +291,14 @@ public class GameScreenController implements HTKListener{
 	public void playAgain() {
 		GameDifficulty currentDifficulty = game.getDifficulty();
 		GameMode currentMode = game.getGameMode();
-		GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty);
+		
+		if (currentMode.equals(GameMode.CUSTOM)) {
+			String quizName = game.getQuizName();
+			GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty, quizName);
+		} else {
+			GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty, null);
+		}
+		
 		initialize();
 	}
 
@@ -286,7 +309,7 @@ public class GameScreenController implements HTKListener{
 		
 		// update circles if we are in a finite game mode
 		
-		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)));
+		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)) || (gamemode.equals(GameMode.CUSTOM)));
 		
 		if (correct) {
 			
@@ -316,7 +339,7 @@ public class GameScreenController implements HTKListener{
 			
 		}
 
-		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.CLASSIC)) {
+		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.CLASSIC) || gamemode.equals(GameMode.CUSTOM)) {
 			lblScore.setText(game.getScore());
 		}
 	}

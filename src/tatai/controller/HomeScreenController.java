@@ -26,7 +26,7 @@ public class HomeScreenController {
 	public void startEasyGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY);
+			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {
@@ -40,7 +40,7 @@ public class HomeScreenController {
 	public void startHardGame(ActionEvent e) {
 		BorderPane root;
 		try {
-			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.HARD);
+			GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.HARD, null);
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameScreen.fxml"));
 			((Node) e.getSource()).getScene().setRoot(root);
 		} catch (IOException e1) {

@@ -29,5 +29,4 @@ public class NumberGame extends FiniteGame {
 	public GameMode getGameMode() {
 		return GameMode.PRACTICE;
 	}
-
 }

@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import tatai.statistics.CSVFile;
+import tatai.statistics.CSVFile.CSVName;
 import tatai.statistics.User;
 
 public class LoginController {
@@ -45,9 +46,9 @@ public class LoginController {
 		});
 
 
-	//	for (String name : CSVFile.getNames()) {
-//			comboUsers.getItems().add(name);
-//		}
+		for (String name : CSVFile.getAllTitles(CSVName.STATISTICS)) {
+			comboUsers.getItems().add(name);
+		}
 		
 
 		// apply a regex to the text field so we can only login if valid input is supplied

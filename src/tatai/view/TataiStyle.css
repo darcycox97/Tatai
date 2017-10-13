@@ -78,6 +78,12 @@
 	-fx-font-size : 18px;
 }
 
+.radio-button {
+	-fx-font-size : 20px;
+	-fx-font-weight : bold;
+}
+
+
 
 
 

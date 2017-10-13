@@ -1,5 +1,11 @@
 package tatai.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tatai.question.Equation;
+import tatai.question.Question;
+
 /**
  * General representation of a game with a finite number of questions. 
  * Subclasses will define the type of questions e.g Numbers or Equations.
@@ -36,6 +42,23 @@ public abstract class FiniteGame extends Game {
 	@Override
 	public String getScore() {
 		return score + "/" + NUM_QUESTIONS;
+	}
+	
+	@Override
+	protected List<Question> initializeQuestions(int range) {
+
+		List<Question> questions = new ArrayList<Question>();
+		
+		for (int i = 0; i < NUM_QUESTIONS; i++) {
+			// generate list of equations corresponding to the games difficulty level
+			questions.add(new Equation(difficulty));
+		}
+
+		return questions;
+	}
+	
+	public String getQuizName() {
+		return null;
 	}
 
 }

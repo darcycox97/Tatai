@@ -7,5 +7,6 @@ public enum GameMode {
 	CLASSIC,
 	TIME_ATTACK,
 	ARCADE,
-	PRACTICE
+	PRACTICE,
+	CUSTOM
 }
