@@ -142,6 +142,33 @@ public class CSVFile {
 		
 	}
 	
+	/**
+	 * Gets a list containing all first entries of the CSV file e.g Usernames or quiznames
+	 */
+	public static List<String> getAllTitles(CSVName csv)
+	{
+		try {
+			File toScan;
+			if (csv.equals(CSVName.STATISTICS)) {
+				toScan = new File(STATS_FILE);
+			} else {
+				toScan = new File(QUIZZES_FILE);
+			}
+			
+			List<String> contents = Files.readAllLines(toScan.toPath());
+			List<String> titles = new ArrayList<String>();
+			for (String s : contents) {
+				String[] entries = s.split(",");
+				titles.add(entries[0]);
+			}
+			
+			return titles;
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 /*
 	public static void appendToCSV(String username, String gamemode, String scoreString) {
