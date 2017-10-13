@@ -45,9 +45,9 @@ public class LoginController {
 		});
 
 
-		for (String name : CSVFile.getNames()) {
-			comboUsers.getItems().add(name);
-		}
+	//	for (String name : CSVFile.getNames()) {
+//			comboUsers.getItems().add(name);
+//		}
 		
 
 		// apply a regex to the text field so we can only login if valid input is supplied

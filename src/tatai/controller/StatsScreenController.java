@@ -41,10 +41,10 @@ public class StatsScreenController {
 		String username = User.getInstance().getName();
 		String gamemode = "TEN_QUESTIONS";
 		
-		CSVFile.setAverage(username, gamemode);
+//		CSVFile.setAverage(username, gamemode);
 		
 		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
-		progressChart.getData().add(CSVFile.getData(username, gamemode));
+//		progressChart.getData().add(CSVFile.getData(username, gamemode));
 		
 	}
 

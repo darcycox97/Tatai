@@ -21,6 +21,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tatai.statistics.CSVFile;
+import tatai.statistics.CSVFile.CSVName;
 
 public class QuizCreatorController {
 
@@ -136,7 +138,7 @@ public class QuizCreatorController {
 				sb.append("," + eqnMap.get(i).getText().replaceAll(" ", ""));
 			}
 			
-			addQuizToCSV(sb.toString());
+			CSVFile.appendToCSV(CSVName.QUIZZES, sb.toString());
 			
 			Alert success = new Alert(
 				AlertType.INFORMATION,
@@ -162,29 +164,10 @@ public class QuizCreatorController {
 		
 	}
 	
-	/**
-	 * Takes the CSV line representation of the quiz (which consists of
-	 * a name followed by ten entries of the form "a [+-x] b"). Adds this
-	 * line to the end of the quiz csv file.
-	 */
-	private void addQuizToCSV(String quiz) {
-		try {
-			List<String> oldFile = Files.readAllLines(quizCSV.toPath());
-			List<String> newFile = new ArrayList<String>(oldFile.size() + 1);
-			
-			// copy oldfile into new file, then add last line
-			for (int i = 0; i < oldFile.size(); i++) {
-				newFile.add(oldFile.get(i));
-			}
-			newFile.add(quiz);
-			
-			Files.write(quizCSV.toPath(), newFile);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
+	/**
+	 * Listener to take care of listening for validity of text fields
+	 */
 	private class EquationValidifier implements ChangeListener<String> {
 		
 		private int observed; // the text field to check input of
@@ -242,10 +225,8 @@ public class QuizCreatorController {
 						if (answer >= 1 && answer <= 99) {
 							validEquation = true;
 						}
-						
 					}
 				}
-				
 			}
 			
 			if (validEquation) {
@@ -257,12 +238,7 @@ public class QuizCreatorController {
 				lblMap.get(observed).setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/icons/cross.png"),25,25,true,true)));
 				validityMap.put(observed, false); // update validity of this text field
 			}
-			
-			
-			
 		}
-			
-		
 	}
 	
 }
