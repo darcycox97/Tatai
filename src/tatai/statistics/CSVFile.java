@@ -2,6 +2,7 @@ package tatai.statistics;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,130 @@ import java.io.FileReader;
  * containing all game statistics.
  */
 public class CSVFile {
+	
+	public enum CSVName {
+		STATISTICS, QUIZZES
+	}
 
-	private static final String STATS_FILE_NAME = "resources/statistics.csv";
-	private static final String TEMP_FILE_NAME = "resources/temporary.csv";
+	private static final String STATS_FILE = "resources/statistics.csv";
+	private static final String QUIZZES_FILE = "resources/quizzes.csv";
+	
+	//private static final String TEMP_FILE_NAME = "resources/temporary.csv";
+	
+	
+	/**
+	 * Appends the provided line to the specified csv file
+	 * @param csv the csv to append to
+	 * @param line the line to add to the csv
+	 */
+	public static void appendToCSV(CSVName file, String line) {
+		
+		try {
+			
+			List<String> oldFile;
+			List<String> newFile;
+			File toChange;
+			if (file.equals(CSVName.STATISTICS)) {
+				toChange = new File(STATS_FILE);
+			} else {
+				toChange = new File(QUIZZES_FILE);
+			}
+			
+			oldFile = Files.readAllLines(toChange.toPath());
+			newFile = new ArrayList<String>();
+			
+			for (int i = 0; i < oldFile.size(); i++) {
+				newFile.add(oldFile.get(i));
+			}
+			newFile.add(line);
 
+			Files.write(toChange.toPath(), newFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Gets a specific line in the csv file.
+	 * Returns null if line does not exist.
+	 * @param fileToRead the csv to read
+	 * @param title the first entry of the line in the csv file e.g name of user or name of quiz
+	 */
+	public static String getLineInCSV(CSVName fileToRead, String title) {
+		try {
+		
+		File toRead;
+		if (fileToRead.equals(CSVName.STATISTICS)) {
+			toRead = new File(STATS_FILE);
+		} else {
+			toRead = new File(QUIZZES_FILE);
+		}
+		
+		List<String> lines = Files.readAllLines(toRead.toPath());
+		
+		for (int i = 0; i < lines.size(); i++) {
+			String line = lines.get(i);
+			String[] entries = line.split(",");
+			String firstEntry = entries[0];
+			
+			if (firstEntry.equals(title)) {
+				return line;
+			}
+		}
+		
+		return null;
+		
+		// if we got this far, there were no mathches, so return null
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * Replaces a specified line with the provided string.
+	 * Returns true if was successful, false if not
+	 * @param title the title of the line to be replaced.
+	 * @param line the line to be inserted into the csv
+	 */
+	public static boolean replaceLine(CSVName csv, String title, String line) {
+		
+		try {
+			File toChange;
+			if (csv.equals(CSVName.STATISTICS)) {
+				toChange = new File(STATS_FILE);
+			} else {
+				toChange = new File(QUIZZES_FILE);
+			}
+
+			List<String> contents = Files.readAllLines(toChange.toPath());
+			
+			for (int i = 0; i < contents.size(); i++) {
+				String currentLine = contents.get(i);
+				String[] entries = currentLine.split(",");
+				String firstEntry = entries[0];
+				
+				if (firstEntry.equals(title)) {
+					// we have found the line to overwrite
+					contents.set(i, line);
+					Files.write(toChange.toPath(), contents); // overwrite file with new line inserted
+					return true;
+				}
+			}
+			
+			return false;	
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
+/*
 	public static void appendToCSV(String username, String gamemode, String scoreString) {
 
 		String[] scoreArray = scoreString.split("/");
@@ -81,8 +202,9 @@ public class CSVFile {
 		setAverage(username, gamemode);
 
 	}
+	*/
 
-	public static List<String> getNames() {
+/*	public static List<String> getNames() {
 
 		List<String> names = new ArrayList<String>();
 
@@ -110,9 +232,9 @@ public class CSVFile {
 		}
 
 		return names;
-	}
+	} */
 
-	public static void setAverage(String username, String gamemode) {
+/*	public static void setAverage(String username, String gamemode) {
 
 		double average = calculateAverage(username, gamemode);
 
@@ -179,8 +301,10 @@ public class CSVFile {
 			e.printStackTrace();
 		}
 
-	}
+	} */
 
+	
+	/*
 	public static String getAverage(String username, String gamemode) {
 
 		setAverage(username, gamemode);
@@ -249,7 +373,10 @@ public class CSVFile {
 
 		return average;
 	}
-
+	*/
+	
+	
+/*
 	public static Series<String, Double> getData(String username, String gamemode) {
 
 		XYChart.Series data = new XYChart.Series<>();
@@ -283,5 +410,7 @@ public class CSVFile {
 
 		return data;
 	}
+	
+	*/
 
 }
