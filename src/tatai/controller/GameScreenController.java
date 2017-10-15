@@ -35,6 +35,7 @@ import tatai.statistics.CSVFile;
 import tatai.statistics.Leader;
 import tatai.statistics.LeadersInstance;
 import tatai.statistics.User;
+import tatai.statistics.CSVFile.CSVName;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
@@ -515,7 +516,10 @@ public class GameScreenController implements HTKListener{
 		String gamemode = game.getGameMode().toString();
 		String score = String.valueOf(game.getScoreValue());
 		
-		CSVFile.appendToCSV(username, gamemode, score);
+		String currentLine = CSVFile.getLineInCSV(CSVName.STATISTICS, username);
+		String newLine = currentLine + "," + gamemode + "," + score;
+		
+		CSVFile.replaceLine(CSVName.STATISTICS, username, newLine);
 
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);

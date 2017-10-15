@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -39,19 +40,6 @@
          </padding>
       </HBox>
    </top>
-   <center>
-      <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false" BorderPane.alignment="CENTER">
-        <xAxis>
-          <NumberAxis label="Time" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="20.0" fx:id="xAxis" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="yAxis" autoRanging="false" label="Score" minorTickCount="0" side="LEFT" tickLabelGap="1.0" tickUnit="2.0" upperBound="20.0" />
-        </yAxis>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="40.0" />
-         </padding>
-      </LineChart>
-   </center>
    <right>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -73,4 +61,27 @@
          </padding>
       </VBox>
    </right>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false">
+              <xAxis>
+                <NumberAxis label="Time" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="20.0" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" autoRanging="false" label="Score" minorTickCount="0" side="LEFT" tickLabelGap="1.0" tickUnit="2.0" upperBound="20.0" />
+              </yAxis>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="40.0" />
+               </padding>
+            </LineChart>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="lblNoScores" text="No scores yet!" />
+                  <Label fx:id="lblPlayGames" text="Play games to track your progress." />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
 </BorderPane>

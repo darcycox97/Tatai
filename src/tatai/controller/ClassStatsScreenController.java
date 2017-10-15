@@ -12,8 +12,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import tatai.game.GameMode;
 import tatai.statistics.CSVFile;
 import tatai.statistics.Medallist;
+import tatai.statistics.Medallist.MedalType;
 
 public class ClassStatsScreenController {
 
@@ -38,16 +40,12 @@ public class ClassStatsScreenController {
 	@FXML
 	public void initialize() {
 
-//		lblFirstPlace.setVisible(false);
-//		lblSecondPlace.setVisible(false);
-//		lblThirdPlace.setVisible(false);
-//
-//		lblGoldUser.setVisible(false);
-//		lblGoldScore.setVisible(false);
-//		lblSilverUser.setVisible(false);
-//		lblSilverScore.setVisible(false);
-//		lblBronzeUser.setVisible(false);
-//		lblBronzeScore.setVisible(false);
+		lblGoldUser.setText("--");
+		lblGoldScore.setText("--");
+		lblSilverUser.setText("--");
+		lblSilverScore.setText("--");
+		lblBronzeUser.setText("--");
+		lblBronzeScore.setText("--");
 
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 	}
@@ -76,64 +74,52 @@ public class ClassStatsScreenController {
 
 	@FXML public void loadBestScores() {
 
-		String gamemode = comboGamemode.getSelectionModel().getSelectedItem();
 		Medallist[] medallists = new Medallist[3];
-		
-		if (gamemode.equals("Classic")) {
-			medallists = getClassicMedallists(gamemode);
-		} else if (gamemode.equals("Arcade")) {
-			medallists = getArcadeMedallists(gamemode);
-		} else if (gamemode.equals("Time Attack")) {
-			medallists = getTimeAttackMedallists(gamemode);
-		}
-		
+
+		medallists = getMedallists();
+
 		setMedalLabels(medallists);
-		
-	}
-	
-	@FXML Medallist[] getClassicMedallists(String gamemode) {
 
-		Medallist gold = CSVFile.getGoldMedallist(gamemode);
-		Medallist silver = CSVFile.getSilverMedallist(gamemode);
-		Medallist bronze = CSVFile.getBronzeMedallist(gamemode);
-		
-		return setMedallists(gold, silver, bronze);
 	}
-	
-	@FXML Medallist[] getArcadeMedallists(String gamemode) {
-		
-		Medallist gold = CSVFile.getGoldMedallist(gamemode);
-		Medallist silver = CSVFile.getSilverMedallist(gamemode);
-		Medallist bronze = CSVFile.getBronzeMedallist(gamemode);
-		
-		return setMedallists(gold, silver, bronze);
-	}
-	
-	@FXML Medallist[] getTimeAttackMedallists(String gamemode) {
-		
-		Medallist gold = CSVFile.getGoldMedallist(gamemode);
-		Medallist silver = CSVFile.getSilverMedallist(gamemode);
-		Medallist bronze = CSVFile.getBronzeMedallist(gamemode);
 
-		return setMedallists(gold, silver, bronze);
-	}
-	
-	private Medallist[] setMedallists(Medallist gold, Medallist silver, Medallist bronze) {
+	@FXML Medallist[] getMedallists() {
+
+		String selected = comboGamemode.getSelectionModel().getSelectedItem();
+		String gamemode = null;
+
+		if (selected.equals("Classic")) {
+			gamemode = "CLASSIC";
+		} else if (selected.equals("Time Attack")) {
+			gamemode = "TIME_ATTACK";
+		} else if (selected.equals("Arcade")) {
+			gamemode = "ARCADE";
+		}
+
 		Medallist[] medallists = new Medallist[3];
-		medallists[0] = gold;
-		medallists[1] = silver;
-		medallists[2] = bronze;
+
+		medallists[0] = CSVFile.getMedallist(MedalType.GOLD, gamemode);
+		medallists[1] = CSVFile.getMedallist(MedalType.SILVER, gamemode);
+		medallists[2] = CSVFile.getMedallist(MedalType.BRONZE, gamemode);
+
 		return medallists;
 	}
-	
+
 	private void setMedalLabels(Medallist[] medallists) {
+		
+		for (Medallist medallist : medallists) {
+			if (medallist.getUsername() == null) {
+				medallist.setDashes();
+			}
+		}
+		
 		lblGoldUser.setText(medallists[0].getUsername());
 		lblSilverUser.setText(medallists[1].getUsername());
 		lblBronzeUser.setText(medallists[2].getUsername());
-		
+
 		lblGoldScore.setText(medallists[0].getScore());
 		lblSilverScore.setText(medallists[1].getScore());
 		lblBronzeScore.setText(medallists[2].getScore());
+
 	}
 
 }

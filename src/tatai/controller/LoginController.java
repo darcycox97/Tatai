@@ -14,6 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import tatai.statistics.CSVFile;
+import tatai.statistics.CSVFile.CSVName;
 import tatai.statistics.User;
 
 public class LoginController {
@@ -42,8 +43,8 @@ public class LoginController {
 		});
 
 
-		//TODO: populate combobox with list of all users
-		for (String name : CSVFile.getNames()) {
+		//TODO: populate combo box with list of all users
+		for (String name : CSVFile.getAllTitles(CSVName.STATISTICS)) {
 			comboUsers.getItems().add(name);
 		}
 		
@@ -81,9 +82,9 @@ public class LoginController {
 		} else if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
-			CSVFile.createUser(username);
+			CSVFile.appendToCSV(CSVName.STATISTICS, username);
 		} else {
-			// pre existing username is selected
+			// pre existing user name is selected
 			username = selected;
 		}
 

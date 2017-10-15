@@ -1,6 +1,7 @@
 package tatai.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import tatai.game.GameMode;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 
@@ -23,6 +25,8 @@ public class MyStatsScreenController {
 	@FXML private ComboBox<String> comboGamemode;
 	@FXML private Label lblBestScore;
 	@FXML private Label lblAverageScore;
+	@FXML private Label lblNoScores;
+	@FXML private Label lblPlayGames;
 
 	@FXML
 	public void initialize() {
@@ -61,7 +65,6 @@ public class MyStatsScreenController {
 		String selection = comboGamemode.getSelectionModel().getSelectedItem();
 
 		if (selection == null) {
-			gamemode = "";
 		} else {
 			if (selection.equals("Classic")) {
 				gamemode = "CLASSIC";
@@ -73,11 +76,24 @@ public class MyStatsScreenController {
 		}
 
 		lblAverageScore.setText(CSVFile.getAverage(username, gamemode));
-		lblBestScore.setText(CSVFile.getUserBest(username, gamemode));
+		List<Double> scores = CSVFile.getUserData(username, gamemode);
+		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 
 		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
 		progressChart.getData().clear();
-		progressChart.getData().add(CSVFile.getData(username, gamemode));
+		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode));
+		
+		if (selection == null || scores.size() == 0) {
+			progressChart.setVisible(false);
+			lblBestScore.setText("--");
+			lblAverageScore.setText("--");
+			lblNoScores.setVisible(true);
+			lblPlayGames.setVisible(true);
+		} else {
+			progressChart.setVisible(true);
+			lblNoScores.setVisible(false);
+			lblPlayGames.setVisible(false);
+		}
 
 	}
 
