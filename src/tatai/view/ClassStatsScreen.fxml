@@ -9,15 +9,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.StatsScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.MyStatsScreenController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="170.0" styleClass="home-buttons" text="Home" />
+            <VBox prefHeight="200.0" spacing="5.0">
+               <children>
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="170.0" styleClass="home-buttons" text="Home" />
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadStatsMenu" prefWidth="170.0" stylesheets="@TataiStyle.css" text="Back">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
             <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="modeComboBox" prefWidth="250.0" promptText="Select a Game Mode" />
+            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="250.0" promptText="Select a Game Mode" />
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
                   <Font size="22.0" />
@@ -42,4 +52,25 @@
          </padding>
       </LineChart>
    </center>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Best Score" />
+            <Label fx:id="lblBestScore" text="Label">
+               <VBox.margin>
+                  <Insets top="-15.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Average Score" />
+            <Label fx:id="lblAverageScore" text="Label">
+               <VBox.margin>
+                  <Insets top="-15.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets right="30.0" />
+         </padding>
+      </VBox>
+   </right>
 </BorderPane>

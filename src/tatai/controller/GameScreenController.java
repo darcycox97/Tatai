@@ -511,7 +511,11 @@ public class GameScreenController implements HTKListener{
 			lblScoreTitle.setText("Total Score:");
 		}
 		
-		CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
+		String username = User.getInstance().getName();
+		String gamemode = game.getGameMode().toString();
+		String score = String.valueOf(game.getScoreValue());
+		
+		CSVFile.appendToCSV(username, gamemode, score);
 
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);
