@@ -350,8 +350,12 @@ public class CSVFile {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return String.valueOf(best);
 =======
+=======
+		return String.valueOf(best);
+>>>>>>> c92e75ed0f1eb03d4e4ff6272564f57571442492
 	} */
 
 	
@@ -365,7 +369,10 @@ public class CSVFile {
 
 			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
 			return String.valueOf(best);
+<<<<<<< HEAD
 >>>>>>> ec6c092bf8ff177e6651cc13c7021f55110868a2
+=======
+>>>>>>> c92e75ed0f1eb03d4e4ff6272564f57571442492
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
