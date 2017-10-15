@@ -29,7 +29,18 @@ public class StatsMenuController {
 	@FXML
 	public void loadMyStats() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MyStatsScreen.fxml"));
+			Parent root = loader.load();
+			btnHome.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void loadClassStats() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ClassStatsScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {

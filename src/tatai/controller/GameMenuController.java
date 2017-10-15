@@ -13,9 +13,6 @@ import javafx.scene.control.Tooltip;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
-import tatai.game.OneMinuteEquationGame;
-import tatai.game.RegularEquationGame;
-import tatai.game.TimedEquationGame;
 
 public class GameMenuController {
 	

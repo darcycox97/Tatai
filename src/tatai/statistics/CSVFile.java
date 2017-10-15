@@ -176,6 +176,40 @@ public class CSVFile {
 		String[] scoreArray = scoreString.split("/");
 		double score = Double.parseDouble(scoreArray[0]);
 
+	public static void createUser(String username) {
+
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(TEMP_FILE_NAME));
+
+			String line = br.readLine();
+
+			while (line != null) {
+				bw.write(line);
+				bw.newLine();
+				line = br.readLine();
+			}
+
+			bw.write(username + ",");
+
+			br.close(); bw.close();
+
+			// Delete the old version of the file
+			File oldFile = new File(STATS_FILE_NAME);
+			oldFile.delete();
+
+			// Rename the temporary file to "statistics.csv"
+			File newFile = new File(TEMP_FILE_NAME);
+			newFile.renameTo(new File(STATS_FILE_NAME));
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void appendToCSV(String username, String gamemode, String score) {
 
 		try {
@@ -286,20 +320,24 @@ public class CSVFile {
 		return String.valueOf(average);
 	}
 
-	public static String getBest(String username, String gamemode) {
+	public static String getUserBest(String username, String gamemode) {
 
 		String[] userData = getUserData(username);
 		double best = 0;
+
 		if (gamemode.equals("TIME_ATTACK")) {
-			best = Double.parseDouble(userData[userData.length - 1]);
-			for (int i = 0; i < userData.length - 1; i++) {
-				if (userData[i].equals(gamemode)) {
-					double score = Double.parseDouble(userData[i+1]);
-					if (score < best) {
-						best = score;
+			if (userData.length > 1) {
+				best = Double.parseDouble(userData[userData.length - 1]);
+				for (int i = 0; i < userData.length - 1; i++) {
+					if (userData[i].equals(gamemode)) {
+						double score = Double.parseDouble(userData[i+1]);
+						if (score < best) {
+							best = score;
+						}
 					}
 				}
 			}
+
 		} else {
 			for (int i = 0; i < userData.length - 1; i++) {
 				if (userData[i].equals(gamemode)) {
@@ -311,6 +349,13 @@ public class CSVFile {
 			}
 		}
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+		return String.valueOf(best);
+=======
+=======
+		return String.valueOf(best);
+>>>>>>> c92e75ed0f1eb03d4e4ff6272564f57571442492
 	} */
 
 	
@@ -324,6 +369,10 @@ public class CSVFile {
 
 			BufferedReader br = new BufferedReader(new FileReader(STATS_FILE_NAME));
 			return String.valueOf(best);
+<<<<<<< HEAD
+>>>>>>> ec6c092bf8ff177e6651cc13c7021f55110868a2
+=======
+>>>>>>> c92e75ed0f1eb03d4e4ff6272564f57571442492
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -398,7 +447,65 @@ public class CSVFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		return userData;
+	}
+	
+	public static Medallist getGoldMedallist(String gamemode) {
 
+		double best = 0.0;
+		String username = null;
+		
+		for (String name : getNames()) {
+			double score = Double.parseDouble(getUserBest(name, gamemode));
+
+			if (score > best) {
+				best = score;
+				username = name;
+			}
+		}
+		
+		Medallist medallist = new Medallist(username, String.valueOf(best));
+		return medallist;
+	}
+	
+	public static Medallist getSilverMedallist(String gamemode) {
+
+		List<String> names = getNames();
+		names.remove(getGoldMedallist(gamemode).getUsername());
+		
+		double best = 0.0;
+		String username = null;
+		
+		for (String name : names) {
+			double score = Double.parseDouble(getUserBest(name, gamemode));
+			if (score > best) {
+				best = score;
+				username = name;
+			}
+		}
+		
+		Medallist medallist = new Medallist(username, String.valueOf(best));
+		return medallist;
+	}
+	
+	public static Medallist getBronzeMedallist(String gamemode) {
+		
+		List<String> names = getNames();
+		names.remove(getGoldMedallist(gamemode).getUsername());
+		names.remove(getSilverMedallist(gamemode).getUsername());
+		
+		double best = 0.0;
+		String username = null;
+		
+		for (String name : names) {
+			double score = Double.parseDouble(getUserBest(name, gamemode));
+			if (score > best) {
+				best = score;
+				username = name;
+			}
+		}
+		
+		Medallist medallist = new Medallist(username, String.valueOf(best));
+		return medallist;
 	}
 	
 	*/
