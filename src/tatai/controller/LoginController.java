@@ -81,6 +81,7 @@ public class LoginController {
 		} else if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
+			CSVFile.createUser(username);
 		} else {
 			// pre existing username is selected
 			username = selected;

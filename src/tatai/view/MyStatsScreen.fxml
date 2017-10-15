@@ -18,16 +18,16 @@
          <children>
             <VBox prefHeight="200.0" spacing="5.0">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="170.0" styleClass="home-buttons" text="Home" />
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadStatsMenu" prefWidth="170.0" stylesheets="@TataiStyle.css" text="Back">
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="90.0" styleClass="home-buttons" text="Home" />
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadStatsMenu" prefWidth="90.0" stylesheets="@TataiStyle.css" text="Back">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                </children>
             </VBox>
-            <Region prefHeight="60.0" prefWidth="496.0" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="250.0" promptText="Select a Game Mode" />
+            <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="190.0" promptText="Select a Game Mode" />
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
                   <Font size="22.0" />

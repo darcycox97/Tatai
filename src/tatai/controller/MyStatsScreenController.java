@@ -54,7 +54,7 @@ public class MyStatsScreenController {
 
 	@FXML
 	private void loadProgressChart() {
-
+		
 		String username = User.getInstance().getName();
 		String gamemode = null;
 
@@ -73,7 +73,7 @@ public class MyStatsScreenController {
 		}
 
 		lblAverageScore.setText(CSVFile.getAverage(username, gamemode));
-		lblBestScore.setText(CSVFile.getBest(username, gamemode));
+		lblBestScore.setText(CSVFile.getUserBest(username, gamemode));
 
 		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
 		progressChart.getData().clear();
