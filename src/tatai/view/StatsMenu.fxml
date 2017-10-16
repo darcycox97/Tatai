@@ -33,7 +33,7 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="A basic game mode. &#10;You have ten questions to answer, with two attempts for each. &#10;Try to score a perfect ten!" wrapText="true" />
+                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="View your personal progress.&#10;" wrapText="true" />
                            </tooltip>
                         </Label>
                      </children>
@@ -50,7 +50,7 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="It's a race against the clock! &#10;You have one minute to get as many correct answers as possible.&#10;" wrapText="true" />
+                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="View class medal holders for each game mode." wrapText="true" />
                            </tooltip>
                         </Label>
                      </children>

@@ -27,6 +27,7 @@ public class MyStatsScreenController {
 	@FXML private Label lblAverageScore;
 	@FXML private Label lblNoScores;
 	@FXML private Label lblPlayGames;
+	@FXML private Label lblChooseMode;
 
 	@FXML
 	public void initialize() {
@@ -83,16 +84,25 @@ public class MyStatsScreenController {
 		progressChart.getData().clear();
 		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode));
 		
-		if (selection == null || scores.size() == 0) {
+		if (selection == null) {
+			progressChart.setVisible(false);
+			lblBestScore.setText("--");
+			lblAverageScore.setText("--");
+			lblNoScores.setVisible(false);
+			lblPlayGames.setVisible(false);
+			lblChooseMode.setVisible(true);
+		} else if (scores.size() == 0) {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
 			lblNoScores.setVisible(true);
 			lblPlayGames.setVisible(true);
+			lblChooseMode.setVisible(false);
 		} else {
 			progressChart.setVisible(true);
 			lblNoScores.setVisible(false);
 			lblPlayGames.setVisible(false);
+			lblChooseMode.setVisible(false);
 		}
 
 	}
