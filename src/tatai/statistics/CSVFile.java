@@ -257,7 +257,7 @@ public class CSVFile {
 			List<Double> scores = getUserData(username, gamemode);
 			if (scores.size() > 0) {
 				String userBest = getBest(scores, gamemode);
-				if (userBest.equals(null)) {
+				if (userBest == null) {
 				} else {
 					bestScores.add(Double.parseDouble(userBest));
 					usernames.add(username);
