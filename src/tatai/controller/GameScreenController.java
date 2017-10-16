@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -111,7 +112,7 @@ public class GameScreenController implements HTKListener{
 			startTimer(COUNT_UP);
 		}
 
-		if (gamemode.equals(GameMode.CLASSIC) || (gamemode.equals(GameMode.TIME_ATTACK))) {
+		if (gamemode.equals(GameMode.CLASSIC) || (gamemode.equals(GameMode.TIME_ATTACK)) || (gamemode.equals(GameMode.CUSTOM))) {
 			// set up hashmap for circles and set their fill to transparent
 			circleMap = new HashMap<Integer,Circle>();
 			circleMap.put(1, circle1);
@@ -139,41 +140,49 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void homeClicked() {
 		
-		BorderPane root;
+	
 		try {
 
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Exit Confirmation");
-
-			alert.setHeaderText("Are you sure you wish to exit?");
-			alert.setContentText("All progress will be lost.");
-
-			ButtonType buttonTypeYes = new ButtonType("Yes");
-			ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
-
-			alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
-
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == buttonTypeYes){
-				// stop the animations
-				
-				if (recordingAnimations != null) {
-					for (Animation a : recordingAnimations) {
-						a.stop();
-					}
-				}
-				
-				if (countingAnimation != null) {
-					countingAnimation.stop();
-				}
-				
-				game.setFinished(true);
-				
-				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
-				returnHome.getScene().setRoot(root);
+			String toLoad;
+			if (gamemode.equals(GameMode.PRACTICE)) {
+				toLoad = "../view/Home.fxml";
 			} else {
-				// ... user chose CANCEL or closed the dialog. stay on the game screen
+				toLoad = "../view/GameMenu.fxml";
 			}
+
+			if (!game.getFinished()) {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Exit Confirmation");
+
+				alert.setHeaderText("Are you sure you wish to exit?");
+				alert.setContentText("All progress will be lost.");
+
+				ButtonType buttonTypeYes = new ButtonType("Yes");
+				ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
+
+				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
+
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() != buttonTypeYes){
+					return;
+				} 
+
+			} 
+
+
+			if (recordingAnimations != null) {
+				for (Animation a : recordingAnimations) {
+					a.stop();
+				}
+			}
+
+			if (countingAnimation != null) {
+				countingAnimation.stop();
+			}
+
+			Parent root = (BorderPane)FXMLLoader.load(getClass().getResource(toLoad));
+			returnHome.getScene().setRoot(root);
+
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -226,7 +235,7 @@ public class GameScreenController implements HTKListener{
 				tryAgainView(); // allow infinite attempts in practice mode
 			}
 			
-		} else if (gamemode.equals(GameMode.CLASSIC)) {
+		} else if (gamemode.equals(GameMode.CLASSIC) || gamemode.equals(GameMode.CUSTOM)) {
 			if (correct || game.getNumAttempts() > 1) {
 				nextQuestionView();
 			} else {
@@ -275,7 +284,14 @@ public class GameScreenController implements HTKListener{
 	public void playAgain() {
 		GameDifficulty currentDifficulty = game.getDifficulty();
 		GameMode currentMode = game.getGameMode();
-		GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty);
+		
+		if (currentMode.equals(GameMode.CUSTOM)) {
+			String quizName = game.getQuizName();
+			GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty, quizName);
+		} else {
+			GameFactory.getInstance().setCurrentGame(currentMode, currentDifficulty, null);
+		}
+		
 		initialize();
 	}
 
@@ -286,7 +302,7 @@ public class GameScreenController implements HTKListener{
 		
 		// update circles if we are in a finite game mode
 		
-		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)));
+		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)) || (gamemode.equals(GameMode.CUSTOM)));
 		
 		if (correct) {
 			
@@ -316,7 +332,7 @@ public class GameScreenController implements HTKListener{
 			
 		}
 
-		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.CLASSIC)) {
+		if (gamemode.equals(GameMode.PRACTICE) || gamemode.equals(GameMode.CLASSIC) || gamemode.equals(GameMode.CUSTOM)) {
 			lblScore.setText(game.getScore());
 		}
 	}
@@ -511,7 +527,7 @@ public class GameScreenController implements HTKListener{
 			lblScoreTitle.setText("Total Score:");
 		}
 		
-		CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
+	//	CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
 
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);

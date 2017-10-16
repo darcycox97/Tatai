@@ -62,5 +62,9 @@ public abstract class InfiniteGame extends Game {
 	public int getQuestionNumber() {
 		return NUM_ELS_IN_LIST * numTimesListRegenerated + questionIndex;
 	}
+	
+	public String getQuizName() {
+		return null;
+	}
 
 }

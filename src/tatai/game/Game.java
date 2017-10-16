@@ -151,4 +151,9 @@ public abstract class  Game {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
+	
+	/**
+	 * In most cases this will return null. But is used for named games
+	 */
+	public abstract String getQuizName();
 }

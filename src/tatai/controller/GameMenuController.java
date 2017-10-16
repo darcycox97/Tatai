@@ -13,9 +13,6 @@ import javafx.scene.control.Tooltip;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
-import tatai.game.OneMinuteEquationGame;
-import tatai.game.RegularEquationGame;
-import tatai.game.TimedEquationGame;
 
 public class GameMenuController {
 	
@@ -28,6 +25,7 @@ public class GameMenuController {
 	@FXML private Button btnClassic;
 	@FXML private Button btnArcade;
 	@FXML private Button btnTimeAttack;
+	@FXML private Button btnCustom;
 
 	public void initialize() {}
 	
@@ -48,9 +46,9 @@ public class GameMenuController {
 		
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.EASY);
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.EASY, null);
 		} else {
-			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.HARD);
+			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.HARD, null);
 		}
 		
 		// load the game screen
@@ -68,9 +66,9 @@ public class GameMenuController {
 
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.EASY);
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.EASY, null);
 		} else {
-			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.HARD);
+			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.HARD, null);
 		}
 		
 		// load the game screen
@@ -89,9 +87,9 @@ public class GameMenuController {
 		
 		// determine what difficulty the game should be in
 		if (toggleEasy.isSelected()) {
-			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.EASY);
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.EASY, null);
 		} else {
-			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.HARD);
+			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.HARD, null);
 		}
 		
 		// load the game screen
@@ -103,5 +101,17 @@ public class GameMenuController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@FXML
+	public void openCustomQuizzes() {
+	
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CustomQuizMenu.fxml"));
+			Parent root = loader.load();
+			btnCustom.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

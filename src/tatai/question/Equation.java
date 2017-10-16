@@ -8,7 +8,7 @@ import tatai.game.GameDifficulty;
  */
 public class Equation implements Question {
 	
-	enum Operation {
+	public enum Operation {
 		PLUS,
 		MINUS,
 		TIMES
@@ -111,7 +111,7 @@ public class Equation implements Question {
 	 * The answer is the result of applying the operation between operand1 and operand2.
 	 * operand1 is on the left of the equation.
 	 */
-	public Equation(int operand1, int operand2, Operation operation) {
+	public Equation(int operand1, Operation operation, int operand2) {
 		this.operand1 = operand1;
 		this.operand2 = operand2;
 		this.operation = operation;

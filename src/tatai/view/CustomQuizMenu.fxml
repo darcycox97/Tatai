@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.CustomQuizMenuController">
+   <top>
+      <Button fx:id="btnGoBack" mnemonicParsing="false" onAction="#openGameMenu" styleClass="home-buttons" text="Go Back" BorderPane.alignment="CENTER_LEFT">
+         <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </top>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+               <children>
+                  <Label id="customQuizTitle" text="Your Custom Quizzes" />
+                  <AnchorPane>
+                     <children>
+                        <VBox fx:id="quizBox" layoutX="262.0" layoutY="-5.0" spacing="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Label id="lblEmptyDisplay" fx:id="lblNoDisplay" text="No Quizzes To Display" visible="false" />
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Button id="btnStartCustomQuiz" fx:id="btnStartQuiz" mnemonicParsing="false" onAction="#startQuiz" text="Start Quiz" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>

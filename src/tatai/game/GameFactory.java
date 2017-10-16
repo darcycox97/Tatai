@@ -22,8 +22,10 @@ public class GameFactory {
 	/**
 	 * Sets the appropriate game.
 	 * @param game The game mode to instantiate
+	 * @param difficulty the difficulty of the game
+	 * @param quizName Used for setting custom game
 	 */
-	public void setCurrentGame(GameMode game, GameDifficulty difficulty) {
+	public void setCurrentGame(GameMode game, GameDifficulty difficulty, String quizName) {
 		
 		switch (game) {
 		case CLASSIC:
@@ -38,6 +40,10 @@ public class GameFactory {
 		case PRACTICE:
 			currentGame = new PracticeEquationGame(difficulty);
 			break;
+		case CUSTOM:
+			currentGame = new CustomEquationGame(quizName);
+			break;
 		}
 	}
+
 }

@@ -85,7 +85,7 @@ public class HomeController {
 	@FXML
 	public void openPractice() {
 		
-		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY);
+		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
