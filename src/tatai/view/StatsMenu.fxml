@@ -23,7 +23,7 @@
                <children>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button fx:id="btnMe" minWidth="200.0" mnemonicParsing="false" onAction="#loadMyStats" styleClass="main-buttons" text="My Statistics" />
+                        <Button fx:id="btnMe" minWidth="200.0" mnemonicParsing="false" onAction="#loadMyStats" styleClass="main-buttons" text="My Stats" />
                         <Label fx:id="lblHelp" contentDisplay="RIGHT">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -40,7 +40,7 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button fx:id="btnClass" minWidth="200.0" mnemonicParsing="false" onAction="#loadClassStats" styleClass="main-buttons" text="Classroom Statistics" />
+                        <Button fx:id="btnClass" minWidth="200.0" mnemonicParsing="false" onAction="#loadClassStats" styleClass="main-buttons" text="Classroom Stats" />
                         <Label contentDisplay="GRAPHIC_ONLY" text="Label">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">

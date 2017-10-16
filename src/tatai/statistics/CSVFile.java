@@ -1,6 +1,5 @@
 package tatai.statistics;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -8,14 +7,9 @@ import java.util.List;
 
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
-import tatai.statistics.CSVFile.CSVName;
 import tatai.statistics.Medallist.MedalType;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 /**
  * Singleton class that encapsulates information about the statistics.csv file 
@@ -175,6 +169,7 @@ public class CSVFile {
 	// STATISTICS SPECIFIC METHODS ...	
 
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Series<String, Double> getSeriesData(String username, String gamemode) {
 
 		XYChart.Series data = new XYChart.Series<>();
@@ -245,7 +240,6 @@ public class CSVFile {
 		return String.valueOf(best);
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public static Medallist getMedallist(MedalType medalType, String gamemode) {
 
 		List<String> names = getAllTitles(CSVName.STATISTICS);

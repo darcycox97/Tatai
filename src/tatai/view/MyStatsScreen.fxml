@@ -28,7 +28,7 @@
                </children>
             </VBox>
             <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="190.0" promptText="Select a Game Mode" />
+            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="185.0" promptText="Select a Game Mode" />
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
                   <Font size="22.0" />
@@ -41,23 +41,32 @@
       </HBox>
    </top>
    <right>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Best Score" />
-            <Label fx:id="lblBestScore" text="Label">
+            <Label styleClass="radio-button" text="Best Score">
+               <VBox.margin>
+                  <Insets top="35.0" />
+               </VBox.margin></Label>
+            <Label fx:id="lblBestScore" styleClass="login-prompts" text="Label">
                <VBox.margin>
                   <Insets top="-15.0" />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="40.0" top="10.0" />
+               </padding>
             </Label>
-            <Label text="Average Score" />
-            <Label fx:id="lblAverageScore" text="Label">
+            <Label styleClass="radio-button" text="Average" />
+            <Label fx:id="lblAverageScore" styleClass="login-prompts" text="Label">
                <VBox.margin>
                   <Insets top="-15.0" />
                </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </Label>
          </children>
          <padding>
-            <Insets right="30.0" />
+            <Insets right="50.0" />
          </padding>
          <BorderPane.margin>
             <Insets left="-20.0" />
@@ -67,12 +76,6 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label fx:id="lblNoScores" text="No scores yet!" />
-                  <Label fx:id="lblPlayGames" text="Play games to track your progress." />
-               </children>
-            </VBox>
             <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false">
               <xAxis>
                 <NumberAxis label="Games" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="1000.0" fx:id="xAxis" />
@@ -84,7 +87,19 @@
                   <Insets bottom="20.0" left="20.0" right="40.0" />
                </padding>
             </LineChart>
-            <Label fx:id="lblChooseMode" text="Select a game mode to view progress." />
+            <Label fx:id="lblChooseMode" styleClass="progress-labels" text="Select a game mode to view progress.">
+               <StackPane.margin>
+                  <Insets top="-80.0" />
+               </StackPane.margin></Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="lblNoScores" styleClass="progress-labels" text="No scores yet!">
+                     <VBox.margin>
+                        <Insets top="-100.0" />
+                     </VBox.margin></Label>
+                  <Label fx:id="lblPlayGames" styleClass="progress-labels" text="Play games to track your progress." />
+               </children>
+            </VBox>
          </children>
       </StackPane>
    </center>

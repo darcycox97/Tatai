@@ -1,8 +1,6 @@
 package tatai.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +10,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import tatai.game.GameMode;
 import tatai.statistics.CSVFile;
 import tatai.statistics.Medallist;
 import tatai.statistics.Medallist.MedalType;

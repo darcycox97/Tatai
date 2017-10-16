@@ -53,10 +53,12 @@ public abstract class InfiniteGame extends Game {
 		 
 		 Formatter f = new Formatter();
 		 f.format("%1$.2f", percentCorrect);
+		 String score = f.toString();
+		 f.close();
 		 
-		 return f.toString() + "% correct";
+		 return score + "% correct";
 	}
-	
+
 	// override this method so question number doesn't roll back to 1.
 	@Override
 	public int getQuestionNumber() {

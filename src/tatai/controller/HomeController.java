@@ -1,6 +1,7 @@
 package tatai.controller;
 
 import java.io.IOException;
+
 import java.util.Optional;
 
 import javafx.fxml.FXML;
@@ -18,7 +19,6 @@ import javafx.scene.control.Alert.AlertType;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
-import tatai.game.PracticeEquationGame;
 import tatai.statistics.User;
 
 public class HomeController {
