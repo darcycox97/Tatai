@@ -1,9 +1,5 @@
 package tatai.statistics;
 
-import java.util.List;
-
-import tatai.statistics.CSVFile.CSVName;
-
 public class Medallist {
 
 	String username;

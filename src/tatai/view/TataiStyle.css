@@ -23,7 +23,11 @@
 	-fx-font-weight : bold;
 }
 
-#lblMain, #lblEmptyDisplay {
+.medal-holder-labels, .progress-labels {
+	-fx-font-size : 20px;
+}
+
+#lblMain, #lblEmptyDisplay, #leaders-title {
 	-fx-font-size : 50px;
 }
 

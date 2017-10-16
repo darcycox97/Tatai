@@ -15,7 +15,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,15 +33,12 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import tatai.question.Question;
 import tatai.statistics.CSVFile;
-import tatai.statistics.Leader;
-import tatai.statistics.LeadersInstance;
 import tatai.statistics.User;
 import tatai.statistics.CSVFile.CSVName;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
-import tatai.game.NumberGame;
 import tatai.htk.HTKListener;
 
 public class GameScreenController implements HTKListener{

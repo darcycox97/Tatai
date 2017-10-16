@@ -1,11 +1,7 @@
 package tatai.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -27,8 +23,6 @@ import tatai.statistics.CSVFile.CSVName;
 public class QuizCreatorController {
 
 	private static final int NUM_EQUATIONS = 10;
-	
-	private final File quizCSV = new File("resources/quizzes.csv");
 	
 	// map to be used to check validity of each equation field
 	private Map<Integer, Boolean> validityMap;

@@ -33,7 +33,7 @@
             </Label>
             <AnchorPane prefHeight="200.0" prefWidth="500.0">
                <children>
-                  <ComboBox fx:id="comboGamemode" layoutX="291.0" layoutY="12.0" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
+                  <Label id="leaders-title" layoutX="-25.0" layoutY="24.0" text="Class Leaders" />
                </children>
             </AnchorPane>
          </children>
@@ -61,27 +61,28 @@
                      </image></ImageView>
                </children>
                <HBox.margin>
-                  <Insets left="-50.0" />
+                  <Insets left="-20.0" right="-20.0" />
                </HBox.margin>
             </VBox>
-            <VBox prefHeight="200.0" spacing="80.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="80.0">
                <children>
-                  <Label fx:id="lblGoldUser" text="Label" />
-                  <Label fx:id="lblSilverUser" text="Label" />
-                  <Label fx:id="lblBronzeUser" text="Label" />
+                  <Label fx:id="lblGoldUser" styleClass="medal-holder-labels" text="Label" />
+                  <Label fx:id="lblSilverUser" styleClass="medal-holder-labels" text="Label" />
+                  <Label fx:id="lblBronzeUser" styleClass="medal-holder-labels" text="Label" />
+                  <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
                </children>
                <padding>
                   <Insets top="30.0" />
                </padding>
                <HBox.margin>
-                  <Insets />
+                  <Insets left="-20.0" />
                </HBox.margin>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="80.0">
                <children>
-                  <Label fx:id="lblGoldScore" text="Label" />
-                  <Label fx:id="lblSilverScore" text="Label" />
-                  <Label fx:id="lblBronzeScore" text="Label" />
+                  <Label fx:id="lblGoldScore" styleClass="medal-holder-labels" text="Label" />
+                  <Label fx:id="lblSilverScore" styleClass="medal-holder-labels" text="Label" />
+                  <Label fx:id="lblBronzeScore" styleClass="medal-holder-labels" text="Label" />
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -89,7 +90,7 @@
             </VBox>
          </children>
          <BorderPane.margin>
-            <Insets left="40.0" top="60.0" />
+            <Insets left="40.0" top="40.0" />
          </BorderPane.margin>
       </HBox>
    </center>
