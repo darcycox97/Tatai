@@ -14,6 +14,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import tatai.TataiPrototype;
 
 public class TeacherMenuController {
 
@@ -42,7 +43,7 @@ public class TeacherMenuController {
 			
 			if (result.isPresent() && result.get().equals(ButtonType.YES)) {
 				try {	
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Login.fxml"));
+					FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Login.fxml"));
 					Parent root = loader.load();
 					Scene scene = new Scene(root,700,300);
 					((Stage)menuLogout.getScene().getWindow()).setScene(scene);
@@ -75,7 +76,7 @@ public class TeacherMenuController {
 	@FXML
 	public void openQuizCreator() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/QuizCreator.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
 			Parent root = loader.load();
 			btnCreateQuiz.getScene().setRoot(root);
 		} catch (IOException e) {

@@ -35,6 +35,7 @@ import tatai.question.Question;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.TataiPrototype;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
@@ -143,9 +144,9 @@ public class GameScreenController implements HTKListener{
 
 			String toLoad;
 			if (gamemode.equals(GameMode.PRACTICE)) {
-				toLoad = "../view/Home.fxml";
+				toLoad = "view/Home.fxml";
 			} else {
-				toLoad = "../view/GameMenu.fxml";
+				toLoad = "view/GameMenu.fxml";
 			}
 
 			if (!game.getFinished()) {
@@ -178,7 +179,7 @@ public class GameScreenController implements HTKListener{
 				countingAnimation.stop();
 			}
 
-			Parent root = (BorderPane)FXMLLoader.load(getClass().getResource(toLoad));
+			Parent root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource(toLoad));
 			returnHome.getScene().setRoot(root);
 
 

@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 
@@ -97,7 +98,7 @@ public class QuizCreatorController {
 	@FXML public void loadTeacherMenu() {
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/TeacherMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 			Parent root = loader.load();
 			btnGoBack.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -231,11 +232,11 @@ public class QuizCreatorController {
 			
 			if (validEquation) {
 				// display tick next to text field
-				lblMap.get(observed).setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/icons/tick.png"),25,25,true,true)));
+				lblMap.get(observed).setGraphic(new ImageView(new Image(TataiPrototype.class.getResourceAsStream("view/icons/tick.png"),25,25,true,true)));
 				validityMap.put(observed, true); // update validity of this text field
 			} else {
 				// display cross next to text field
-				lblMap.get(observed).setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../view/icons/cross.png"),25,25,true,true)));
+				lblMap.get(observed).setGraphic(new ImageView(new Image(TataiPrototype.class.getResourceAsStream("view/icons/cross.png"),25,25,true,true)));
 				validityMap.put(observed, false); // update validity of this text field
 			}
 		}

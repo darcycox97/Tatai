@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import tatai.TataiPrototype;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
@@ -48,7 +49,7 @@ public class CustomQuizMenuController {
 	@FXML
 	public void openGameMenu() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
 			Parent root = loader.load();
 			btnGoBack.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -62,7 +63,7 @@ public class CustomQuizMenuController {
 		GameFactory.getInstance().setCurrentGame(GameMode.CUSTOM, GameDifficulty.EASY, quizName);
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 			Parent root = loader.load();
 			btnGoBack.getScene().setRoot(root);
 		} catch (IOException e) {

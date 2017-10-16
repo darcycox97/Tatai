@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import tatai.TataiPrototype;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
@@ -32,7 +33,7 @@ public class GameMenuController {
 	@FXML
 	public void loadHomeScreen() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Home.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -53,7 +54,7 @@ public class GameMenuController {
 		
 		// load the game screen
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -73,7 +74,7 @@ public class GameMenuController {
 		
 		// load the game screen
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -94,7 +95,7 @@ public class GameMenuController {
 		
 		// load the game screen
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -107,7 +108,7 @@ public class GameMenuController {
 	public void openCustomQuizzes() {
 	
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CustomQuizMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/CustomQuizMenu.fxml"));
 			Parent root = loader.load();
 			btnCustom.getScene().setRoot(root);
 		} catch (IOException e) {

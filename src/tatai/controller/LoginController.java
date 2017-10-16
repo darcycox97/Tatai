@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 import tatai.statistics.User;
@@ -97,7 +98,7 @@ public class LoginController {
 		if (username.equals(TEACHER)) {
 			// load teacher menu
 			try {
-				BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/TeacherMenu.fxml"));
+				BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 				Scene scene = new Scene(root,700,600);
 				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
 			} catch (IOException e) {
@@ -107,7 +108,7 @@ public class LoginController {
 		} else {
 			// load the home screen
 			try {
-				BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/Home.fxml"));
+				BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/Home.fxml"));
 				Scene scene = new Scene(root,700,600);
 				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
 			} catch (IOException e) {

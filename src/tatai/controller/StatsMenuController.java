@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import tatai.TataiPrototype;
 
 public class StatsMenuController {
 	
@@ -18,7 +19,7 @@ public class StatsMenuController {
 	@FXML
 	public void loadHomeScreen() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Home.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -29,7 +30,7 @@ public class StatsMenuController {
 	@FXML
 	public void loadMyStats() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MyStatsScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/MyStatsScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -40,7 +41,7 @@ public class StatsMenuController {
 	@FXML
 	public void loadClassStats() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ClassStatsScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/ClassStatsScreen.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {

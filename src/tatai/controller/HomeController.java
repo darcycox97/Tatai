@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import tatai.TataiPrototype;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
@@ -53,7 +54,7 @@ public class HomeController {
 			
 			if (result.isPresent() && result.get().equals(ButtonType.YES)) {
 				try {	
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Login.fxml"));
+					FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Login.fxml"));
 					Parent root = loader.load();
 					Scene scene = new Scene(root,700,300);
 					((Stage)menuUser.getScene().getWindow()).setScene(scene);
@@ -74,7 +75,7 @@ public class HomeController {
 	public void openGames() {
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
 			Parent root = loader.load();
 			btnGames.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -88,7 +89,7 @@ public class HomeController {
 		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameScreen.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 			Parent root = loader.load();
 			btnGames.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -100,7 +101,7 @@ public class HomeController {
 	public void openStatistics() {
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
 			Parent root = loader.load();
 			btnGames.getScene().setRoot(root);
 		} catch (IOException e) {

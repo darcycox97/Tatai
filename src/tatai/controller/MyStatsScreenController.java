@@ -12,6 +12,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 
@@ -38,7 +39,7 @@ public class MyStatsScreenController {
 	@FXML
 	public void loadHomeScreen() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Home.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -49,7 +50,7 @@ public class MyStatsScreenController {
 	@FXML
 	public void loadStatsMenu() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
