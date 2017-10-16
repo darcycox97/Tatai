@@ -123,7 +123,7 @@ public class QuizCreatorController {
 		}
 		
 		String name = txtQuizName.getText();
-		if (!Pattern.matches("[\\w\\-]+", name)) {
+		if (!Pattern.matches("[\\w\\-\\s]+", name)) {
 			// only allow alphanumeric, hyphens, and underscores
 			validFields = false;
 		}
@@ -132,7 +132,13 @@ public class QuizCreatorController {
 			// convert quiz into its csv form.
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append(txtQuizName.getText()); // first entry should be the quiz name
+			String text;
+			if (txtQuizName.getText().replace(" ","").length() == 0) {
+				text = "Unnamed Quiz";
+			} else {
+				text = txtQuizName.getText();
+			}
+			sb.append(text); // first entry should be the quiz name
 			
 			for (int i = 1; i <= NUM_EQUATIONS; i++) {
 				sb.append("," + eqnMap.get(i).getText().replaceAll(" ", ""));
