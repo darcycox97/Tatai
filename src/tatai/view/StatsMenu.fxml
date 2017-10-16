@@ -33,14 +33,14 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="A basic game mode. &#10;You have ten questions to answer, with two attempts for each. &#10;Try to score a perfect ten!" wrapText="true" />
+                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="View your personal progress.&#10;" wrapText="true" />
                            </tooltip>
                         </Label>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Button minWidth="200.0" mnemonicParsing="false" styleClass="main-buttons" text="Classroom Statistics" />
+                        <Button fx:id="btnClass" minWidth="200.0" mnemonicParsing="false" onAction="#loadClassStats" styleClass="main-buttons" text="Classroom Statistics" />
                         <Label contentDisplay="GRAPHIC_ONLY" text="Label">
                            <graphic>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -50,7 +50,7 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="It's a race against the clock! &#10;You have one minute to get as many correct answers as possible.&#10;" wrapText="true" />
+                              <Tooltip prefHeight="100.0" prefWidth="200.0" text="View class medal holders for each game mode." wrapText="true" />
                            </tooltip>
                         </Label>
                      </children>

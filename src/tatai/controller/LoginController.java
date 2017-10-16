@@ -45,7 +45,7 @@ public class LoginController {
 			}
 		});
 
-
+		//TODO: populate combo box with list of all users
 		for (String name : CSVFile.getAllTitles(CSVName.STATISTICS)) {
 			comboUsers.getItems().add(name);
 		}
@@ -86,8 +86,9 @@ public class LoginController {
 		} else if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
+			CSVFile.appendToCSV(CSVName.STATISTICS, username);
 		} else {
-			// pre existing username is selected
+			// pre existing user name is selected
 			username = selected;
 		}
 

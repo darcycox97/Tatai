@@ -2,6 +2,7 @@ package tatai.controller;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ import tatai.statistics.CSVFile;
 import tatai.statistics.Leader;
 import tatai.statistics.LeadersInstance;
 import tatai.statistics.User;
+import tatai.statistics.CSVFile.CSVName;
 import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
@@ -527,7 +529,14 @@ public class GameScreenController implements HTKListener{
 			lblScoreTitle.setText("Total Score:");
 		}
 		
-	//	CSVFile.appendToCSV(User.getInstance().getName(), game.getGameMode().toString(), game.getScore());
+		String username = User.getInstance().getName();
+		String gamemode = game.getGameMode().toString();
+		String score = String.valueOf(game.getScoreValue());
+		
+		String currentLine = CSVFile.getLineInCSV(CSVName.STATISTICS, username);
+		String newLine = currentLine + "," + gamemode + "," + score;
+		
+		CSVFile.replaceLine(CSVName.STATISTICS, username, newLine);
 
 		lblGamePrompts.setVisible(true);
 		btnNext.setVisible(false);
