@@ -1,16 +1,18 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-
-.text {
-	/*-fx-font-family : 'fontname'; This is how to set fonts*/
-}
-
 .root {
 	-fx-background-image : url('tatai-background-lighter.jpg');
 }
 
 .circle {
 	-fx-border-color:transparent;
+}
+
+.button {
+	-fx-border-radius:60;
+	-fx-border-color:#468499;
+	-fx-border-width:2px;
+	-fx-background-radius:60;
 }
 
 .home-buttons {
@@ -21,15 +23,20 @@
 	-fx-font-weight : bold;
 }
 
-.button {
-	-fx-border-radius:60;
-	-fx-border-color:#468499;
-	-fx-border-width:2px;
-	-fx-background-radius:60;
-	}
+#lblMain, #lblEmptyDisplay {
+	-fx-font-size : 50px;
+}
+
+#lblGameMenuTitle, #customQuizTitle {
+	-fx-font-size : 30px;
+}
 
 #questionLabel {
-	-fx-padding:40px;
+	-fx-padding : 40px;
+}
+
+#lblGamePrompts {
+	-fx-padding:20px;
 }
 
 
@@ -43,35 +50,21 @@
 	-fx-opacity:0.6;
 }
 
-#lblGamePrompts {
-	-fx-padding:20px;
-}
-
 .login-prompts {
 	-fx-font-size : 18px;
 }
 
-#btnLogin {
+#btnLogin, #btnStartCustomQuiz {
 	-fx-font-size : 25px;
-}
-
-#lblMain {
-	-fx-font-size : 50px;
 }
 
 .home-screen-images {
 	-fx-min-width : 100px;
-	
 }
 
 .main-buttons {
 	-fx-font-size : 28px;
 	-fx-min-width : 280px;
-}
-
-.title-label {
-	-fx-font-weight : bold;
-	-fx-font-size : 30px;
 }
 
 .custom-question-label {

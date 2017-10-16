@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -139,8 +140,15 @@ public class GameScreenController implements HTKListener{
 	@FXML
 	public void homeClicked() {
 		
-		BorderPane root;
+	
 		try {
+
+			String toLoad;
+			if (gamemode.equals(GameMode.PRACTICE)) {
+				toLoad = "../view/Home.fxml";
+			} else {
+				toLoad = "../view/GameMenu.fxml";
+			}
 
 			if (!game.getFinished()) {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -155,41 +163,26 @@ public class GameScreenController implements HTKListener{
 				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
 
 				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == buttonTypeYes){
-					// stop the animations
+				if (result.get() != buttonTypeYes){
+					return;
+				} 
 
-					if (recordingAnimations != null) {
-						for (Animation a : recordingAnimations) {
-							a.stop();
-						}
-					}
+			} 
 
-					if (countingAnimation != null) {
-						countingAnimation.stop();
-					}
 
-					game.setFinished(true);
-
-					root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
-					returnHome.getScene().setRoot(root);
-				} else {
-					// ... user chose CANCEL or closed the dialog. stay on the game screen
+			if (recordingAnimations != null) {
+				for (Animation a : recordingAnimations) {
+					a.stop();
 				}
-			} else {
-				// no warning
-				if (recordingAnimations != null) {
-					for (Animation a : recordingAnimations) {
-						a.stop();
-					}
-				}
-
-				if (countingAnimation != null) {
-					countingAnimation.stop();
-				}
-				
-				root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/GameMenu.fxml"));
-				returnHome.getScene().setRoot(root);
 			}
+
+			if (countingAnimation != null) {
+				countingAnimation.stop();
+			}
+
+			Parent root = (BorderPane)FXMLLoader.load(getClass().getResource(toLoad));
+			returnHome.getScene().setRoot(root);
+
 
 		} catch (IOException e) {
 			e.printStackTrace();

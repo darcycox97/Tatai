@@ -19,7 +19,7 @@
          <children>
             <VBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Label styleClass="title-label" text="Select a game mode to begin" textAlignment="CENTER" wrapText="true">
+                  <Label id="lblGameMenuTitle" text="Select a game mode to begin" textAlignment="CENTER" wrapText="true">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
