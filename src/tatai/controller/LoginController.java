@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
@@ -17,15 +18,20 @@ import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 import tatai.statistics.User;
+import javafx.scene.control.PasswordField;
 
 public class LoginController {
 
 	@FXML private Button btnLogin;
 	@FXML private ComboBox<String> comboUsers;
 	@FXML private TextField txtUserName;
+	@FXML private PasswordField passwordField;
 
 	private static final String NEW_USER = "New User";
 	private static final String TEACHER = "Teacher";
+	private static final String TEACHER_PASSWORD = "admin";
+	
+	private boolean passwordCorrect = false;
 
 	@FXML
 	public void initialize() {
@@ -37,20 +43,25 @@ public class LoginController {
 		// add option for new user, and set up to show text field if selected
 		comboUsers.getItems().add(NEW_USER);
 		comboUsers.getSelectionModel().selectedItemProperty().addListener(e -> {
-			if (comboUsers.getSelectionModel().getSelectedItem().equals(NEW_USER)) {
+			
+			String selected = comboUsers.getSelectionModel().getSelectedItem();
+			if (selected.equals(NEW_USER)) {
 				txtUserName.setVisible(true);
+				passwordField.setVisible(false);
 				btnLogin.setDisable(true);
+			} else if(selected.equals(TEACHER)) {
+				txtUserName.setVisible(false);
+				passwordField.setVisible(true);
+				btnLogin.setDisable(false);
 			} else {
 				txtUserName.setVisible(false);
 				btnLogin.setDisable(false);
 			}
 		});
 
-		//TODO: populate combo box with list of all users
 		for (String name : CSVFile.getAllTitles(CSVName.STATISTICS)) {
 			comboUsers.getItems().add(name);
 		}
-		
 
 		// apply a regex to the text field so we can only login if valid input is supplied
 		// only allow hyphens underscores and alphanumerics
@@ -62,21 +73,24 @@ public class LoginController {
 				btnLogin.setDisable(true);
 			}
 		});
+		
+		// checks the correctness of the password for teacher.
+		passwordField.textProperty().addListener(e -> {
+			String text = passwordField.getText();
+			passwordCorrect = text.equals(TEACHER_PASSWORD);
+		});
 
 	}
 
 
 	@FXML
 	public void login() {
-
-		//TODO: password protect teacher login.
 		
 		// determine if username provided, and if so set the current user for the session
 
 		String username;
 		String selected = comboUsers.getSelectionModel().getSelectedItem();
 		if (selected == null) {
-
 			Alert alert = new Alert(
 					AlertType.INFORMATION,
 					"Please select a username before logging in"
@@ -96,13 +110,20 @@ public class LoginController {
 		User.getInstance().setName(username);
 
 		if (username.equals(TEACHER)) {
-			// load teacher menu
-			try {
-				BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
-				Scene scene = new Scene(root,700,600);
-				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
-			} catch (IOException e) {
-				e.printStackTrace();
+			
+			if (passwordCorrect) {
+				// load teacher menu
+				try {
+					BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
+					Scene scene = new Scene(root,700,600);
+					((Stage)btnLogin.getScene().getWindow()).setScene(scene);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				Alert alert = new Alert(AlertType.WARNING, "That password is not correct, please try again.", ButtonType.OK);
+				alert.showAndWait();
+				return;
 			}
 
 		} else {
