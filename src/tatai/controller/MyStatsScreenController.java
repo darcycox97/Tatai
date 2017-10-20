@@ -24,6 +24,7 @@ public class MyStatsScreenController {
 	@FXML private Button btnHome;
 	@FXML private Button btnBack;
 	@FXML private ComboBox<String> comboGamemode;
+	@FXML private ComboBox<String> comboLevel;
 	@FXML private Label lblBestScore;
 	@FXML private Label lblAverageScore;
 	@FXML private Label lblNoScores;
@@ -33,7 +34,8 @@ public class MyStatsScreenController {
 	@FXML
 	public void initialize() {
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
-		loadProgressChart();
+		comboLevel.getItems().addAll("Easy", "Hard");
+		loadProgress();
 	}
 
 	@FXML
@@ -59,33 +61,44 @@ public class MyStatsScreenController {
 	}
 
 	@FXML
-	private void loadProgressChart() {
+	private void loadProgress() {
 		
 		String username = User.getInstance().getName();
 		String gamemode = null;
+		String level = null;
 
-		String selection = comboGamemode.getSelectionModel().getSelectedItem();
+		String selectedMode = comboGamemode.getSelectionModel().getSelectedItem();
+		String selectedLevel = comboLevel.getSelectionModel().getSelectedItem();
 
-		if (selection == null) {
+		if (selectedMode == null) {
 		} else {
-			if (selection.equals("Classic")) {
+			if (selectedMode.equals("Classic")) {
 				gamemode = "CLASSIC";
-			} else if (selection.equals("Time Attack")) {
+			} else if (selectedMode.equals("Time Attack")) {
 				gamemode = "TIME_ATTACK";
-			} else if (selection.equals("Arcade")) {
+			} else if (selectedMode.equals("Arcade")) {
 				gamemode = "ARCADE";
 			}
 		}
+		
+		if (selectedLevel == null) {
+		} else {
+			if (selectedLevel.equals("Easy")) {
+				level = "EASY";
+			} else if (selectedLevel.equals("Hard")) {
+				level = "HARD";
+			}
+		}
 
-		lblAverageScore.setText(CSVFile.getAverage(username, gamemode));
-		List<Double> scores = CSVFile.getUserData(username, gamemode);
+		lblAverageScore.setText(CSVFile.getAverage(username, gamemode, level));
+		List<Double> scores = CSVFile.getUserData(username, gamemode, level);
 		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 
 		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
 		progressChart.getData().clear();
-		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode));
+		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode, level));
 		
-		if (selection == null) {
+		if (selectedMode == null) {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");

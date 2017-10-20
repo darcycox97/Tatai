@@ -528,10 +528,11 @@ public class GameScreenController implements HTKListener{
 		
 		String username = User.getInstance().getName();
 		String gamemode = game.getGameMode().toString();
+		String level = game.getDifficulty().toString();
 		String score = String.valueOf(game.getScoreValue());
 		
 		String currentLine = CSVFile.getLineInCSV(CSVName.STATISTICS, username);
-		String newLine = currentLine + "," + gamemode + "," + score;
+		String newLine = currentLine + "," + gamemode + "," + level + "," + score;
 		
 		CSVFile.replaceLine(CSVName.STATISTICS, username, newLine);
 

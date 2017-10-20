@@ -1,6 +1,7 @@
 package tatai.statistics;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -165,60 +166,64 @@ public class CSVFile {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Returns true if the csv contains a line with this title, false if not.
 	 * @param csv the file to check
 	 * @param title the title to look for
 	 */
 	public static boolean titleExists(CSVName csv, String title) {
-		
+
 		// get list of all titles, and check this list for the specified title
 		List<String> titles = CSVFile.getAllTitles(csv);
 		return titles.contains(title);
-		
+
 	}
 
 	// STATISTICS SPECIFIC METHODS ...	
 
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Series<String, Double> getSeriesData(String username, String gamemode) {
+	public static Series<String, Double> getSeriesData(String username, String gamemode, String level) {
 
 		XYChart.Series data = new XYChart.Series<>();
 		int gameNumber = 1;
 
 		String[] lineArray = getLineInCSV(CSVName.STATISTICS, username).split(",");
 
-		for (int i = 0; i < lineArray.length - 1; i++) {
+		for (int i = 0; i < lineArray.length - 2; i++) {
 			if (lineArray[i].equals(gamemode)) {
-				data.getData().add(new XYChart.Data(gameNumber, Double.parseDouble(lineArray[i+1])));
-				gameNumber++;
+				if (lineArray[i+1].equals(level)) {
+					data.getData().add(new XYChart.Data(gameNumber, Double.parseDouble(lineArray[i+2])));
+					gameNumber++;
+				}
 			}
 		}
 
 		return data;
 	}
 
-	public static List<Double> getUserData(String username, String gamemode) {
+	public static List<Double> getUserData(String username, String gamemode, String level) {
 
 		List<Double> data = new ArrayList<Double>();
 
 		String[] lineArray = getLineInCSV(CSVName.STATISTICS, username).split(",");
 
-		for (int i = 0; i < lineArray.length - 1; i++) {
+		for (int i = 0; i < lineArray.length - 2; i++) {
 			if (lineArray[i].equals(gamemode)) {
-				data.add(Double.parseDouble(lineArray[i+1]));
+				if (lineArray[i+1].equals(level)) {
+					data.add(Double.parseDouble(lineArray[i+2]));
+				}
 			}
 		}
 
 		return data;
 	}
 
-	public static String getAverage(String username, String gamemode) {
+	public static String getAverage(String username, String gamemode, String level) {
 
 		double sum = 0.0;
-		List<Double> userData = getUserData(username, gamemode);
+		List<Double> userData = getUserData(username, gamemode, level);
 
 		for (Double value : userData) {
 			sum += value;
@@ -233,7 +238,7 @@ public class CSVFile {
 
 	public static String getBest(List<Double> data, String gamemode) {
 
-		Double best = null;
+		double best = 0;
 
 		if (data.size() > 0) {
 			best = data.get(0);
@@ -250,24 +255,27 @@ public class CSVFile {
 			}
 		}
 
+		best = Math.round(best*10);
+		best = best / 10;
+
 		return String.valueOf(best);
 	}
 
-	public static Medallist getMedallist(MedalType medalType, String gamemode) {
+	public static Medallist getMedallist(MedalType medalType, String gamemode, String level) {
 
 		List<String> names = getAllTitles(CSVName.STATISTICS);
 		List<Double> bestScores = new ArrayList<Double>();
 		List<String> usernames = new ArrayList<String>();
 
 		if (medalType.equals(MedalType.SILVER)) {
-			names.remove(getMedallist(MedalType.GOLD, gamemode).getUsername());
+			names.remove(getMedallist(MedalType.GOLD, gamemode, level).getUsername());
 		} else if (medalType.equals(MedalType.BRONZE)) {
-			names.remove(getMedallist(MedalType.GOLD, gamemode).getUsername());
-			names.remove(getMedallist(MedalType.SILVER, gamemode).getUsername());
+			names.remove(getMedallist(MedalType.GOLD, gamemode, level).getUsername());
+			names.remove(getMedallist(MedalType.SILVER, gamemode, level).getUsername());
 		}
 
 		for (String username : names) {
-			List<Double> scores = getUserData(username, gamemode);
+			List<Double> scores = getUserData(username, gamemode, level);
 			if (scores.size() > 0) {
 				String userBest = getBest(scores, gamemode);
 				if (userBest == null) {
@@ -278,10 +286,10 @@ public class CSVFile {
 			}
 		}
 
-		
+
 		String score = null;
 		String username = null;
-		
+
 		if (bestScores.size() > 0) {
 			score = getBest(bestScores, gamemode);
 			username = usernames.get(bestScores.indexOf(Double.parseDouble(score)));

@@ -28,7 +28,16 @@
                </children>
             </VBox>
             <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="comboGamemode" onAction="#loadProgressChart" prefWidth="185.0" promptText="Select a Game Mode" />
+            <VBox prefHeight="200.0" prefWidth="190.0">
+               <children>
+                  <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
+                  <ComboBox fx:id="comboLevel" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Level">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
             <Label fx:id="lblScore" alignment="CENTER">
                <font>
                   <Font size="22.0" />
