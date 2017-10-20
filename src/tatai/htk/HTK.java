@@ -69,19 +69,23 @@ public class HTK {
 			
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_FILE));
+				
+				// read lines until we reach either the end of the file, or match the first word
 				String line = reader.readLine();
-				while (line != null && !line.equals("sil")) {
+				while (line != null && !line.equals(wordsToMatch[0])) {
 					line = reader.readLine();
 				}
 				
-				// if line is null then first word wasnt matched
+				// if line is null then first word wasn't matched
 				if (line == null) {
 					reader.close();
 					return false;
 				}
 				
-				// The next lines will be the words spoken. we need to iterate through the remaining words and check the file has the right ones
-				for (int i = 0; i < wordsToMatch.length; i++) {
+				// The next lines are the lines to check for the correct output.
+				// the algorithm returns correct if all words to match are found in the correct order
+				
+				for (int i = 1; i < wordsToMatch.length; i++) {
 					line = reader.readLine(); // move on to the next word
 					if (line == null) {
 						reader.close();
@@ -93,14 +97,8 @@ public class HTK {
 					}
 				}
 				
-				// if we got to this point, then all words matched, check that there are no words other than "sil" after this
-				if (reader.readLine().equals("sil")) {
 				reader.close();
-					return true;
-				} else {
-					reader.close();
-					return false;
-				}
+				return true; // if we made it through the loop without terminating, all words matched
 				
 			} catch (IOException e) {
 				System.out.println("Error reading output file");
