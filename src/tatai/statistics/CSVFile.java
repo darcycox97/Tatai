@@ -165,6 +165,19 @@ public class CSVFile {
 			return null;
 		}
 	}
+	
+	/**
+	 * Returns true if the csv contains a line with this title, false if not.
+	 * @param csv the file to check
+	 * @param title the title to look for
+	 */
+	public static boolean titleExists(CSVName csv, String title) {
+		
+		// get list of all titles, and check this list for the specified title
+		List<String> titles = CSVFile.getAllTitles(csv);
+		return titles.contains(title);
+		
+	}
 
 	// STATISTICS SPECIFIC METHODS ...	
 

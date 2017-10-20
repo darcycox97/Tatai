@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -112,7 +113,7 @@ public class QuizCreatorController {
 		boolean validFields = true;
 		for (int i = 1; i <= NUM_EQUATIONS; i++) {
 			if (!validityMap.get(i)) {
-				// not valid if one or more equations arent valid
+				// not valid if one or more equations aren't valid
 				validFields = false;
 			}
 		}
@@ -125,6 +126,16 @@ public class QuizCreatorController {
 		
 		if (validFields) {
 			// convert quiz into its csv form.
+			
+			if (CSVFile.titleExists(CSVName.QUIZZES, txtQuizName.getText())) {
+				Alert alert = new Alert(
+					AlertType.INFORMATION,
+					"That quiz name already exists",
+					ButtonType.OK
+				);
+				alert.showAndWait();
+				return;
+			}
 			
 			StringBuilder sb = new StringBuilder();
 			String text;

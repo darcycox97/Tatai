@@ -37,6 +37,7 @@ public class LoginController {
 	public void initialize() {
 
 		txtUserName.setVisible(false); // becomes visible when new user is selected
+		btnLogin.setDisable(true); // becomes enabled when valid selection is made
 
 		comboUsers.getItems().add(TEACHER);
 		
@@ -101,7 +102,19 @@ public class LoginController {
 		} else if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
-			CSVFile.appendToCSV(CSVName.STATISTICS, username);
+			
+			// add new line to stats csv if this is a new username
+			if (!CSVFile.titleExists(CSVName.STATISTICS, username)) {
+				CSVFile.appendToCSV(CSVName.STATISTICS, username);
+			} else {
+				Alert alert = new Alert(
+					AlertType.INFORMATION,
+					"The username \"" + username + "\" is already taken.",
+					ButtonType.OK
+				);
+				alert.showAndWait();
+				return;
+			}
 		} else {
 			// pre existing user name is selected
 			username = selected;
