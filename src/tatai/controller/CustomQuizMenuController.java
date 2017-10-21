@@ -59,15 +59,18 @@ public class CustomQuizMenuController {
 	
 	@FXML
 	public void startQuiz() {
-		String quizName = (String) quizToggle.getSelectedToggle().getUserData();
-		GameFactory.getInstance().setCurrentGame(GameMode.CUSTOM, GameDifficulty.EASY, quizName);
 		
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
-			Parent root = loader.load();
-			btnGoBack.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (quizToggle.getSelectedToggle() != null) {
+			String quizName = (String) quizToggle.getSelectedToggle().getUserData();
+			GameFactory.getInstance().setCurrentGame(GameMode.CUSTOM, GameDifficulty.EASY, quizName);
+
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
+				Parent root = loader.load();
+				btnGoBack.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
