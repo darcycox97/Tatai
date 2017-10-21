@@ -2,6 +2,7 @@ package tatai.controller;
 
 import java.io.IOException;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import tatai.TataiPrototype;
-import tatai.game.GameDifficulty;
 import tatai.statistics.CSVFile;
 import tatai.statistics.Medallist;
 import tatai.statistics.Medallist.MedalType;
