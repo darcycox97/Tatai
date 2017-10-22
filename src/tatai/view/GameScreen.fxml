@@ -101,20 +101,25 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <HBox fx:id="circleBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                  <StackPane>
                      <children>
-                        <Circle fx:id="circle1" fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                        <HBox fx:id="circleBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Circle fx:id="circle1" fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="lblNumCorrect" styleClass="label-20px" />
                      </children>
-                  </HBox>
+                  </StackPane>
                </children>
             </VBox>
          </children>

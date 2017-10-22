@@ -51,31 +51,12 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="infoPane4" layoutX="50.0" layoutY="123.0" visible="false">
-         <children>
-            <AnchorPane layoutY="49.0" prefHeight="84.0" prefWidth="320.0" styleClass="tutorial-info">
-               <children>
-                  <Label layoutX="18.0" layoutY="12.0" maxWidth="339.0" prefHeight="57.0" prefWidth="283.0" styleClass="tutorial-text" text="This helps you keep track of how many equations you've attempted." wrapText="true" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="19.0" />
-               </children>
-            </AnchorPane>
-            <Polygon fill="DODGERBLUE" layoutX="279.0" layoutY="51.0" scaleX="0.18" scaleY="0.3" stroke="BLACK" strokeType="INSIDE" styleClass="tutorial-info">
-               <points>
-                  <Double fx:value="-50.0" />
-                  <Double fx:value="40.0" />
-                  <Double fx:value="50.0" />
-                  <Double fx:value="40.0" />
-                  <Double fx:value="0.0" />
-                  <Double fx:value="-60.0" />
-               </points>
-            </Polygon>
-         </children>
-      </Pane>
       <ImageView fx:id="nextIcon" disable="true" fitHeight="48.0" fitWidth="53.0" layoutX="635.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/skip.png" />
          </image>
       </ImageView>
-      <Pane fx:id="infoPane7" layoutX="243.0" layoutY="271.0" visible="false">
+      <Pane fx:id="infoPane6" layoutX="243.0" layoutY="271.0" visible="false">
          <children>
             <Polygon fill="DODGERBLUE" layoutX="96.0" layoutY="184.0" scaleX="0.2" scaleY="-0.3" stroke="BLACK" strokeType="INSIDE" styleClass="tutorial-info">
                <points>
@@ -94,7 +75,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="infoPane5" layoutX="190.0" layoutY="-76.0" visible="false">
+      <Pane fx:id="infoPane4" layoutX="190.0" layoutY="-76.0" visible="false">
          <children>
             <Polygon fill="DODGERBLUE" layoutX="380.0" layoutY="121.0" rotate="-90.0" scaleX="0.2" scaleY="-0.3" stroke="BLACK" strokeType="INSIDE" styleClass="tutorial-info">
                <points>
@@ -113,7 +94,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="infoPane6" layoutX="-93.0" layoutY="442.0" visible="false">
+      <Pane fx:id="infoPane5" layoutX="-93.0" layoutY="442.0" visible="false">
          <children>
             <Polygon fill="DODGERBLUE" layoutX="390.0" layoutY="121.0" rotate="-90.0" scaleX="0.2" scaleY="-0.3" stroke="BLACK" strokeType="INSIDE" styleClass="tutorial-info">
                <points>

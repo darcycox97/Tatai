@@ -86,6 +86,7 @@ public class GameScreenController implements HTKListener{
 	@FXML private Label lblTotalScore;
 	@FXML private Label lblScoreTitle;
 	@FXML private Label lblRecordTimer;
+	@FXML private Label lblNumCorrect;
 	
 	@FXML private HBox circleBox;
 	@FXML private Circle circle1;
@@ -304,8 +305,11 @@ public class GameScreenController implements HTKListener{
 
 	private void displayResults(boolean correct) {
 		
-		// update circles if we are in a finite game mode
+		if (gamemode.equals(GameMode.ARCADE)) {
+			lblNumCorrect.setText("Correct: " + game.getScore());
+		}
 		
+		// update circles if we are in a finite game mode
 		boolean finiteGame = ((gamemode.equals(GameMode.CLASSIC)) || (gamemode.equals(GameMode.TIME_ATTACK)) || (gamemode.equals(GameMode.CUSTOM)));
 		
 		if (correct) {
@@ -323,6 +327,7 @@ public class GameScreenController implements HTKListener{
 					circleToChange.setStyle("-fx-fill:" + HALF_MARK_COLOR + ";");
 				}
 			}
+			
 		} else {
 			
 			lblGamePrompts.setText(INCORRECT);
@@ -490,6 +495,10 @@ public class GameScreenController implements HTKListener{
 		tryAgainBox.setVisible(true);
 		questionLabel.setVisible(true);
 		lblScore.setVisible(true);
+		
+		if (gamemode.equals(GameMode.ARCADE)) {
+			lblNumCorrect.setVisible(true);
+		}
 
 		displayResults(game.getLatestResult());
 	}
@@ -508,6 +517,10 @@ public class GameScreenController implements HTKListener{
 		totalScoreBox.setVisible(false);
 		lblScore.setVisible(true);
 		btnSkip.setVisible(false);
+		
+		if (gamemode.equals(GameMode.ARCADE)) {
+			lblNumCorrect.setVisible(true);
+		}
 
 		displayResults(game.getLatestResult());
 	}
@@ -552,6 +565,7 @@ public class GameScreenController implements HTKListener{
 		lblScore.setVisible(false);
 		btnSkip.setVisible(false);
 		lblRecordTimer.setVisible(false);
+		lblNumCorrect.setVisible(false);
 		
 		totalScoreBox.setVisible(true);
 		gameFinishedBox.setVisible(true);
@@ -580,14 +594,14 @@ public class GameScreenController implements HTKListener{
 		// depending on game mode, calculate whether the score is a "good score" and display an appropriate message.
 		if (game.getGameMode().equals(GameMode.TIME_ATTACK)) {
 			if (game.getScoreValue() <= threshold) {
-				lblGamePrompts.setText("That's a great score!");
+				lblGamePrompts.setText("Ka Pai! Great score!");
 
 			} else {
 				lblGamePrompts.setText("Nice try!");
 			}
 		} else {
 			if (game.getScoreValue() >= threshold) {
-				lblGamePrompts.setText("That's a great score!");
+				lblGamePrompts.setText("Ka Pai! Great score!");
 
 			} else {
 				lblGamePrompts.setText("Nice try!");

@@ -38,7 +38,7 @@ public class TutorialScreenController {
 	
 	
 	
-	private static final int NUM_PANES = 7;
+	private static final int NUM_PANES = 6;
 	private static final String BEGINNING_CLASS = "tutorial-start";
 	private static final String QUESTION_ATTEMPT_CLASS = "tutorial-question-attempt";
 	private static final String END_CLASS = "tutorial-end";
