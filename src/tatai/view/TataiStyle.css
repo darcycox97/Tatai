@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.root {
+.root, .tutorial-end {
 	-fx-background-image : url('tatai-background-lighter.jpg');
 }
 
@@ -78,6 +78,35 @@
 .radio-button {
 	-fx-font-size : 20px;
 	-fx-font-weight : bold;
+}
+
+.tutorial-start {
+	-fx-background-image : url('screenshots/start-of-game.jpg');
+}
+
+.tutorial-question-attempt {
+	-fx-background-image:url('screenshots/question-attempt.jpg');
+}
+
+.tutorial-navigation-pane {
+	-fx-background-color: #CCCCCC;
+	-fx-opacity : 0.0;
+}
+
+.tutorial-navigation-pane:hover {
+	-fx-opacity : 0.3;
+}
+
+.tutorial-info {
+	-fx-background-color : #27180e;
+	-fx-fill:#27180e;
+	-fx-border-fill:#27180e;
+	
+}
+
+.tutorial-text {
+	-fx-font-size : 15px;
+	-fx-text-fill : #FFFFFF;
 }
 
 
