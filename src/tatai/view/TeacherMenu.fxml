@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.TeacherMenuController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="70.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" spacing="40.0">
                <children>
-                  <Label alignment="CENTER" styleClass="title-label" text="Teacher Mode" />
-                  <Label text="View classroom stats or create custom quizzes" />
+                  <Label alignment="CENTER" styleClass="label-50px" text="Teacher Mode" />
+                  <Label styleClass="label-20px" text="View classroom stats or create custom quizzes" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="100.0">

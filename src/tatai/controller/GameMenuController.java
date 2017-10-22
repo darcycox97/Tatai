@@ -27,6 +27,7 @@ public class GameMenuController {
 	@FXML private Button btnArcade;
 	@FXML private Button btnTimeAttack;
 	@FXML private Button btnCustom;
+	@FXML private Button btnTutorial;
 
 	public void initialize() {}
 	
@@ -114,5 +115,17 @@ public class GameMenuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	public void openTutorial() {
+		try {
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TutorialScreen.fxml"));
+			Parent root = loader.load();
+			btnTutorial.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
