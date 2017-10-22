@@ -3,7 +3,6 @@ package tatai;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
@@ -21,12 +20,6 @@ public class TataiPrototype extends Application {
 			primaryStage.setTitle("Tātai!");
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			
-			Stage tutorial = new Stage();
-			Parent tut= FXMLLoader.load(getClass().getResource("view/TutorialScreen.fxml"));
-			Scene tutScene = new Scene(tut,700,600);
-			tutorial.setScene(tutScene);
-			tutorial.show();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

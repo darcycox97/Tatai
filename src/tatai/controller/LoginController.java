@@ -103,8 +103,8 @@ public class LoginController {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
 			
-			// add new line to stats csv if this is a new username
-			if (!CSVFile.titleExists(CSVName.STATISTICS, username)) {
+			// add new line to stats csv if this is a new username, that is not "Teacher"
+			if (!CSVFile.titleExists(CSVName.STATISTICS, username) && !username.equals(TEACHER)) {
 				CSVFile.appendToCSV(CSVName.STATISTICS, username);
 			} else {
 				Alert alert = new Alert(
