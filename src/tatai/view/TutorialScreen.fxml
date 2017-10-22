@@ -151,7 +151,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Label fx:id="lblTutorialComplete" alignment="CENTER" layoutX="314.0" layoutY="257.0" text="You're ready to play Tātai!&#10;Good luck!" textAlignment="CENTER" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label fx:id="lblTutorialComplete" alignment="CENTER" layoutX="314.0" layoutY="257.0" styleClass="label-30px" text="You're ready to play Tātai!&#10;&#10;Good luck!" textAlignment="CENTER" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
       <AnchorPane id="next-pane" fx:id="prevPane" layoutY="-1.0" onMouseClicked="#showPrevPane" prefHeight="609.0" prefWidth="83.0" styleClass="tutorial-navigation-pane" />
       <ImageView fx:id="prevIcon" disable="true" fitHeight="48.0" fitWidth="53.0" layoutX="15.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -46,7 +46,12 @@ public class GameScreenController implements HTKListener{
 	
 	private static final String RECORDING = "Recording";
 	
-	private static final int NEXT_LEVEL_THRESHOLD = 8;
+	// these constants define what is considered a good score for each game mode.
+	private static final int CLASSIC_THRESHOLD = 8;
+	private static final int ARCADE_THRESHOLD = 10;
+	private static final int TIME_ATTACK_THRESHOLD = 60;
+
+	// integer codes to use for 
 	private static final int COUNT_UP = 0;
 	private static final int COUNT_DOWN = 1;
 	
@@ -455,6 +460,7 @@ public class GameScreenController implements HTKListener{
 			}
 		}
 		
+		
 		btnPlayBack.setVisible(false);
 		tryAgainBox.setVisible(false);
 		btnNext.setVisible(false);
@@ -536,6 +542,7 @@ public class GameScreenController implements HTKListener{
 		CSVFile.replaceLine(CSVName.STATISTICS, username, newLine);
 
 		lblGamePrompts.setVisible(true);
+		lblGamePrompts.setStyle("-fx-background-color:transparent;");
 		btnNext.setVisible(false);
 		btnRecord.setVisible(false);
 		tryAgainBox.setVisible(false);
@@ -551,12 +558,40 @@ public class GameScreenController implements HTKListener{
 		
 		lblTotalScore.setText(game.getScore());
 	
+		int threshold;
+		switch (game.getGameMode()) {
+		case CLASSIC:
+		case CUSTOM:
+			// custom games and classic games have the same threshold.
+			threshold = CLASSIC_THRESHOLD;
+			break;
+		case ARCADE:
+			threshold = ARCADE_THRESHOLD;
+			break;
+		case TIME_ATTACK:
+			threshold = TIME_ATTACK_THRESHOLD;
+			break;
+		default:
+			// other game modes never finish so this is not applicable, do nothing.
+			threshold = 0;
+			break;
+		}
 		
-		if (game.getScoreValue() >= NEXT_LEVEL_THRESHOLD) {
-			lblGamePrompts.setText("That's a great score!");
+		// depending on game mode, calculate whether the score is a "good score" and display an appropriate message.
+		if (game.getGameMode().equals(GameMode.TIME_ATTACK)) {
+			if (game.getScoreValue() <= threshold) {
+				lblGamePrompts.setText("That's a great score!");
 
+			} else {
+				lblGamePrompts.setText("Nice try!");
+			}
 		} else {
-			lblGamePrompts.setText("Nice try!");
+			if (game.getScoreValue() >= threshold) {
+				lblGamePrompts.setText("That's a great score!");
+
+			} else {
+				lblGamePrompts.setText("Nice try!");
+			}
 		}
 
 	}

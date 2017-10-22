@@ -23,6 +23,27 @@
 	-fx-font-weight : bold;
 }
 
+.label-20px {
+	-fx-font-size:20px;
+}
+
+.label-30px {
+	-fx-font-size:30px;
+}
+
+.label-40px {
+	-fx-font-size:40px;
+}
+
+.label-50px {
+	-fx-font-size:50px;
+}
+
+.label-60px {
+	-fx-font-size:60px;
+}
+
+
 .medal-holder-labels, .progress-labels {
 	-fx-font-size : 20px;
 }
