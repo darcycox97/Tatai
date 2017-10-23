@@ -56,6 +56,7 @@ public class LoginController {
 				btnLogin.setDisable(false);
 			} else {
 				txtUserName.setVisible(false);
+				passwordField.setVisible(false);
 				btnLogin.setDisable(false);
 			}
 		});
