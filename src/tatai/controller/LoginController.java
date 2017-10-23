@@ -30,7 +30,7 @@ public class LoginController {
 	private static final String NEW_USER = "New User";
 	private static final String TEACHER = "Teacher";
 	private static final String TEACHER_PASSWORD = "admin";
-	
+
 	private boolean passwordCorrect = false;
 
 	@FXML
@@ -40,11 +40,11 @@ public class LoginController {
 		btnLogin.setDisable(true); // becomes enabled when valid selection is made
 
 		comboUsers.getItems().add(TEACHER);
-		
+
 		// add option for new user, and set up to show text field if selected
 		comboUsers.getItems().add(NEW_USER);
 		comboUsers.getSelectionModel().selectedItemProperty().addListener(e -> {
-			
+
 			String selected = comboUsers.getSelectionModel().getSelectedItem();
 			if (selected.equals(NEW_USER)) {
 				txtUserName.setVisible(true);
@@ -74,7 +74,7 @@ public class LoginController {
 				btnLogin.setDisable(true);
 			}
 		});
-		
+
 		// checks the correctness of the password for teacher.
 		passwordField.textProperty().addListener(e -> {
 			String text = passwordField.getText();
@@ -86,20 +86,23 @@ public class LoginController {
 
 	@FXML
 	public void login() {
-		
+
 		// determine if username provided, and if so set the current user for the session
 
 		String username;
 		String selected = comboUsers.getSelectionModel().getSelectedItem();
-		if (selected == null) {
-			Alert alert = new Alert(
-					AlertType.INFORMATION,
-					"Please select a username before logging in"
-					);
-			alert.showAndWait();
-			return;
 
-		} else if (selected.equals(NEW_USER)) {
+		//		if (selected == null) {
+		//			Alert alert = new Alert(
+		//					AlertType.INFORMATION,
+		//					"Please select a username before logging in"
+		//					);
+		//			alert.showAndWait();
+		//			return;
+		//
+		//		} else 
+
+		if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
 			
@@ -108,10 +111,10 @@ public class LoginController {
 				CSVFile.appendToCSV(CSVName.STATISTICS, username);
 			} else {
 				Alert alert = new Alert(
-					AlertType.INFORMATION,
-					"The username \"" + username + "\" is already taken.",
-					ButtonType.OK
-				);
+						AlertType.INFORMATION,
+						"The username \"" + username + "\" is already taken.",
+						ButtonType.OK
+						);
 				alert.showAndWait();
 				return;
 			}
@@ -123,7 +126,6 @@ public class LoginController {
 		User.getInstance().setName(username);
 
 		if (username.equals(TEACHER)) {
-			
 			if (passwordCorrect) {
 				// load teacher menu
 				try {

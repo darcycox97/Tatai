@@ -70,6 +70,11 @@
                   <Label fx:id="lblSilverUser" styleClass="medal-holder-labels" text="Label" />
                   <Label fx:id="lblBronzeUser" styleClass="medal-holder-labels" text="Label" />
                   <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
+                  <ComboBox fx:id="comboLevel" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Level">
+                     <VBox.margin>
+                        <Insets top="-60.0" />
+                     </VBox.margin>
+                  </ComboBox>
                </children>
                <padding>
                   <Insets top="30.0" />

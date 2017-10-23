@@ -2,6 +2,7 @@ package tatai.controller;
 
 import java.io.IOException;
 
+
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -14,9 +15,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
-import tatai.statistics.User;
+import tatai.statistics.CSVFile.CSVName;
 
-public class MyStatsScreenController {
+public class TeacherStatsScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -26,6 +27,7 @@ public class MyStatsScreenController {
 	
 	@FXML private ComboBox<String> comboGamemode;
 	@FXML private ComboBox<String> comboLevel;
+	@FXML private ComboBox<String> comboStudent;
 	
 	@FXML private Label lblBestScore;
 	@FXML private Label lblAverageScore;
@@ -33,12 +35,13 @@ public class MyStatsScreenController {
 	@FXML private Label lblNoScores;
 	@FXML private Label lblPlayGames;
 	@FXML private Label lblChooseMode;
-	
 
 	@FXML
 	public void initialize() {
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
+		comboStudent.getItems().addAll(CSVFile.getAllTitles(CSVName.STATISTICS));
+		comboStudent.getSelectionModel().selectFirst();
 		loadProgress();
 	}
 
@@ -56,7 +59,7 @@ public class MyStatsScreenController {
 	@FXML
 	public void loadStatsMenu() {
 		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 			Parent root = loader.load();
 			btnHome.getScene().setRoot(root);
 		} catch (IOException e) {
@@ -67,10 +70,10 @@ public class MyStatsScreenController {
 	@FXML
 	private void loadProgress() {
 		
-		String username = User.getInstance().getName();
 		String gamemode = null;
 		String level = null;
 
+		String username = comboStudent.getSelectionModel().getSelectedItem();
 		String selectedMode = comboGamemode.getSelectionModel().getSelectedItem();
 		String selectedLevel = comboLevel.getSelectionModel().getSelectedItem();
 
@@ -99,14 +102,15 @@ public class MyStatsScreenController {
 		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 		lblGamesPlayed.setText(String.valueOf(scores.size()));
 
-		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
+		progressChart.setTitle(username + "'s Progress");
 		progressChart.getData().clear();
 		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode, level));
 		
-		if (selectedMode == null || selectedLevel == null) {
+		if (selectedMode == null || selectedLevel == null || username == null) {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
+			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(false);
 			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(true);
@@ -114,6 +118,7 @@ public class MyStatsScreenController {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
+			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(true);
 			lblPlayGames.setVisible(true);
 			lblChooseMode.setVisible(false);

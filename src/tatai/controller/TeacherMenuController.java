@@ -63,14 +63,14 @@ public class TeacherMenuController {
 	@FXML
 	public void openClassStats() {
 		
-		//TODO: load classroom stats screen
-		//try {
-		//	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StatsScreen.fxml"));
-		//	Parent root = loader.load();
-		//	btnStats.getScene().setRoot(root);
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
+		// Load classroom stats screen
+		try {
+			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherStatsScreen.fxml"));
+			Parent root = loader.load();
+			btnStats.getScene().setRoot(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

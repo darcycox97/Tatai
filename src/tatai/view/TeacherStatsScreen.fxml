@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.MyStatsScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.TeacherStatsScreenController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -30,6 +30,11 @@
             <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <VBox prefHeight="200.0" prefWidth="190.0">
                <children>
+                  <ComboBox fx:id="comboStudent" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Student">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
                   <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
                   <ComboBox fx:id="comboLevel" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Level">
                      <VBox.margin>
@@ -102,7 +107,7 @@
                   <Insets bottom="20.0" left="20.0" right="40.0" />
                </padding>
             </LineChart>
-            <Label fx:id="lblChooseMode" styleClass="progress-labels" text="Select a game mode and a level.">
+            <Label fx:id="lblChooseMode" styleClass="progress-labels" text="Select a game mode, user and level.">
                <StackPane.margin>
                   <Insets top="-80.0" />
                </StackPane.margin></Label>
