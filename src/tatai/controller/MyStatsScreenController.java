@@ -16,7 +16,7 @@ import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 
-public class MyStatsScreenController {
+public class MyStatsScreenController extends ScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -33,10 +33,12 @@ public class MyStatsScreenController {
 	@FXML private Label lblNoScores;
 	@FXML private Label lblPlayGames;
 	@FXML private Label lblChooseMode;
+	@FXML private Label lblStatsTitle;
 	
 
 	@FXML
 	public void initialize() {
+		setup();
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
 		loadProgress();
@@ -99,7 +101,7 @@ public class MyStatsScreenController {
 		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 		lblGamesPlayed.setText(String.valueOf(scores.size()));
 
-		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
+		lblStatsTitle.setText(User.getInstance().getName() + "'s Progress");
 		progressChart.getData().clear();
 		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode, level));
 		
@@ -107,6 +109,7 @@ public class MyStatsScreenController {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
+			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(false);
 			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(true);
@@ -124,6 +127,12 @@ public class MyStatsScreenController {
 			lblChooseMode.setVisible(false);
 		}
 
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

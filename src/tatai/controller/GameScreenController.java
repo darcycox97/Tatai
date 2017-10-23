@@ -1,13 +1,12 @@
 package tatai.controller;
 
 import java.io.File;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.FadeTransition;
@@ -42,7 +41,7 @@ import tatai.game.GameFactory;
 import tatai.game.GameMode;
 import tatai.htk.HTKListener;
 
-public class GameScreenController implements HTKListener{
+public class GameScreenController extends ScreenController implements HTKListener{
 	
 	private static final String RECORDING = "Recording";
 	
@@ -71,7 +70,6 @@ public class GameScreenController implements HTKListener{
 	private Timeline countingAnimation;
 	private SimpleDoubleProperty gameDuration;
 
-	@FXML private Button returnHome;
 	@FXML private Button btnRecord;
 	@FXML private Label questionLabel;
 	@FXML private Label lblQuestionNumber;
@@ -103,6 +101,8 @@ public class GameScreenController implements HTKListener{
 
 	@FXML 
 	public void initialize() {
+
+		setup();
 		
 		game = GameFactory.getInstance().getCurrentGame();
 		gamemode = game.getGameMode();
@@ -140,58 +140,6 @@ public class GameScreenController implements HTKListener{
 		}
 		
 		recordingAnimations = getRecordAnimations();
-	}
-
-	@FXML
-	public void homeClicked() {
-		
-	
-		try {
-
-			String toLoad;
-			if (gamemode.equals(GameMode.PRACTICE)) {
-				toLoad = "view/Home.fxml";
-			} else {
-				toLoad = "view/GameMenu.fxml";
-			}
-
-			if (!game.getFinished()) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Exit Confirmation");
-
-				alert.setHeaderText("Are you sure you wish to exit?");
-				alert.setContentText("All progress will be lost.");
-
-				ButtonType buttonTypeYes = new ButtonType("Yes");
-				ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
-
-				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
-
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() != buttonTypeYes){
-					return;
-				} 
-
-			} 
-
-
-			if (recordingAnimations != null) {
-				for (Animation a : recordingAnimations) {
-					a.stop();
-				}
-			}
-
-			if (countingAnimation != null) {
-				countingAnimation.stop();
-			}
-
-			Parent root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource(toLoad));
-			returnHome.getScene().setRoot(root);
-
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
@@ -548,7 +496,9 @@ public class GameScreenController implements HTKListener{
 		String username = User.getInstance().getName();
 		String gamemode = game.getGameMode().toString();
 		String level = game.getDifficulty().toString();
-		String score = String.valueOf(game.getScoreValue());
+	
+		double scoreValue = game.getScoreValue();
+		String score = String.valueOf(scoreValue);
 		
 		String currentLine = CSVFile.getLineInCSV(CSVName.STATISTICS, username);
 		String newLine = currentLine + "," + gamemode + "," + level + "," + score;
@@ -592,8 +542,15 @@ public class GameScreenController implements HTKListener{
 			break;
 		}
 		
-		// depending on game mode, calculate whether the score is a "good score" and display an appropriate message.
-		if (game.getGameMode().equals(GameMode.TIME_ATTACK)) {
+		// Calculate the user's best score to date for the relevant mode and level
+		List<Double> userData = CSVFile.getUserData(username, gamemode, level);
+		double userBest = Double.parseDouble(CSVFile.getBest(userData, gamemode));
+		
+		// depending on game mode, calculate whether the score is a "good score" 
+		// or a personal best and display an appropriate message.
+		if (game.getScoreValue() > userBest) {
+			lblGamePrompts.setText("Ka Pai! Personal Best!");
+		} else if (game.getGameMode().equals(GameMode.TIME_ATTACK)) {
 			if (game.getScoreValue() <= threshold) {
 				lblGamePrompts.setText("Ka Pai! Great score!");
 
@@ -609,6 +566,59 @@ public class GameScreenController implements HTKListener{
 			}
 		}
 
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@FXML
+	public void loadHomeScreen() {
+		
+	
+		try {
+
+			String toLoad = "view/Home.fxml";
+
+			if (!game.getFinished()) {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Exit Confirmation");
+
+				alert.setHeaderText("Are you sure you wish to exit?");
+				alert.setContentText("All progress will be lost.");
+
+				ButtonType buttonTypeYes = new ButtonType("Yes");
+				ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
+
+				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
+
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() != buttonTypeYes){
+					return;
+				} 
+
+			} 
+
+
+			if (recordingAnimations != null) {
+				for (Animation a : recordingAnimations) {
+					a.stop();
+				}
+			}
+
+			if (countingAnimation != null) {
+				countingAnimation.stop();
+			}
+
+			Parent root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource(toLoad));
+			btnHome.getScene().setRoot(root);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

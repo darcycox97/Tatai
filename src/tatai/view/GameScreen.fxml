@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,215 +16,262 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.GameScreenController">
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.GameScreenController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="returnHome" mnemonicParsing="false" onAction="#homeClicked" prefHeight="37.0" prefWidth="115.0" styleClass="home-buttons" text="Go Back" />
-            <HBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="534.0">
+            <AnchorPane layoutX="140.0" prefHeight="600.0" prefWidth="560.0">
                <children>
-                  <Label fx:id="lblScore" alignment="CENTER_RIGHT" text="Score goes here">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets top="5.0" />
-               </padding>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </HBox>
-   </top>
-   <center>
-      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="0.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="957.0" minWidth="10.0" prefWidth="957.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="0.0" prefWidth="0.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <children>
-                  <VBox alignment="CENTER">
-                     <children>
-                        <Label fx:id="lblGamePrompts" contentDisplay="RIGHT" graphicTextGap="0.0" wrapText="true">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblRecordTimer">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </StackPane>
-            <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <children>
-                  <Label fx:id="questionLabel" text="#" wrapText="true">
-                     <font>
-                        <Font size="90.0" />
-                     </font>
-                  </Label>
-                  <VBox fx:id="totalScoreBox" alignment="CENTER" spacing="40.0" visible="false">
-                     <children>
-                        <Label fx:id="lblScoreTitle" text="Total Score:">
-                           <font>
-                              <Font size="42.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblTotalScore" alignment="CENTER" text="Label">
-                           <font>
-                              <Font size="39.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </StackPane>
-            <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-               <children>
-                  <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <StackPane>
-                     <children>
-                        <HBox fx:id="circleBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                  <BorderPane layoutX="-140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+                     <top>
+                        <HBox maxWidth="700.0" minWidth="700.0" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Circle fx:id="circle1" fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                              <HBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="534.0">
+                                 <children>
+                                    <Label fx:id="lblScore" alignment="CENTER_RIGHT" text="Score goes here">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="-115.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
                            </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
                         </HBox>
-                        <Label fx:id="lblNumCorrect" styleClass="label-20px" />
-                     </children>
-                  </StackPane>
+                     </top>
+                     <center>
+                        <GridPane alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="700.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="0.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="0.0" prefWidth="0.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="957.0" minWidth="10.0" prefWidth="957.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="0.0" prefWidth="0.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="0.0" prefWidth="0.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <StackPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                 <children>
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <Label fx:id="lblGamePrompts" contentDisplay="RIGHT" graphicTextGap="0.0" wrapText="true">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblRecordTimer">
+                                             <font>
+                                                <Font size="22.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane prefHeight="353.0" prefWidth="915.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <children>
+                                    <Label fx:id="questionLabel" text="#" wrapText="true">
+                                       <font>
+                                          <Font size="90.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox fx:id="totalScoreBox" alignment="CENTER" spacing="40.0" visible="false">
+                                       <children>
+                                          <Label fx:id="lblScoreTitle" text="Total Score:">
+                                             <font>
+                                                <Font size="42.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblTotalScore" alignment="CENTER" text="Label">
+                                             <font>
+                                                <Font size="39.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </StackPane>
+                              <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                                 <children>
+                                    <Label fx:id="lblQuestionNumber" alignment="CENTER" contentDisplay="CENTER">
+                                       <font>
+                                          <Font size="40.0" />
+                                       </font>
+                                    </Label>
+                                    <StackPane>
+                                       <children>
+                                          <HBox fx:id="circleBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                             <children>
+                                                <Circle fx:id="circle1" fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle2" fill="WHITE" layoutX="489.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle3" fill="WHITE" layoutX="504.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle4" fill="WHITE" layoutX="519.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle5" fill="WHITE" layoutX="534.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle6" fill="WHITE" layoutX="549.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle7" fill="WHITE" layoutX="564.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle8" fill="WHITE" layoutX="579.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle9" fill="WHITE" layoutX="594.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Circle fx:id="circle10" fill="WHITE" layoutX="609.0" layoutY="60.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="lblNumCorrect" styleClass="label-20px" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                     </center>
+                     <bottom>
+                        <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="797.0" minWidth="10.0" prefWidth="688.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="590.0" minWidth="0.0" prefWidth="109.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="72.0" minHeight="9.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <children>
+                                    <Button fx:id="btnNext" mnemonicParsing="false" onAction="#nextQuestion" text="Next" visible="false">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="btnRecord" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startRecording" text="Record">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Button>
+                                    <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="10.0" visible="false">
+                                       <children>
+                                          <Label text="Try Again?">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Label>
+                                          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion" styleClass="icon-buttons">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/tick.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion" styleClass="icon-buttons">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/cross.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="gameFinishedBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0" visible="false">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#playAgain" text="Play Again">
+                                             <font>
+                                                <Font size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#loadHomeScreen" text="Quit Game">
+                                             <font>
+                                                <Font size="19.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <children>
+                                    <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" visible="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/speaker.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btnSkip" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="13.0" prefWidth="61.0" styleClass="home-buttons">
+                                       <graphic>
+                                          <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/skip.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </GridPane>
+                     </bottom>
+                  </BorderPane>
                </children>
-            </VBox>
-         </children>
-      </GridPane>
-   </center>
-   <bottom>
-      <GridPane prefHeight="137.0" prefWidth="1005.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="797.0" minWidth="10.0" prefWidth="688.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="590.0" minWidth="0.0" prefWidth="109.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="63.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="72.0" minHeight="9.0" prefHeight="54.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            </AnchorPane>
+            <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
                <children>
-                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#nextQuestion" text="Next" visible="false">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnRecord" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startRecording" text="Record">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <HBox fx:id="tryAgainBox" alignment="CENTER" spacing="10.0" visible="false">
+                  <VBox alignment="TOP_CENTER" layoutX="19.0" layoutY="86.0" prefHeight="200.0" prefWidth="110.0" spacing="30.0">
                      <children>
-                        <Label text="Try Again?">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                        </Label>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#retryQuestion" styleClass="icon-buttons">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/tick.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadPreviousScreen" prefWidth="110.0" styleClass="navigation-buttons" text="&lt;- Back">
+                           <VBox.margin>
+                              <Insets top="-0.0" />
+                           </VBox.margin>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#nextQuestion" styleClass="icon-buttons">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/cross.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Home">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnGames" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnStats" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#loadHelpScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Help" />
+                        <Button fx:id="btnLogout" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
-                  </HBox>
-                  <HBox fx:id="gameFinishedBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0" visible="false">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#playAgain" text="Play Again">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#homeClicked" text="Quit Game">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
+                  </VBox>
+                  <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/menu.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </StackPane>
-            <StackPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <children>
-                  <Button fx:id="btnPlayBack" alignment="CENTER" mnemonicParsing="false" onAction="#playbackAudio" visible="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/speaker.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnSkip" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="13.0" prefWidth="61.0" styleClass="home-buttons">
-                     <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/skip.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
-               </children>
-            </StackPane>
+            </AnchorPane>
          </children>
-      </GridPane>
-   </bottom>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</StackPane>

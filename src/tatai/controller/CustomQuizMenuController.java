@@ -18,7 +18,7 @@ import tatai.game.GameMode;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 
-public class CustomQuizMenuController {
+public class CustomQuizMenuController extends ScreenController {
 	
 	@FXML private VBox quizBox;
 	@FXML private Button btnGoBack;
@@ -30,6 +30,8 @@ public class CustomQuizMenuController {
 	
 	@FXML
 	public void initialize() {
+		
+		setup();
 		
 		List<String> quizzes = CSVFile.getAllTitles(CSVName.QUIZZES);
 		
@@ -72,6 +74,12 @@ public class CustomQuizMenuController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

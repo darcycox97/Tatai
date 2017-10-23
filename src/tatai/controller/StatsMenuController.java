@@ -8,13 +8,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import tatai.TataiPrototype;
 
-public class StatsMenuController {
+public class StatsMenuController extends ScreenController {
 	
 	@FXML private Button btnMe;
 	@FXML private Button btnClass;
 	@FXML private Button btnHome;
 
-	public void initialize() {}
+	public void initialize() {
+		setup();
+	}
 	
 	@FXML
 	public void loadHomeScreen() {
@@ -47,6 +49,12 @@ public class StatsMenuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

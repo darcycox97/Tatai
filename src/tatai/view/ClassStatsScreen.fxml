@@ -9,94 +9,132 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.ClassStatsScreenController">
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0" BorderPane.alignment="CENTER_LEFT">
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.ClassStatsScreenController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <VBox prefHeight="200.0" spacing="5.0">
+            <AnchorPane layoutX="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="560.0">
                <children>
-                  <Button fx:id="btnHome" minWidth="90.0" mnemonicParsing="false" onAction="#loadHomeScreen" styleClass="home-buttons" text="Home" />
-                  <Button fx:id="btnBack" minWidth="90.0" mnemonicParsing="false" onAction="#loadStatsMenu" stylesheets="@TataiStyle.css" text="Back">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <BorderPane layoutX="-140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+                     <top>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0" BorderPane.alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="lblScore" alignment="CENTER">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane prefHeight="200.0" prefWidth="500.0">
+                                 <children>
+                                    <Label id="leaders-title" layoutX="90.0" layoutY="24.0" text="Class Leaders" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                     <center>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/gold.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/silver.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/bronze.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="-20.0" right="-20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="80.0">
+                                 <children>
+                                    <Label fx:id="lblGoldUser" styleClass="medal-holder-labels" text="Label" />
+                                    <Label fx:id="lblSilverUser" styleClass="medal-holder-labels" text="Label" />
+                                    <Label fx:id="lblBronzeUser" styleClass="medal-holder-labels" text="Label" />
+                                    <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
+                                    <ComboBox fx:id="comboLevel" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Level">
+                                       <VBox.margin>
+                                          <Insets top="-60.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="30.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="-20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="80.0">
+                                 <children>
+                                    <Label fx:id="lblGoldScore" styleClass="medal-holder-labels" text="Label" />
+                                    <Label fx:id="lblSilverScore" styleClass="medal-holder-labels" text="Label" />
+                                    <Label fx:id="lblBronzeScore" styleClass="medal-holder-labels" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="30.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="40.0" top="40.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </center>
+                  </BorderPane>
                </children>
-            </VBox>
-            <Label fx:id="lblScore" alignment="CENTER">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <AnchorPane prefHeight="200.0" prefWidth="500.0">
+            </AnchorPane>
+            <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
                <children>
-                  <Label id="leaders-title" layoutX="-25.0" layoutY="24.0" text="Class Leaders" />
+                  <VBox alignment="TOP_CENTER" layoutX="19.0" layoutY="86.0" prefHeight="200.0" prefWidth="110.0" spacing="30.0">
+                     <children>
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadPreviousScreen" prefWidth="110.0" styleClass="navigation-buttons" text="&lt;- Back">
+                           <VBox.margin>
+                              <Insets top="-0.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Home">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnGames" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnStats" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#loadHelpScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Help" />
+                        <Button fx:id="btnLogout" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/menu.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </HBox>
-   </top>
-   <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-               <children>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/gold.png" />
-                     </image></ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/silver.png" />
-                     </image></ImageView>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/bronze.png" />
-                     </image></ImageView>
-               </children>
-               <HBox.margin>
-                  <Insets left="-20.0" right="-20.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="80.0">
-               <children>
-                  <Label fx:id="lblGoldUser" styleClass="medal-holder-labels" text="Label" />
-                  <Label fx:id="lblSilverUser" styleClass="medal-holder-labels" text="Label" />
-                  <Label fx:id="lblBronzeUser" styleClass="medal-holder-labels" text="Label" />
-                  <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
-                  <ComboBox fx:id="comboLevel" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Level">
-                     <VBox.margin>
-                        <Insets top="-60.0" />
-                     </VBox.margin>
-                  </ComboBox>
-               </children>
-               <padding>
-                  <Insets top="30.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets left="-20.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="80.0">
-               <children>
-                  <Label fx:id="lblGoldScore" styleClass="medal-holder-labels" text="Label" />
-                  <Label fx:id="lblSilverScore" styleClass="medal-holder-labels" text="Label" />
-                  <Label fx:id="lblBronzeScore" styleClass="medal-holder-labels" text="Label" />
-               </children>
-               <padding>
-                  <Insets top="30.0" />
-               </padding>
-            </VBox>
-         </children>
-         <BorderPane.margin>
-            <Insets left="40.0" top="40.0" />
-         </BorderPane.margin>
-      </HBox>
-   </center>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</StackPane>

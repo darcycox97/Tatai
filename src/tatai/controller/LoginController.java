@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
@@ -129,7 +130,7 @@ public class LoginController {
 			if (passwordCorrect) {
 				// load teacher menu
 				try {
-					BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
+					StackPane root = (StackPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 					Scene scene = new Scene(root,700,600);
 					((Stage)btnLogin.getScene().getWindow()).setScene(scene);
 				} catch (IOException e) {

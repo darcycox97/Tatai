@@ -22,7 +22,7 @@ import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 
-public class QuizCreatorController {
+public class QuizCreatorController extends ScreenController {
 
 	private static final int NUM_EQUATIONS = 10;
 	
@@ -59,6 +59,8 @@ public class QuizCreatorController {
 	
 	@FXML
 	public void initialize() {
+		
+		setup();
 		
 		// initialize hashmap of equations (the key is the equation number)
 		eqnMap.put(1, eqn1);
@@ -251,6 +253,13 @@ public class QuizCreatorController {
 				validityMap.put(observed, false); // update validity of this text field
 			}
 		}
+	}
+
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

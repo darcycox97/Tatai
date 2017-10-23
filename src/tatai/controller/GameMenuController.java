@@ -10,37 +10,28 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+
 import tatai.TataiPrototype;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
 
-public class GameMenuController {
+public class GameMenuController extends ScreenController {
 	
 	@FXML private ToggleGroup toggleDifficulty;
 	@FXML private RadioButton toggleEasy;
 	@FXML private RadioButton toggleHard;
 	@FXML private Tooltip tooltipTest;
 	@FXML private Label lblHelp;
-	@FXML private Button btnHome;
 	@FXML private Button btnClassic;
 	@FXML private Button btnArcade;
 	@FXML private Button btnTimeAttack;
 	@FXML private Button btnCustom;
 	@FXML private Button btnTutorial;
 
-	public void initialize() {}
-	
 	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+	public void initialize() {
+		setup();
 	}
 	
 	@FXML
@@ -116,16 +107,10 @@ public class GameMenuController {
 			e.printStackTrace();
 		}
 	}
-	
-	@FXML
-	public void openTutorial() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TutorialScreen.fxml"));
-			Parent root = loader.load();
-			btnTutorial.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
 		
 	}
 }

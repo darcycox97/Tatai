@@ -17,7 +17,7 @@ import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
 
-public class TeacherStatsScreenController {
+public class TeacherStatsScreenController extends ScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -33,11 +33,11 @@ public class TeacherStatsScreenController {
 	@FXML private Label lblAverageScore;
 	@FXML private Label lblGamesPlayed;
 	@FXML private Label lblNoScores;
-	@FXML private Label lblPlayGames;
 	@FXML private Label lblChooseMode;
 
 	@FXML
 	public void initialize() {
+		setup();
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
 		comboStudent.getItems().addAll(CSVFile.getAllTitles(CSVName.STATISTICS));
@@ -112,23 +112,25 @@ public class TeacherStatsScreenController {
 			lblAverageScore.setText("--");
 			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(false);
-			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(true);
 		} else if (scores.size() == 0) {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
-			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(true);
-			lblPlayGames.setVisible(true);
 			lblChooseMode.setVisible(false);
 		} else {
 			progressChart.setVisible(true);
 			lblNoScores.setVisible(false);
-			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(false);
 		}
 
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

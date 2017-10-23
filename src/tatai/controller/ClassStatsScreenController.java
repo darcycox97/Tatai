@@ -16,7 +16,7 @@ import tatai.statistics.CSVFile;
 import tatai.statistics.Medallist;
 import tatai.statistics.Medallist.MedalType;
 
-public class ClassStatsScreenController {
+public class ClassStatsScreenController extends ScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -40,6 +40,8 @@ public class ClassStatsScreenController {
 	@FXML
 	public void initialize() {
 
+		setup();
+		
 		lblGoldUser.setText("--");
 		lblGoldScore.setText("--");
 		lblSilverUser.setText("--");
@@ -136,6 +138,12 @@ public class ClassStatsScreenController {
 		lblSilverScore.setText(medallists[1].getScore());
 		lblBronzeScore.setText(medallists[2].getScore());
 
+	}
+
+	@Override
+	public void loadPreviousScreen() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

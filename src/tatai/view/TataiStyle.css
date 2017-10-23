@@ -92,6 +92,18 @@
 	-fx-min-width : 280px;
 }
 
+.game-menu-buttons {
+	-fx-font-size : 28px;
+	-fx-min-width : 200px;
+	-fx-max-width : 150px;
+	-fx-min-height : 150px;
+}
+
+.navigation-buttons {
+	-fx-font-size : 17px;
+	-fx-min-width : 110px;
+}
+
 .custom-question-label {
 	-fx-font-size : 18px;
 }
