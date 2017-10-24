@@ -1,16 +1,12 @@
 package tatai.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -97,33 +93,6 @@ public class QuizCreatorController extends ScreenController {
 			// listen to each text field to check for valid input
 			TextField addTo = eqnMap.get(i);
 			addTo.textProperty().addListener(new EquationValidifier(i));
-		}
-	}
-	
-	@FXML public void loadTeacherMenu() {
-		
-		setPreviousScreen();
-		
-		try {
-			
-			Alert confirm = new Alert(
-				AlertType.CONFIRMATION,
-				"Are you sure you want to go back?\n This quiz will not be saved.",
-				ButtonType.YES,
-				ButtonType.NO
-			);
-			
-			Optional<ButtonType> result = confirm.showAndWait();
-			if (!(result.isPresent() && result.get() == ButtonType.YES)) {
-				return;
-			}
-			
-			
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
-			Parent root = loader.load();
-			btnGoBack.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	

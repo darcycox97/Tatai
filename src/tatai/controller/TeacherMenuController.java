@@ -22,56 +22,58 @@ public class TeacherMenuController extends ScreenController {
 	@FXML private MenuButton menuLogout;
 	@FXML private Button btnCreateQuiz;
 	@FXML private Button btnMainStats;
-	
+
 	@FXML
 	public void initialize() {
-		
+
 		setup();
-		
+
 		// initialize log out menu item
 		menuLogout.setText("Teacher");
 		menuLogout.getItems().clear();
-		
+
 		MenuItem logout = new MenuItem("Log Out");
 		logout.setOnAction(e -> {
 			// ask for log out confirmation
 			Alert confirm = new Alert(
-				AlertType.WARNING,
-				"Are you sure you want to log out?",
-				ButtonType.YES,
-				ButtonType.NO
-			);
-			
+					AlertType.WARNING,
+					"Are you sure you want to log out?",
+					ButtonType.YES,
+					ButtonType.NO
+					);
+
 			Optional<ButtonType> result = confirm.showAndWait();
-			
+
 			if (result.isPresent() && result.get().equals(ButtonType.YES)) {
 				try {	
 					FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Login.fxml"));
 					Parent root = loader.load();
 					Scene scene = new Scene(root,700,300);
 					((Stage)menuLogout.getScene().getWindow()).setScene(scene);
-					
+
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			} else {
 				return; // user does not wish to log out
 			}
 		});
-		
+
 		menuLogout.getItems().add(logout);
 	}
-	
+
 	@FXML
 	public void openQuizCreator() {
-		setPreviousScreen();
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
-			Parent root = loader.load();
-			btnCreateQuiz.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (confirmExit()) {
+			setPreviousScreen();
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
+				Parent root = loader.load();
+				btnCreateQuiz.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -79,5 +81,5 @@ public class TeacherMenuController extends ScreenController {
 	protected Screen getScreen() {
 		return Screen.TEACHER_MENU;
 	}
-	
+
 }

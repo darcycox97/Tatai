@@ -52,7 +52,6 @@ public class CustomQuizMenuController extends ScreenController {
 	@FXML
 	public void startQuiz() {
 		
-		confirmExit();
 		setPreviousScreen();
 		
 		if ((quizToggle != null) && (quizToggle.getSelectedToggle() != null)) {

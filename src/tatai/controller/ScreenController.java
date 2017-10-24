@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tatai.TataiPrototype;
+import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
@@ -32,7 +33,7 @@ public abstract class ScreenController {
 
 	protected static Screen CURRENT_SCREEN = Screen.HOME;
 	protected static Screen PREVIOUS_SCREEN = Screen.HOME;
-	
+
 	@FXML protected Button btnBack;
 	@FXML protected Button btnHome;
 	@FXML protected Button btnGames;
@@ -105,8 +106,7 @@ public abstract class ScreenController {
 			keyFrames.add(new KeyFrame(Duration.millis(300), new KeyValue(btnPractice.visibleProperty(), true)));
 		}
 
-		if (PREVIOUS_SCREEN.equals(Screen.GAME) || PREVIOUS_SCREEN.equals(Screen.HOME)){
-
+		if (PREVIOUS_SCREEN.equals(Screen.GAME) || PREVIOUS_SCREEN.equals(Screen.HOME)) {
 			keyFrames.add(new KeyFrame(Duration.millis(300), new KeyValue(btnBack.visibleProperty(), false)));
 
 		} else {
@@ -151,28 +151,30 @@ public abstract class ScreenController {
 
 	@FXML
 	public void loadHomeScreen() {
-		
-		confirmExit();
-		setPreviousScreen();
 
-		String toLoad = null;
-		if (User.getInstance().getName().equals("Teacher")) {
-			toLoad = "view/TeacherMenu.fxml";
-		} else {
-			toLoad = "view/Home.fxml";
-		}
+		if (confirmExit()) {
+			setPreviousScreen();
 
-		try {
+			String toLoad = null;
+			if (User.getInstance().getName().equals("Teacher")) {
+				toLoad = "view/TeacherMenu.fxml";
+			} else {
+				toLoad = "view/Home.fxml";
+			}
 
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource(toLoad));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource(toLoad));
+				Parent root = loader.load();
+				btnHome.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
-	protected void confirmExit() {
+	protected boolean confirmExit() {
+		boolean exit = true;
 		if (CURRENT_SCREEN.equals(Screen.GAME) || CURRENT_SCREEN.equals(Screen.CREATE_QUIZ)) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Exit Confirmation");
@@ -187,10 +189,10 @@ public abstract class ScreenController {
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() != buttonTypeYes){
-				return;
-			} 
-
-		} 
+				return false;
+			}
+		}
+		return exit; 
 	}
 
 	protected void setPreviousScreen() {
@@ -199,30 +201,32 @@ public abstract class ScreenController {
 
 	@FXML
 	public void loadPreviousScreen() {
-		confirmExit();
-		String toLoad = getFXMLString(PREVIOUS_SCREEN);
-		setPreviousScreen();
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource(toLoad));
-			Parent root = loader.load();
-			btnBack.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (confirmExit()) {
+			String toLoad = getFXMLString(PREVIOUS_SCREEN);
+			setPreviousScreen();
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource(toLoad));
+				Parent root = loader.load();
+				btnBack.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@FXML
 	public void loadGameScreen() {
 
-		confirmExit();
-		setPreviousScreen();
+		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.GAME_MENU)) {
+			setPreviousScreen();
 
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
+				Parent root = loader.load();
+				btnHome.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -230,36 +234,49 @@ public abstract class ScreenController {
 	@FXML
 	public void loadPracticeScreen() {
 
-		confirmExit();
-		setPreviousScreen();
+		boolean load = true;
 
-		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
+		if (CURRENT_SCREEN.equals(Screen.GAME)) {
+			if (GameFactory.getInstance().getCurrentGame().getGameMode().equals(GameMode.PRACTICE)) {
+				load = false;
+			}
+		}
 
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
-			Parent root = loader.load();
-			btnGames.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (load == true) {
+			if (confirmExit()) {
+
+				setPreviousScreen();
+				GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
+
+				try {
+					FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
+					Parent root = loader.load();
+					btnGames.getScene().setRoot(root);
+				} catch (IOException e) {
+					e.printStackTrace();
+
+				}
+			}
 		}
 	}
 
 	@FXML
 	public void loadStatsScreen() {
-		
-		confirmExit();
-		setPreviousScreen();
+
+		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.STATS_MENU)) {
+			setPreviousScreen();
 
 
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
-			if (User.getInstance().getName().equals("Teacher")) {
-				loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherStatsScreen.fxml"));
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
+				if (User.getInstance().getName().equals("Teacher")) {
+					loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherStatsScreen.fxml"));
+				}
+				Parent root = loader.load();
+				btnHome.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 	}
@@ -267,14 +284,16 @@ public abstract class ScreenController {
 	@FXML
 	public void loadCreateScreen() {
 
-		setPreviousScreen();
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (confirmExit()) {
+			setPreviousScreen();
+
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
+				Parent root = loader.load();
+				btnHome.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -282,14 +301,16 @@ public abstract class ScreenController {
 	@FXML
 	public void loadHelpScreen() {
 
-		setPreviousScreen();
+		if (confirmExit()) {
+			setPreviousScreen();
 
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TutorialScreen.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TutorialScreen.fxml"));
+				Parent root = loader.load();
+				btnHome.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
