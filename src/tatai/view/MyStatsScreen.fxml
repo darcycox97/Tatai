@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,14 +32,19 @@
                                     <Insets left="80.0" top="15.0" />
                                  </HBox.margin>
                               </Label>
-                              <VBox prefHeight="200.0" prefWidth="190.0">
+                              <VBox prefHeight="200.0" prefWidth="190.0" spacing="5.0">
                                  <children>
                                     <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
-                                    <ComboBox fx:id="comboLevel" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Level">
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </ComboBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <RadioButton fx:id="btnEasy" mnemonicParsing="false" styleClass="label-15px" text="Easy">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="difficultyToggle" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="btnHard" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="label-15px" text="Hard" toggleGroup="$difficultyToggle" />
+                                       </children>
+                                    </HBox>
                                  </children>
                                  <HBox.margin>
                                     <Insets />

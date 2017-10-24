@@ -5,6 +5,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import tatai.statistics.CSVFile;
 import tatai.statistics.Medallist;
 import tatai.statistics.Medallist.MedalType;
@@ -16,7 +19,9 @@ public class ClassStatsScreenController extends ScreenController {
 	@FXML private NumberAxis xAxis;
 	@FXML private NumberAxis yAxis;
 	@FXML private ComboBox<String> comboGamemode;
-	@FXML private ComboBox<String> comboLevel;
+	@FXML private ToggleGroup difficultyToggle;
+	@FXML private RadioButton btnEasy;
+	@FXML private RadioButton btnHard;
 
 	@FXML private Label lblFirstPlace;
 	@FXML private Label lblSecondPlace;
@@ -42,13 +47,15 @@ public class ClassStatsScreenController extends ScreenController {
 		lblBronzeScore.setText("--");
 
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
-		comboLevel.getItems().addAll("Easy", "Hard");
+		
+		// update scores whenever new toggle is selected
+		difficultyToggle.selectedToggleProperty().addListener(e -> loadBestScores());
 	}
 
 	@FXML public void loadBestScores() {
 
 		if (comboGamemode.getSelectionModel().getSelectedItem() != null) {
-			if (comboLevel.getSelectionModel().getSelectedItem() != null) {
+			if (difficultyToggle.getSelectedToggle() != null) {
 
 				Medallist[] medallists = new Medallist[3];
 
@@ -66,7 +73,7 @@ public class ClassStatsScreenController extends ScreenController {
 		String selectedMode = comboGamemode.getSelectionModel().getSelectedItem();
 		String gamemode = null;
 
-		String selectedLevel = comboLevel.getSelectionModel().getSelectedItem();
+		Toggle selectedLevel = difficultyToggle.getSelectedToggle();
 		String level = null;
 
 		if (selectedMode.equals("Classic")) {
@@ -77,9 +84,9 @@ public class ClassStatsScreenController extends ScreenController {
 			gamemode = "ARCADE";
 		}
 
-		if (selectedLevel.equals("Easy")) {
+		if (selectedLevel.equals(btnEasy)) {
 			level = "EASY";
-		} else if (selectedLevel.equals("Hard")) {
+		} else if (selectedLevel.equals(btnHard)) {
 			level = "HARD";
 		}
 

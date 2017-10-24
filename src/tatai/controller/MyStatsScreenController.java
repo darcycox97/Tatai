@@ -8,6 +8,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
 import tatai.view.Screen;
@@ -21,7 +24,9 @@ public class MyStatsScreenController extends ScreenController {
 	@FXML private Button btnBack;
 	
 	@FXML private ComboBox<String> comboGamemode;
-	@FXML private ComboBox<String> comboLevel;
+	@FXML private ToggleGroup difficultyToggle;
+	@FXML private RadioButton btnEasy;
+	@FXML private RadioButton btnHard;
 	
 	@FXML private Label lblBestScore;
 	@FXML private Label lblAverageScore;
@@ -36,8 +41,10 @@ public class MyStatsScreenController extends ScreenController {
 	public void initialize() {
 		setup();
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
-		comboLevel.getItems().addAll("Easy", "Hard");
 		loadProgress();
+		
+		// ensure data is updated when toggle is changed
+		difficultyToggle.selectedToggleProperty().addListener(e -> loadProgress());
 	}
 
 	@FXML
@@ -48,7 +55,7 @@ public class MyStatsScreenController extends ScreenController {
 		String level = null;
 
 		String selectedMode = comboGamemode.getSelectionModel().getSelectedItem();
-		String selectedLevel = comboLevel.getSelectionModel().getSelectedItem();
+		Toggle selectedLevel = difficultyToggle.getSelectedToggle();
 
 		if (selectedMode == null) {
 		} else {
@@ -63,9 +70,9 @@ public class MyStatsScreenController extends ScreenController {
 		
 		if (selectedLevel == null) {
 		} else {
-			if (selectedLevel.equals("Easy")) {
+			if (selectedLevel.equals(btnEasy)) {
 				level = "EASY";
-			} else if (selectedLevel.equals("Hard")) {
+			} else if (selectedLevel.equals(btnHard)) {
 				level = "HARD";
 			}
 		}
