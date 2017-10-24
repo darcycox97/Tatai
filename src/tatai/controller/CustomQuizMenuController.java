@@ -55,7 +55,7 @@ public class CustomQuizMenuController extends ScreenController {
 		confirmExit();
 		setPreviousScreen();
 		
-		if (quizToggle.getSelectedToggle() != null) {
+		if ((quizToggle != null) && (quizToggle.getSelectedToggle() != null)) {
 			String quizName = (String) quizToggle.getSelectedToggle().getUserData();
 			GameFactory.getInstance().setCurrentGame(GameMode.CUSTOM, GameDifficulty.EASY, quizName);
 

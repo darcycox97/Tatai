@@ -101,6 +101,7 @@ public class GameScreenController extends ScreenController implements HTKListene
 		gamemode = game.getGameMode();
 		
 		lblScore.setText("");
+		lblGamePrompts.setText("");
 		recordView(); // put gui into ready to record state
 		displayQuestion(game.nextQuestion());
 		
