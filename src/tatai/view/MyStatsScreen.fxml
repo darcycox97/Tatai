@@ -6,116 +6,178 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.MyStatsScreenController">
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.MyStatsScreenController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <VBox prefHeight="200.0" spacing="5.0">
+            <AnchorPane layoutX="140.0" prefHeight="600.0" prefWidth="560.0" styleClass="root" stylesheets="@TataiStyle.css">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="90.0" styleClass="home-buttons" text="Home" />
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadStatsMenu" prefWidth="90.0" stylesheets="@TataiStyle.css" text="Back">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <BorderPane layoutX="-140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+                     <top>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="lblStatsTitle" maxWidth="400.0" prefWidth="400.0" styleClass="label-30px" stylesheets="@TataiStyle.css" text="User Progress Title">
+                                 <HBox.margin>
+                                    <Insets left="80.0" top="15.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <VBox prefHeight="200.0" prefWidth="190.0">
+                                 <children>
+                                    <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
+                                    <ComboBox fx:id="comboLevel" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Level">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <Label fx:id="lblScore" alignment="CENTER">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                     <right>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label styleClass="radio-button" text="Best Score">
+                                 <VBox.margin>
+                                    <Insets top="35.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblBestScore" styleClass="login-prompts" text="Label">
+                                 <VBox.margin>
+                                    <Insets top="-5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="40.0" />
+                                 </padding>
+                              </Label>
+                              <Label styleClass="radio-button" text="Average" />
+                              <Label fx:id="lblAverageScore" styleClass="login-prompts" text="Label">
+                                 <VBox.margin>
+                                    <Insets top="-5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="40.0" />
+                                 </padding>
+                              </Label>
+                              <Label styleClass="radio-button" text="Games Played" />
+                              <Label fx:id="lblGamesPlayed" styleClass="login-prompts" text="Label">
+                                 <VBox.margin>
+                                    <Insets top="-5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                           <BorderPane.margin>
+                              <Insets left="-20.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </right>
+                     <center>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="550.0" verticalGridLinesVisible="false">
+                                <xAxis>
+                                  <NumberAxis label="Games" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="1000.0" fx:id="xAxis" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis fx:id="yAxis" label="Score" minorTickCount="0" side="LEFT" tickLabelGap="1.0" tickUnit="2.0" upperBound="20.0" />
+                                </yAxis>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="40.0" />
+                                 </padding>
+                                 <StackPane.margin>
+                                    <Insets left="-0.0" />
+                                 </StackPane.margin>
+                              </LineChart>
+                              <Label fx:id="lblChooseMode" styleClass="progress-labels" text="Select a game mode and a level.">
+                                 <StackPane.margin>
+                                    <Insets top="-80.0" />
+                                 </StackPane.margin>
+                              </Label>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="0.0">
+                                 <children>
+                                    <Label fx:id="lblNoScores" styleClass="progress-labels" text="No scores yet!">
+                                       <VBox.margin>
+                                          <Insets top="-100.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="lblPlayGames" styleClass="progress-labels" text="Play games to track your progress." />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                     </center>
+                  </BorderPane>
                </children>
-            </VBox>
-            <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <VBox prefHeight="200.0" prefWidth="190.0">
+            </AnchorPane>
+            <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
                <children>
-                  <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
-                  <ComboBox fx:id="comboLevel" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Level">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </ComboBox>
+                  <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/menu.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane layoutX="15.0" layoutY="80.0" prefHeight="500.0" prefWidth="110.0">
+                     <children>
+                        <Button fx:id="btnBack" layoutY="60.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadPreviousScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefHeight="40.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnGames" layoutY="140.0" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
+                        <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </VBox>
-            <Label fx:id="lblScore" alignment="CENTER">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
+            </AnchorPane>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </HBox>
-   </top>
-   <right>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label styleClass="radio-button" text="Best Score">
-               <VBox.margin>
-                  <Insets top="35.0" />
-               </VBox.margin></Label>
-            <Label fx:id="lblBestScore" styleClass="login-prompts" text="Label">
-               <VBox.margin>
-                  <Insets top="-5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="40.0" />
-               </padding>
-            </Label>
-            <Label styleClass="radio-button" text="Average" />
-            <Label fx:id="lblAverageScore" styleClass="login-prompts" text="Label">
-               <VBox.margin>
-                  <Insets top="-5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="40.0" />
-               </padding>
-            </Label>
-            <Label styleClass="radio-button" text="Games Played" />
-            <Label fx:id="lblGamesPlayed" styleClass="login-prompts" text="Label">
-               <VBox.margin>
-                  <Insets top="-5.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-         <padding>
-            <Insets right="50.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets left="-20.0" />
-         </BorderPane.margin>
-      </VBox>
-   </right>
-   <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false">
-              <xAxis>
-                <NumberAxis label="Games" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="1000.0" fx:id="xAxis" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis fx:id="yAxis" label="Score" minorTickCount="0" side="LEFT" tickLabelGap="1.0" tickUnit="2.0" upperBound="20.0" />
-              </yAxis>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="40.0" />
-               </padding>
-            </LineChart>
-            <Label fx:id="lblChooseMode" styleClass="progress-labels" text="Select a game mode and a level.">
-               <StackPane.margin>
-                  <Insets top="-80.0" />
-               </StackPane.margin></Label>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label fx:id="lblNoScores" styleClass="progress-labels" text="No scores yet!">
-                     <VBox.margin>
-                        <Insets top="-100.0" />
-                     </VBox.margin></Label>
-                  <Label fx:id="lblPlayGames" styleClass="progress-labels" text="Play games to track your progress." />
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-   </center>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</StackPane>

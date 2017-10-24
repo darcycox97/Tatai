@@ -1,23 +1,18 @@
 package tatai.controller;
 
-import java.io.IOException;
-
-
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.view.Screen;
 
-public class TeacherStatsScreenController {
+public class TeacherStatsScreenController extends ScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -33,38 +28,16 @@ public class TeacherStatsScreenController {
 	@FXML private Label lblAverageScore;
 	@FXML private Label lblGamesPlayed;
 	@FXML private Label lblNoScores;
-	@FXML private Label lblPlayGames;
 	@FXML private Label lblChooseMode;
 
 	@FXML
 	public void initialize() {
+		setup();
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
 		comboStudent.getItems().addAll(CSVFile.getAllTitles(CSVName.STATISTICS));
 		comboStudent.getSelectionModel().selectFirst();
 		loadProgress();
-	}
-
-	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	public void loadStatsMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
@@ -112,23 +85,24 @@ public class TeacherStatsScreenController {
 			lblAverageScore.setText("--");
 			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(false);
-			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(true);
 		} else if (scores.size() == 0) {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
-			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(true);
-			lblPlayGames.setVisible(true);
 			lblChooseMode.setVisible(false);
 		} else {
 			progressChart.setVisible(true);
 			lblNoScores.setVisible(false);
-			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(false);
 		}
 
+	}
+
+	@Override
+	protected Screen getScreen() {
+		return Screen.TEACHER_STATS;
 	}
 
 }

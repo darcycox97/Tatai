@@ -5,43 +5,107 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.TeacherMenuController">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="70.0" BorderPane.alignment="CENTER">
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.TeacherMenuController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <VBox alignment="TOP_CENTER" spacing="40.0">
+            <AnchorPane layoutX="140.0" prefHeight="600.0" prefWidth="560.0">
                <children>
-                  <Label alignment="CENTER" styleClass="label-50px" text="Teacher Mode" />
-                  <Label styleClass="label-20px" text="View classroom stats or create custom quizzes" />
+                  <BorderPane layoutX="-140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+                     <center>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="70.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox alignment="TOP_CENTER" spacing="40.0">
+                                 <children>
+                                    <Label alignment="CENTER" styleClass="label-50px" text="Teacher Mode" />
+                                    <Label styleClass="label-20px" text="View classroom stats or create custom quizzes" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+                                 <children>
+                                    <Button fx:id="btnMainStats" mnemonicParsing="false" onAction="#loadStatsScreen" styleClass="teacher-menu-buttons" text="Classroom Stats" />
+                                    <Button fx:id="btnMainCreateQuiz1" mnemonicParsing="false" onAction="#openQuizCreator" styleClass="teacher-menu-buttons" text="Create Quiz" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="-20.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <BorderPane.margin>
+                              <Insets top="20.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </center>
+                     <top>
+                        <MenuButton fx:id="menuLogout" mnemonicParsing="false" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                           <BorderPane.margin>
+                              <Insets right="20.0" top="20.0" />
+                           </BorderPane.margin>
+                        </MenuButton>
+                     </top>
+                  </BorderPane>
                </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="100.0">
+            </AnchorPane>
+            <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
                <children>
-                  <Button fx:id="btnStats" mnemonicParsing="false" onAction="#openClassStats" styleClass="main-buttons" text="Classroom Stats" />
-                  <Button fx:id="btnCreateQuiz" mnemonicParsing="false" onAction="#openQuizCreator" styleClass="main-buttons" text="Create Quiz" />
+                  <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/menu.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane layoutX="15.0" layoutY="80.0" prefHeight="500.0" prefWidth="110.0">
+                     <children>
+                        <Button fx:id="btnBack" layoutY="60.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadPreviousScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefHeight="40.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnGames" layoutY="140.0" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" onAction="#loadCreateScreen" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
+                        <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </VBox>
+            </AnchorPane>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <BorderPane.margin>
-            <Insets top="20.0" />
-         </BorderPane.margin>
-      </VBox>
-   </center>
-   <top>
-      <MenuButton fx:id="menuLogout" mnemonicParsing="false" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <BorderPane.margin>
-            <Insets right="20.0" top="20.0" />
-         </BorderPane.margin>
-      </MenuButton>
-   </top>
-</BorderPane>
+      </AnchorPane>
+   </children>
+</StackPane>

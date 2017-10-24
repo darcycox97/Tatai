@@ -22,8 +22,9 @@ import javafx.scene.image.ImageView;
 import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.view.Screen;
 
-public class QuizCreatorController {
+public class QuizCreatorController extends ScreenController {
 
 	private static final int NUM_EQUATIONS = 10;
 	
@@ -60,6 +61,8 @@ public class QuizCreatorController {
 	
 	@FXML
 	public void initialize() {
+		
+		setup();
 		
 		// initialize hashmap of equations (the key is the equation number)
 		eqnMap.put(1, eqn1);
@@ -98,6 +101,8 @@ public class QuizCreatorController {
 	}
 	
 	@FXML public void loadTeacherMenu() {
+		
+		setPreviousScreen();
 		
 		try {
 			
@@ -266,6 +271,11 @@ public class QuizCreatorController {
 				validityMap.put(observed, false); // update validity of this text field
 			}
 		}
+	}
+	
+	@Override
+	protected Screen getScreen() {
+		return Screen.CREATE_QUIZ;
 	}
 	
 }

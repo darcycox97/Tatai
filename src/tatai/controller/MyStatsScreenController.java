@@ -1,22 +1,18 @@
 package tatai.controller;
 
-import java.io.IOException;
-
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
+import tatai.view.Screen;
 
-public class MyStatsScreenController {
+public class MyStatsScreenController extends ScreenController {
 
 	@FXML private LineChart<String,Double> progressChart;
 	@FXML private NumberAxis xAxis;
@@ -33,35 +29,15 @@ public class MyStatsScreenController {
 	@FXML private Label lblNoScores;
 	@FXML private Label lblPlayGames;
 	@FXML private Label lblChooseMode;
+	@FXML private Label lblStatsTitle;
 	
 
 	@FXML
 	public void initialize() {
+		setup();
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
 		loadProgress();
-	}
-
-	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	public void loadStatsMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
@@ -99,7 +75,7 @@ public class MyStatsScreenController {
 		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 		lblGamesPlayed.setText(String.valueOf(scores.size()));
 
-		progressChart.setTitle(User.getInstance().getName() + "'s Progress");
+		lblStatsTitle.setText(User.getInstance().getName() + "'s Progress");
 		progressChart.getData().clear();
 		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode, level));
 		
@@ -107,6 +83,7 @@ public class MyStatsScreenController {
 			progressChart.setVisible(false);
 			lblBestScore.setText("--");
 			lblAverageScore.setText("--");
+			lblGamesPlayed.setText("--");
 			lblNoScores.setVisible(false);
 			lblPlayGames.setVisible(false);
 			lblChooseMode.setVisible(true);
@@ -124,6 +101,11 @@ public class MyStatsScreenController {
 			lblChooseMode.setVisible(false);
 		}
 
+	}
+
+	@Override
+	protected Screen getScreen() {
+		return Screen.MY_STATS;
 	}
 
 }

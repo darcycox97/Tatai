@@ -26,8 +26,7 @@ public class HTK {
 	 * The object parameter 
 	 */
 	public void recordQuestion(Question q, HTKListener l) {
-		
-		System.out.println("Answer: " + q.getValue());
+
 		recordService = new Service<Boolean>(){
 			@Override
 			protected Task<Boolean> createTask() {

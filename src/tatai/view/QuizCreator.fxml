@@ -10,144 +10,201 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.QuizCreatorController">
-   <top>
-      <AnchorPane>
+<StackPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.QuizCreatorController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <HBox alignment="CENTER" layoutX="212.0" spacing="20.0">
+            <AnchorPane layoutX="140.0" prefHeight="600.0" prefWidth="560.0">
                <children>
-                  <Label styleClass="label-30px" text="Custom Quiz">
-                     <padding>
-                        <Insets bottom="20.0" top="20.0" />
-                     </padding>
-                  </Label>
-                  <Label>
-                     <graphic>
-                        <ImageView fitHeight="62.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/help.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip height="150.0" text="Enter ten equations into the text fields.&#10;No need to provide the answer, just type the equation.&#10;For example &quot;6 - 3&quot;.&#10;Equations must have an answer from 1 to 99.&#10;" width="150.0" />
-                     </tooltip>
-                  </Label>
+                  <BorderPane layoutX="-140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+                     <top>
+                        <AnchorPane>
+                           <children>
+                              <HBox alignment="CENTER" layoutX="212.0" spacing="20.0">
+                                 <children>
+                                    <Label styleClass="label-30px" text="Custom Quiz">
+                                       <padding>
+                                          <Insets bottom="20.0" top="20.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label>
+                                       <graphic>
+                                          <ImageView fitHeight="62.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/help.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip height="150.0" text="Enter ten equations into the text fields.&#10;No need to provide the answer, just type the equation.&#10;For example &quot;6 - 3&quot;.&#10;Equations must have an answer from 1 to 99.&#10;" width="150.0" />
+                                       </tooltip>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <VBox prefHeight="544.0" prefWidth="350.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 1" />
+                                                <TextField fx:id="eqn1" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl1" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 3" />
+                                                <TextField fx:id="eqn3" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl3" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 5" />
+                                                <TextField fx:id="eqn5" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl5" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 7" />
+                                                <TextField fx:id="eqn7" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl7" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 9" />
+                                                <TextField fx:id="eqn9" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl9" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="350.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 2" />
+                                                <TextField fx:id="eqn2" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl2" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 4" />
+                                                <TextField fx:id="eqn4" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl4" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 6" />
+                                                <TextField fx:id="eqn6" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl6" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 8" />
+                                                <TextField fx:id="eqn8" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl8" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
+                                             <children>
+                                                <Label minWidth="130.0" styleClass="custom-question-label" text="Question 10" />
+                                                <TextField fx:id="eqn10" maxWidth="120.0" promptText="Example: a + b" />
+                                                <Label fx:id="lbl10" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="30.0" right="30.0" />
+                           </padding>
+                        </HBox>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label styleClass="custom-question-label" text="Enter Quiz Name:" />
+                              <TextField fx:id="txtQuizName">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="btnSaveQuiz" mnemonicParsing="false" onAction="#saveQuiz" text="Save Quiz">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
                </children>
-            </HBox>
-            <Button fx:id="btnGoBack" layoutX="57.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadTeacherMenu" styleClass="home-buttons" text="Go Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            </AnchorPane>
+            <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
+               <children>
+                  <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/menu.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane layoutX="15.0" layoutY="80.0" prefHeight="500.0" prefWidth="110.0">
+                     <children>
+                        <Button fx:id="btnBack" layoutY="60.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadPreviousScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefHeight="40.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnGames" layoutY="140.0" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" onAction="#loadCreateScreen" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
+                        <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
-   </top>
-   <center>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <VBox prefHeight="544.0" prefWidth="350.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 1" />
-                              <TextField fx:id="eqn1" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl1" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 3" />
-                              <TextField fx:id="eqn3" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl3" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 5" />
-                              <TextField fx:id="eqn5" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl5" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 7" />
-                              <TextField fx:id="eqn7" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl7" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 9" />
-                              <TextField fx:id="eqn9" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl9" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="350.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 2" />
-                              <TextField fx:id="eqn2" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl2" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 4" />
-                              <TextField fx:id="eqn4" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl4" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 6" />
-                              <TextField fx:id="eqn6" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl6" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 8" />
-                              <TextField fx:id="eqn8" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl8" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="80.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Label minWidth="130.0" styleClass="custom-question-label" text="Question 10" />
-                              <TextField fx:id="eqn10" maxWidth="120.0" promptText="Example: a + b" />
-                              <Label fx:id="lbl10" contentDisplay="GRAPHIC_ONLY" maxHeight="10.0" maxWidth="10.0" text="Label" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="30.0" right="30.0" />
-         </padding>
-      </HBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label styleClass="custom-question-label" text="Enter Quiz Name:" />
-            <TextField fx:id="txtQuizName">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </TextField>
-            <Button fx:id="btnSaveQuiz" mnemonicParsing="false" onAction="#saveQuiz" text="Save Quiz">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
-</BorderPane>
+   </children>
+</StackPane>

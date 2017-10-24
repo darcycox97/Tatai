@@ -15,15 +15,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import tatai.TataiPrototype;
+import tatai.view.Screen;
 
-public class TeacherMenuController {
+public class TeacherMenuController extends ScreenController {
 
 	@FXML private MenuButton menuLogout;
-	@FXML private Button btnStats;
 	@FXML private Button btnCreateQuiz;
+	@FXML private Button btnMainStats;
 	
 	@FXML
 	public void initialize() {
+		
+		setup();
 		
 		// initialize log out menu item
 		menuLogout.setText("Teacher");
@@ -61,20 +64,8 @@ public class TeacherMenuController {
 	}
 	
 	@FXML
-	public void openClassStats() {
-		
-		// Load classroom stats screen
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherStatsScreen.fxml"));
-			Parent root = loader.load();
-			btnStats.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
 	public void openQuizCreator() {
+		setPreviousScreen();
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
 			Parent root = loader.load();
@@ -82,6 +73,11 @@ public class TeacherMenuController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	protected Screen getScreen() {
+		return Screen.TEACHER_MENU;
 	}
 	
 }

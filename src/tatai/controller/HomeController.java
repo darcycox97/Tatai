@@ -17,21 +17,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import tatai.TataiPrototype;
-import tatai.game.GameDifficulty;
-import tatai.game.GameFactory;
-import tatai.game.GameMode;
 import tatai.statistics.User;
+import tatai.view.Screen;
 
-public class HomeController {
+public class HomeController extends ScreenController {
 
 	@FXML private Label lblMain;
 	@FXML private MenuButton menuUser;
-	@FXML private Button btnGames;
-	@FXML private Button btnPractice;
-	@FXML private Button btnStatistics;
+	@FXML private Button btnMainGames;
+	@FXML private Button btnMainPractice;
+	@FXML private Button btnMainStats;
 	
 	@FXML
 	public void initialize() {
+		
+		setup();
+		
+		navigationPane.setVisible(false);
 		
 		// set text of user button to show who is logged in
 		menuUser.setText(User.getInstance().getName());
@@ -70,43 +72,10 @@ public class HomeController {
 		
 		menuUser.getItems().add(logOutMenu);
 	}
-	
-	@FXML
-	public void openGames() {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
-			Parent root = loader.load();
-			btnGames.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	public void openPractice() {
-		
-		GameFactory.getInstance().setCurrentGame(GameMode.PRACTICE, GameDifficulty.EASY, null);
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
-			Parent root = loader.load();
-			btnGames.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
-	public void openStatistics() {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
-			Parent root = loader.load();
-			btnGames.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+	@Override
+	protected Screen getScreen() {
+		return Screen.HOME;
 	}
 	
 	

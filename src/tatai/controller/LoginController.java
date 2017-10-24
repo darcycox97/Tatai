@@ -1,6 +1,7 @@
 package tatai.controller;
 
 import java.io.IOException;
+
 import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
@@ -12,7 +13,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
@@ -93,16 +95,6 @@ public class LoginController {
 		String username;
 		String selected = comboUsers.getSelectionModel().getSelectedItem();
 
-		//		if (selected == null) {
-		//			Alert alert = new Alert(
-		//					AlertType.INFORMATION,
-		//					"Please select a username before logging in"
-		//					);
-		//			alert.showAndWait();
-		//			return;
-		//
-		//		} else 
-
 		if (selected.equals(NEW_USER)) {
 			// no need for validation check because login button can't be clicked if invalid
 			username = txtUserName.getText();
@@ -130,7 +122,7 @@ public class LoginController {
 			if (passwordCorrect) {
 				// load teacher menu
 				try {
-					BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
+					StackPane root = (StackPane)FXMLLoader.load(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 					Scene scene = new Scene(root,700,600);
 					((Stage)btnLogin.getScene().getWindow()).setScene(scene);
 				} catch (IOException e) {
@@ -145,7 +137,7 @@ public class LoginController {
 		} else {
 			// load the home screen
 			try {
-				BorderPane root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource("view/Home.fxml"));
+				AnchorPane root = (AnchorPane)FXMLLoader.load(TataiPrototype.class.getResource("view/Home.fxml"));
 				Scene scene = new Scene(root,700,600);
 				((Stage)btnLogin.getScene().getWindow()).setScene(scene);
 			} catch (IOException e) {

@@ -92,6 +92,34 @@
 	-fx-min-width : 280px;
 }
 
+.game-menu-buttons {
+	-fx-font-size : 28px;
+	-fx-min-width : 200px;
+	-fx-max-width : 150px;
+	-fx-min-height : 150px;
+}
+
+.teacher-menu-buttons {
+	-fx-font-size : 30px;
+	-fx-min-width : 450px;
+	-fx-max-width : 450px;
+	-fx-min-height : 130px;
+}
+
+.navigation-buttons {
+	-fx-font-size : 17px;
+	-fx-min-width : 110px;
+	-fx-min-height: 50px;
+	-fx-max-height: 50px;
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+
+.navigation-buttons:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-border-color: #FFFFFF;
+}
+
 .custom-question-label {
 	-fx-font-size : 18px;
 }

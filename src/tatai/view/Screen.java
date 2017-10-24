@@ -1,0 +1,15 @@
+package tatai.view;
+
+public enum Screen {
+	HOME,
+	GAME_MENU,
+	GAME,
+	LOGIN,
+	STATS_MENU,
+	MY_STATS,
+	CLASS_STATS,
+	TEACHER_MENU,
+	TEACHER_STATS,
+	CREATE_QUIZ,
+	CUSTOM_QUIZ_MENU
+}

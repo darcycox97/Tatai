@@ -101,8 +101,6 @@ public class Equation implements Question {
 
 			
 		}
-
-		System.out.println(getDisplayText() + " = " + getValue());
 		
 	}
 	
