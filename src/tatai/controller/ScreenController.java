@@ -1,6 +1,7 @@
 package tatai.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tatai.TataiPrototype;
-import tatai.game.Game;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
@@ -263,7 +263,7 @@ public abstract class ScreenController {
 	@FXML
 	public void loadStatsScreen() {
 
-		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.STATS_MENU)) {
+		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.STATS_MENU) && !CURRENT_SCREEN.equals(Screen.TEACHER_STATS)) {
 			setPreviousScreen();
 
 
