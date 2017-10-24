@@ -43,6 +43,7 @@ public class CustomQuizMenuController extends ScreenController {
 				RadioButton button = new RadioButton(q);
 				button.setUserData(q);
 				button.setToggleGroup(quizToggle);
+				button.getStyleClass().add("label-20px");
 				quizBox.getChildren().add(button);
 			}
 		}
