@@ -13,6 +13,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +64,8 @@ public class GameScreenController extends ScreenController implements HTKListene
 	private static final String CORRECT = "Correct!";
 	private static final String INCORRECT = "Incorrect!";
 
+	private static final File INCORRECT_SOUND = new File("resources/sounds/incorrect.wav");
+	private static final File CORRECT_SOUND = new File("resources/sounds/correct.mp3");
 	private static final File AUDIO = new File("resources/HTK/MaoriNumbers/question_attempt.wav"); // points to the file that contains the output of the user's recordings.
 
 	private Game game;
@@ -263,6 +266,20 @@ public class GameScreenController extends ScreenController implements HTKListene
 		
 		if (correct) {
 			
+			// play positive sound to let user know, and have a fade animation to draw attention to the label
+			if (player != null) {
+				player.stop();
+			}
+			player = new MediaPlayer(new Media(CORRECT_SOUND.toURI().toString()));
+			player.play();
+			
+			FadeTransition correctAnimation = new FadeTransition(Duration.millis(600), lblGamePrompts);
+			correctAnimation.setFromValue(1.0);
+			correctAnimation.setToValue(0.6);
+			correctAnimation.setAutoReverse(true);
+			correctAnimation.setCycleCount(2);
+			correctAnimation.play();
+			
 			lblGamePrompts.setText(CORRECT);
 			lblGamePrompts.setStyle("-fx-background-color:" + CORRECT_COLOR + ";");
 			
@@ -278,6 +295,32 @@ public class GameScreenController extends ScreenController implements HTKListene
 			}
 			
 		} else {
+			
+			// play the incorrect sound
+			if (player != null) {
+				player.stop();
+			}
+			player = new MediaPlayer(new Media(INCORRECT_SOUND.toURI().toString()));
+			player.play();
+			
+			// make the main label shake to indicate answer was incorrect
+			TranslateTransition moveRight = new TranslateTransition(Duration.millis(50), questionLabel);
+			moveRight.setByX(20);
+			moveRight.setAutoReverse(true);
+			moveRight.setCycleCount(2);
+			
+			TranslateTransition moveLeft = new TranslateTransition(Duration.millis(50), questionLabel);
+			moveLeft.setByX(-20);
+			moveLeft.setAutoReverse(true);
+			moveLeft.setCycleCount(2);
+			
+			Timeline shakeAnimation = new Timeline();
+			shakeAnimation.getKeyFrames().addAll(
+				new KeyFrame(Duration.ZERO, e -> moveRight.play()),
+				new KeyFrame(Duration.millis(100), e -> moveLeft.play())
+			);
+			shakeAnimation.play();
+			
 			
 			lblGamePrompts.setText(INCORRECT);
 			lblGamePrompts.setStyle("-fx-background-color:" + INCORRECT_COLOR + ";");

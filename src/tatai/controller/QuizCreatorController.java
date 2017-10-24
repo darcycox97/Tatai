@@ -3,6 +3,7 @@ package tatai.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javafx.beans.value.ChangeListener;
@@ -104,6 +105,20 @@ public class QuizCreatorController extends ScreenController {
 		setPreviousScreen();
 		
 		try {
+			
+			Alert confirm = new Alert(
+				AlertType.CONFIRMATION,
+				"Are you sure you want to go back?\n This quiz will not be saved.",
+				ButtonType.YES,
+				ButtonType.NO
+			);
+			
+			Optional<ButtonType> result = confirm.showAndWait();
+			if (!(result.isPresent() && result.get() == ButtonType.YES)) {
+				return;
+			}
+			
+			
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
 			Parent root = loader.load();
 			btnGoBack.getScene().setRoot(root);
