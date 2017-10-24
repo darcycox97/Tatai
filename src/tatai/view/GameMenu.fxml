@@ -185,7 +185,14 @@
                         <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
                         <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
                         <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
-                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons" />
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
                      </children>
                   </AnchorPane>

@@ -113,7 +113,7 @@ public abstract class ScreenController {
 			keyFrames.add(new KeyFrame(Duration.millis(300), new KeyValue(btnBack.visibleProperty(), true)));
 		}
 
-		if (getScreen().equals(Screen.GAME_MENU)) {
+		if (CURRENT_SCREEN.equals(Screen.GAME_MENU)) {
 			keyFrames.add(new KeyFrame(Duration.millis(300), new KeyValue(btnHelp.visibleProperty(), true)));
 		} else {
 			keyFrames.add(new KeyFrame(Duration.millis(300), new KeyValue(btnHelp.visibleProperty(), false)));
