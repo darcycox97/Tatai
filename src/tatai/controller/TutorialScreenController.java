@@ -36,8 +36,6 @@ public class TutorialScreenController {
 	@FXML private AnchorPane exitPane;
 	@FXML private Button btnQuit;
 	
-	
-	
 	private static final int NUM_PANES = 6;
 	private static final String BEGINNING_CLASS = "tutorial-start";
 	private static final String QUESTION_ATTEMPT_CLASS = "tutorial-question-attempt";
@@ -127,7 +125,7 @@ public class TutorialScreenController {
 	}
 	
 	@FXML
-	public void openGameMenu() {
+	public void openGameMenu() {	
 	
 	try {
 		FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));

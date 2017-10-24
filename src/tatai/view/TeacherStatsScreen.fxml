@@ -129,34 +129,47 @@
             </AnchorPane>
             <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
                <children>
-                  <VBox alignment="TOP_CENTER" layoutX="19.0" layoutY="86.0" prefHeight="200.0" prefWidth="110.0" spacing="30.0">
-                     <children>
-                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#loadPreviousScreen" prefWidth="110.0" styleClass="navigation-buttons" text="&lt;- Back">
-                           <VBox.margin>
-                              <Insets top="-0.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Home">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="btnGames" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
-                        <Button fx:id="btnPractice" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
-                        <Button fx:id="btnStats" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
-                        <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#loadHelpScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Help" />
-                        <Button fx:id="btnLogout" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out">
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
                   <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/menu.png" />
                      </image>
                   </ImageView>
+                  <AnchorPane layoutX="15.0" layoutY="80.0" prefHeight="500.0" prefWidth="110.0">
+                     <children>
+                        <Button fx:id="btnBack" layoutY="60.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadPreviousScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefHeight="40.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/home.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnGames" layoutY="140.0" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                        <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                        <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" onAction="#loadCreateScreen" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
+                        <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/help.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

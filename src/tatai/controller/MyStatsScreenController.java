@@ -1,20 +1,16 @@
 package tatai.controller;
 
-import java.io.IOException;
-
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
+import tatai.view.Screen;
 
 public class MyStatsScreenController extends ScreenController {
 
@@ -42,28 +38,6 @@ public class MyStatsScreenController extends ScreenController {
 		comboGamemode.getItems().addAll("Classic", "Arcade", "Time Attack");
 		comboLevel.getItems().addAll("Easy", "Hard");
 		loadProgress();
-	}
-
-	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	public void loadStatsMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/StatsMenu.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
@@ -130,9 +104,8 @@ public class MyStatsScreenController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.MY_STATS;
 	}
 
 }

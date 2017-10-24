@@ -23,7 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -33,6 +33,7 @@ import javafx.util.Duration;
 import tatai.question.Question;
 import tatai.statistics.CSVFile;
 import tatai.statistics.User;
+import tatai.view.Screen;
 import tatai.statistics.CSVFile.CSVName;
 import tatai.TataiPrototype;
 import tatai.game.Game;
@@ -568,57 +569,30 @@ public class GameScreenController extends ScreenController implements HTKListene
 
 	}
 
-	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
+	private void stopAnimations() {
 		
+		if (recordingAnimations != null) {
+			for (Animation a : recordingAnimations) {
+				a.stop();
+			}
+		}
+
+		if (countingAnimation != null) {
+			countingAnimation.stop();
+		}
 	}
 	
 	@FXML
 	public void loadHomeScreen() {
 		
-	
-		try {
+		stopAnimations();
+		super.loadHomeScreen();
+		
+	}
 
-			String toLoad = "view/Home.fxml";
-
-			if (!game.getFinished()) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Exit Confirmation");
-
-				alert.setHeaderText("Are you sure you wish to exit?");
-				alert.setContentText("All progress will be lost.");
-
-				ButtonType buttonTypeYes = new ButtonType("Yes");
-				ButtonType buttonTypeCancel = new ButtonType("No", ButtonData.CANCEL_CLOSE);
-
-				alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeCancel);
-
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() != buttonTypeYes){
-					return;
-				} 
-
-			} 
-
-
-			if (recordingAnimations != null) {
-				for (Animation a : recordingAnimations) {
-					a.stop();
-				}
-			}
-
-			if (countingAnimation != null) {
-				countingAnimation.stop();
-			}
-
-			Parent root = (BorderPane)FXMLLoader.load(TataiPrototype.class.getResource(toLoad));
-			btnHome.getScene().setRoot(root);
-
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	@Override
+	protected Screen getScreen() {
+		return Screen.GAME;
 	}
 	
 }

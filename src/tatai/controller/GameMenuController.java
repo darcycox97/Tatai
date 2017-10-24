@@ -15,6 +15,7 @@ import tatai.TataiPrototype;
 import tatai.game.GameDifficulty;
 import tatai.game.GameFactory;
 import tatai.game.GameMode;
+import tatai.view.Screen;
 
 public class GameMenuController extends ScreenController {
 	
@@ -44,6 +45,8 @@ public class GameMenuController extends ScreenController {
 			GameFactory.getInstance().setCurrentGame(GameMode.CLASSIC, GameDifficulty.HARD, null);
 		}
 		
+		setPreviousScreen();
+		
 		// load the game screen
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
@@ -63,6 +66,8 @@ public class GameMenuController extends ScreenController {
 		} else {
 			GameFactory.getInstance().setCurrentGame(GameMode.ARCADE, GameDifficulty.HARD, null);
 		}
+		
+		setPreviousScreen();
 		
 		// load the game screen
 		try {
@@ -85,6 +90,8 @@ public class GameMenuController extends ScreenController {
 			GameFactory.getInstance().setCurrentGame(GameMode.TIME_ATTACK, GameDifficulty.HARD, null);
 		}
 		
+		setPreviousScreen();
+		
 		// load the game screen
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
@@ -99,6 +106,8 @@ public class GameMenuController extends ScreenController {
 	@FXML
 	public void openCustomQuizzes() {
 	
+		setPreviousScreen();
+		
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/CustomQuizMenu.fxml"));
 			Parent root = loader.load();
@@ -109,8 +118,7 @@ public class GameMenuController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.GAME_MENU;
 	}
 }

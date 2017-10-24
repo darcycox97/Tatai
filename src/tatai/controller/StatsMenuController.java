@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import tatai.TataiPrototype;
+import tatai.view.Screen;
 
 public class StatsMenuController extends ScreenController {
 	
@@ -19,18 +20,8 @@ public class StatsMenuController extends ScreenController {
 	}
 	
 	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
 	public void loadMyStats() {
+		setPreviousScreen();
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/MyStatsScreen.fxml"));
 			Parent root = loader.load();
@@ -42,6 +33,7 @@ public class StatsMenuController extends ScreenController {
 	
 	@FXML
 	public void loadClassStats() {
+		setPreviousScreen();
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/ClassStatsScreen.fxml"));
 			Parent root = loader.load();
@@ -52,9 +44,8 @@ public class StatsMenuController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.STATS_MENU;
 	}
 
 }

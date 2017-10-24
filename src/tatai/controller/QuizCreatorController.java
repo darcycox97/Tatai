@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.view.Screen;
 
 public class QuizCreatorController extends ScreenController {
 
@@ -99,6 +100,8 @@ public class QuizCreatorController extends ScreenController {
 	}
 	
 	@FXML public void loadTeacherMenu() {
+		
+		setPreviousScreen();
 		
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
@@ -254,12 +257,10 @@ public class QuizCreatorController extends ScreenController {
 			}
 		}
 	}
-
-
+	
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.CREATE_QUIZ;
 	}
 	
 }

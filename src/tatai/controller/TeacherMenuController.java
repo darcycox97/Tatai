@@ -15,11 +15,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import tatai.TataiPrototype;
+import tatai.view.Screen;
 
 public class TeacherMenuController extends ScreenController {
 
 	@FXML private MenuButton menuLogout;
 	@FXML private Button btnCreateQuiz;
+	@FXML private Button btnMainStats;
 	
 	@FXML
 	public void initialize() {
@@ -63,6 +65,7 @@ public class TeacherMenuController extends ScreenController {
 	
 	@FXML
 	public void openQuizCreator() {
+		setPreviousScreen();
 		try {
 			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/QuizCreator.fxml"));
 			Parent root = loader.load();
@@ -73,9 +76,8 @@ public class TeacherMenuController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.TEACHER_MENU;
 	}
 	
 }

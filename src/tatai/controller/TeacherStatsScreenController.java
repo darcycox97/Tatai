@@ -1,21 +1,16 @@
 package tatai.controller;
 
-import java.io.IOException;
-
-
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import tatai.TataiPrototype;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.view.Screen;
 
 public class TeacherStatsScreenController extends ScreenController {
 
@@ -43,28 +38,6 @@ public class TeacherStatsScreenController extends ScreenController {
 		comboStudent.getItems().addAll(CSVFile.getAllTitles(CSVName.STATISTICS));
 		comboStudent.getSelectionModel().selectFirst();
 		loadProgress();
-	}
-
-	@FXML
-	public void loadHomeScreen() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/Home.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	public void loadStatsMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/TeacherMenu.fxml"));
-			Parent root = loader.load();
-			btnHome.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@FXML
@@ -128,9 +101,8 @@ public class TeacherStatsScreenController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.TEACHER_STATS;
 	}
 
 }

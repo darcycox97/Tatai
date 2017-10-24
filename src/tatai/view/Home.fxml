@@ -7,70 +7,127 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@TataiStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.HomeController">
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="680.0" spacing="55.0" BorderPane.alignment="CENTER">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tatai.controller.HomeController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label fx:id="lblMain" text="Welcome to Tātai!">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnGames" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openGames" styleClass="main-buttons" text="Games">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
-                     <image>
-                        <Image url="@icons/dice.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="21.0" />
-               </font></Button>
-            <Button fx:id="btnPractice" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openPractice" styleClass="main-buttons" text="Practice">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
-                     <image>
-                        <Image url="@icons/practice.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="21.0" />
-               </font></Button>
-            <Button fx:id="btnStatistics" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#openStatistics" styleClass="main-buttons" text="Statistics">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
-                     <image>
-                        <Image url="@icons/graph.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="21.0" />
-               </font></Button>
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="root" stylesheets="@TataiStyle.css">
+               <center>
+                  <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="680.0" spacing="55.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="lblMain" text="Welcome to Tātai!">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnMainGames" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#loadGameScreen" styleClass="main-buttons" text="Games">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                                 <image>
+                                    <Image url="@icons/dice.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMainPractice" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#loadPracticeScreen" styleClass="main-buttons" text="Practice">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                                 <image>
+                                    <Image url="@icons/practice.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnMainStats" contentDisplay="RIGHT" graphicTextGap="20.0" minWidth="180.0" mnemonicParsing="false" onAction="#loadStatsScreen" styleClass="main-buttons" text="Statistics">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="home-screen-images">
+                                 <image>
+                                    <Image url="@icons/graph.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets top="40.0" />
+                     </padding>
+                  </VBox>
+               </center>
+               <top>
+                  <MenuButton fx:id="menuUser" alignment="CENTER" mnemonicParsing="false" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <BorderPane.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </MenuButton>
+               </top>
+            </BorderPane>
          </children>
-         <padding>
-            <Insets top="40.0" />
-         </padding>
-      </VBox>
-   </center>
-   <top>
-      <MenuButton fx:id="menuUser" alignment="CENTER" mnemonicParsing="false" text="MenuButton" BorderPane.alignment="TOP_RIGHT">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-         <BorderPane.margin>
-            <Insets right="20.0" top="20.0" />
-         </BorderPane.margin>
-         <font>
-            <Font size="20.0" />
-         </font>
-      </MenuButton>
-   </top>
-</BorderPane>
+      </AnchorPane>
+      <AnchorPane fx:id="navigationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#hideNavigationBar" prefHeight="600.0" prefWidth="140.0" stylesheets="@TataiStyle.css">
+         <children>
+            <ImageView fx:id="menuIcon" fitHeight="50.0" fitWidth="50.0" layoutX="10.0" layoutY="10.0" onMouseEntered="#showNavigationBar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/menu.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="15.0" layoutY="80.0" prefHeight="500.0" prefWidth="110.0">
+               <children>
+                  <Button fx:id="btnBack" layoutY="60.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadPreviousScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#loadHomeScreen" prefHeight="40.0" prefWidth="110.0" styleClass="navigation-buttons">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnGames" layoutY="140.0" mnemonicParsing="false" onAction="#loadGameScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Games" />
+                  <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
+                  <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
+                  <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
+                  <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/help.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

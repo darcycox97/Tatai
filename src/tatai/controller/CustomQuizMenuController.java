@@ -17,11 +17,11 @@ import tatai.game.GameFactory;
 import tatai.game.GameMode;
 import tatai.statistics.CSVFile;
 import tatai.statistics.CSVFile.CSVName;
+import tatai.view.Screen;
 
 public class CustomQuizMenuController extends ScreenController {
 	
 	@FXML private VBox quizBox;
-	@FXML private Button btnGoBack;
 	@FXML private Button btnStartQuiz;
 	@FXML private Label lblNoDisplay;
 	
@@ -49,18 +49,10 @@ public class CustomQuizMenuController extends ScreenController {
 	}
 	
 	@FXML
-	public void openGameMenu() {
-		try {
-			FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameMenu.fxml"));
-			Parent root = loader.load();
-			btnGoBack.getScene().setRoot(root);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@FXML
 	public void startQuiz() {
+		
+		confirmExit();
+		setPreviousScreen();
 		
 		if (quizToggle.getSelectedToggle() != null) {
 			String quizName = (String) quizToggle.getSelectedToggle().getUserData();
@@ -69,7 +61,7 @@ public class CustomQuizMenuController extends ScreenController {
 			try {
 				FXMLLoader loader = new FXMLLoader(TataiPrototype.class.getResource("view/GameScreen.fxml"));
 				Parent root = loader.load();
-				btnGoBack.getScene().setRoot(root);
+				btnStartQuiz.getScene().setRoot(root);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -77,9 +69,8 @@ public class CustomQuizMenuController extends ScreenController {
 	}
 
 	@Override
-	public void loadPreviousScreen() {
-		// TODO Auto-generated method stub
-		
+	protected Screen getScreen() {
+		return Screen.CUSTOM_QUIZ_MENU;
 	}
 	
 
