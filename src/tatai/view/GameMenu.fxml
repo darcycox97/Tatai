@@ -54,7 +54,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" spacing="40.0">
+                              <VBox alignment="CENTER" spacing="20.0">
                                  <children>
                                     <HBox alignment="CENTER" spacing="20.0">
                                        <children>
@@ -72,11 +72,18 @@
                                              </tooltip>
                                           </Label>
                                           <Button fx:id="btnArcade" minWidth="200.0" mnemonicParsing="false" onAction="#startArcadeGame" styleClass="game-menu-buttons" text="Arcade" />
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@icons/help.png" />
-                                             </image>
-                                          </ImageView>
+                                          <Label>
+                                             <graphic>
+                                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/help.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="It's a race against the clock!&#10;You have one minute to &#10;complete as many questions as you can!" />
+                                             </tooltip>
+                                          </Label>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" spacing="20.0">
@@ -110,11 +117,18 @@
                                              <padding>
                                                 <Insets left="40.0" />
                                              </padding></Button>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@icons/help.png" />
-                                             </image>
-                                          </ImageView>
+                                          <Label>
+                                             <graphic>
+                                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/help.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="See what quizzes your teacher &#10;has designed just for you!" />
+                                             </tooltip>
+                                          </Label>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
@@ -127,6 +141,9 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <padding>
+                                    <Insets top="30.0" />
+                                 </padding>
                               </VBox>
                            </children>
                            <BorderPane.margin>
@@ -168,15 +185,7 @@
                         <Button fx:id="btnPractice" layoutY="195.0" mnemonicParsing="false" onAction="#loadPracticeScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Practice" />
                         <Button fx:id="btnCreateQuiz" layoutY="305.0" mnemonicParsing="false" prefWidth="110.0" styleClass="navigation-buttons" text="New Quiz" />
                         <Button fx:id="btnStats" layoutY="250.0" mnemonicParsing="false" onAction="#loadStatsScreen" prefWidth="110.0" styleClass="navigation-buttons" text="Stats" />
-                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/help.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <Button fx:id="btnHelp" layoutY="395.0" maxHeight="50.0" mnemonicParsing="false" onAction="#loadHelpScreen" prefHeight="50.0" prefWidth="110.0" styleClass="navigation-buttons" />
                         <Button fx:id="btnLogout" layoutY="450.0" mnemonicParsing="false" onAction="#logout" prefWidth="110.0" styleClass="navigation-buttons" text="Log Out" />
                      </children>
                   </AnchorPane>
