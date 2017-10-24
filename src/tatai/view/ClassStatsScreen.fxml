@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -69,12 +71,21 @@
                                     <Label fx:id="lblGoldUser" styleClass="medal-holder-labels" text="Label" />
                                     <Label fx:id="lblSilverUser" styleClass="medal-holder-labels" text="Label" />
                                     <Label fx:id="lblBronzeUser" styleClass="medal-holder-labels" text="Label" />
-                                    <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
-                                    <ComboBox fx:id="comboLevel" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Level">
-                                       <VBox.margin>
-                                          <Insets top="-60.0" />
-                                       </VBox.margin>
-                                    </ComboBox>
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="comboGamemode" onAction="#loadBestScores" prefWidth="190.0" promptText="Select a Game Mode" />
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                             <children>
+                                                <RadioButton fx:id="btnEasy" mnemonicParsing="false" styleClass="label-15px" text="Easy">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="difficultyToggle" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="btnHard" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="label-15px" text="Hard" toggleGroup="$difficultyToggle" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <padding>
                                     <Insets top="30.0" />
