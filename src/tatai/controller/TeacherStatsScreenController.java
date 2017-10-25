@@ -34,6 +34,7 @@ public class TeacherStatsScreenController extends ScreenController {
 	@FXML private Label lblGamesPlayed;
 	@FXML private Label lblNoScores;
 	@FXML private Label lblChooseMode;
+	@FXML private Label lblStatsTitle;
 
 	@FXML
 	public void initialize() {
@@ -82,7 +83,7 @@ public class TeacherStatsScreenController extends ScreenController {
 		lblBestScore.setText(CSVFile.getBest(scores, gamemode));
 		lblGamesPlayed.setText(String.valueOf(scores.size()));
 
-		progressChart.setTitle(username + "'s Progress");
+		lblStatsTitle.setText(username + "'s Progress");
 		progressChart.getData().clear();
 		progressChart.getData().add(CSVFile.getSeriesData(username, gamemode, level));
 		

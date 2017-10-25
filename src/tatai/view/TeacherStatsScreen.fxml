@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -28,7 +27,11 @@
                      <top>
                         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Region prefHeight="60.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="lblStatsTitle" maxWidth="400.0" prefWidth="400.0" styleClass="label-30px" stylesheets="@TataiStyle.css" text="User Progress Title">
+                                 <HBox.margin>
+                                    <Insets left="80.0" top="15.0" />
+                                 </HBox.margin>
+                              </Label>
                               <VBox prefHeight="98.0" prefWidth="190.0">
                                  <children>
                                     <ComboBox fx:id="comboStudent" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Student">
@@ -36,7 +39,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <ComboBox fx:id="comboGamemode" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
+                                    <ComboBox fx:id="comboGamemode" minWidth="-Infinity" onAction="#loadProgress" prefWidth="190.0" promptText="Select a Game Mode" />
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <RadioButton fx:id="btnEasy" mnemonicParsing="false" styleClass="label-15px" text="Easy">
@@ -109,7 +112,7 @@
                      <center>
                         <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" title="My Progress!" verticalGridLinesVisible="false">
+                              <LineChart fx:id="progressChart" blendMode="DARKEN" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" verticalGridLinesVisible="false">
                                 <xAxis>
                                   <NumberAxis label="Games" lowerBound="1.0" minorTickCount="0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" upperBound="1000.0" fx:id="xAxis" />
                                 </xAxis>
@@ -133,6 +136,9 @@
                                        </VBox.margin>
                                     </Label>
                                  </children>
+                                 <padding>
+                                    <Insets top="50.0" />
+                                 </padding>
                               </VBox>
                            </children>
                         </StackPane>
