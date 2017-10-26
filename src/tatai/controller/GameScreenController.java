@@ -309,8 +309,10 @@ public class GameScreenController extends ScreenController implements HTKListene
 				new KeyFrame(Duration.ZERO, e -> moveRight.play()),
 				new KeyFrame(Duration.millis(100), e -> moveLeft.play())
 			);
-			shakeAnimation.play();
 			
+			shakeAnimation.setOnFinished(e -> questionLabel.setTranslateX(0));
+			
+			shakeAnimation.play();
 			
 			lblGamePrompts.setText(INCORRECT);
 			lblGamePrompts.setStyle("-fx-background-color:" + INCORRECT_COLOR + ";");
