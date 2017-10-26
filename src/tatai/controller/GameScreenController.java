@@ -310,8 +310,7 @@ public class GameScreenController extends ScreenController implements HTKListene
 				new KeyFrame(Duration.millis(100), e -> moveLeft.play())
 			);
 			
-			shakeAnimation.setOnFinished(e -> questionLabel.setTranslateX(0));
-			
+			shakeAnimation.setOnFinished(e -> questionLabel.setTranslateX(0));			
 			shakeAnimation.play();
 			
 			lblGamePrompts.setText(INCORRECT);
