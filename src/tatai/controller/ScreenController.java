@@ -149,8 +149,11 @@ public abstract class ScreenController {
 
 	}
 
+	
+	/****** All loadXScreen() methods return boolean indicating whether the screen was changed or not ********/
+	
 	@FXML
-	public void loadHomeScreen() {
+	public boolean loadHomeScreen() {
 
 		if (confirmExit()) {
 			setPreviousScreen();
@@ -170,7 +173,11 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			return true;
 		}
+		
+		return false;
 	}
 
 	protected boolean confirmExit() {
@@ -200,7 +207,7 @@ public abstract class ScreenController {
 	}
 
 	@FXML
-	public void loadPreviousScreen() {
+	public boolean loadPreviousScreen() {
 		if (confirmExit()) {
 			String toLoad = getFXMLString(PREVIOUS_SCREEN);
 			setPreviousScreen();
@@ -211,11 +218,14 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 
 	@FXML
-	public void loadGameScreen() {
+	public boolean loadGameScreen() {
 
 		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.GAME_MENU)) {
 			setPreviousScreen();
@@ -227,12 +237,14 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return true;
 		}
+		return false;
 
 	}
 
 	@FXML
-	public void loadPracticeScreen() {
+	public boolean loadPracticeScreen() {
 
 		boolean load = true;
 
@@ -256,12 +268,14 @@ public abstract class ScreenController {
 					e.printStackTrace();
 
 				}
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@FXML
-	public void loadStatsScreen() {
+	public boolean loadStatsScreen() {
 
 		if (confirmExit() && !CURRENT_SCREEN.equals(Screen.STATS_MENU) && !CURRENT_SCREEN.equals(Screen.TEACHER_STATS)) {
 			setPreviousScreen();
@@ -277,12 +291,14 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			return true;
 		}
-
+		return false;
 	}
 
 	@FXML
-	public void loadCreateScreen() {
+	public boolean loadCreateScreen() {
 
 		if (confirmExit()) {
 			setPreviousScreen();
@@ -294,12 +310,14 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			return true;
 		}
-
+		return false;
 	}
 
 	@FXML
-	public void loadHelpScreen() {
+	public boolean loadHelpScreen() {
 
 		if (confirmExit()) {
 			setPreviousScreen();
@@ -311,12 +329,14 @@ public abstract class ScreenController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			return true;
 		}
-
+		return false;
 	}
 
 	@FXML
-	public void logout() {
+	public boolean logout() {
 		Alert confirm = new Alert(
 				AlertType.WARNING,
 				"Are you sure you want to log out?",
@@ -336,9 +356,11 @@ public abstract class ScreenController {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			
+			return true;
 
 		} else {
-			return; // user does not wish to log out
+			return false; // user does not wish to log out
 		}
 
 	}

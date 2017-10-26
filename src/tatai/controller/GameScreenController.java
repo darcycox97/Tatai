@@ -614,39 +614,45 @@ public class GameScreenController extends ScreenController implements HTKListene
 	// override exit methods so that animations are stopped to avoid possible errors.
 
 	@FXML @Override
-	public void loadHomeScreen() {
-		stopAnimations();
-		super.loadHomeScreen();
+	public boolean loadHomeScreen() {
+		boolean exit = super.loadHomeScreen();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 	@FXML @Override
-	public void loadPreviousScreen() {
-		stopAnimations();
-		super.loadPreviousScreen();
+	public boolean loadPreviousScreen() {
+		boolean exit = super.loadPreviousScreen();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 	@FXML @Override 
-	public void loadGameScreen() {
-		stopAnimations();
-		super.loadGameScreen();
+	public boolean loadGameScreen() {
+		boolean exit = super.loadGameScreen();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 	@FXML @Override 
-	public void loadPracticeScreen() {
-		stopAnimations();
-		super.loadPracticeScreen();
+	public boolean loadPracticeScreen() {
+		boolean exit = super.loadPracticeScreen();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 	@FXML @Override
-	public void loadStatsScreen() {
-		stopAnimations();
-		super.loadStatsScreen();
+	public boolean loadStatsScreen() {
+		boolean exit = super.loadStatsScreen();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 	@FXML @Override
-	public void logout() {
-		stopAnimations();
-		super.logout();
+	public boolean logout() {
+		boolean exit = super.logout();
+		if (exit) { stopAnimations(); }
+		return exit;
 	}
 	
 
