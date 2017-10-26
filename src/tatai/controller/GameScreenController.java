@@ -311,6 +311,7 @@ public class GameScreenController extends ScreenController implements HTKListene
 			);
 			shakeAnimation.play();
 			
+			shakeAnimation.setOnFinished(e -> questionLabel.setTranslateX(0));
 			
 			lblGamePrompts.setText(INCORRECT);
 			lblGamePrompts.setStyle("-fx-background-color:" + INCORRECT_COLOR + ";");
