@@ -610,13 +610,45 @@ public class GameScreenController extends ScreenController implements HTKListene
 		}
 	}
 	
-	@FXML
+	
+	// override exit methods so that animations are stopped to avoid possible errors.
+
+	@FXML @Override
 	public void loadHomeScreen() {
-		
 		stopAnimations();
 		super.loadHomeScreen();
-		
 	}
+	
+	@FXML @Override
+	public void loadPreviousScreen() {
+		stopAnimations();
+		super.loadPreviousScreen();
+	}
+	
+	@FXML @Override 
+	public void loadGameScreen() {
+		stopAnimations();
+		super.loadGameScreen();
+	}
+	
+	@FXML @Override 
+	public void loadPracticeScreen() {
+		stopAnimations();
+		super.loadPracticeScreen();
+	}
+	
+	@FXML @Override
+	public void loadStatsScreen() {
+		stopAnimations();
+		super.loadStatsScreen();
+	}
+	
+	@FXML @Override
+	public void logout() {
+		stopAnimations();
+		super.logout();
+	}
+	
 
 	@Override
 	protected Screen getScreen() {
