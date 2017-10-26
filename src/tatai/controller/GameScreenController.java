@@ -10,7 +10,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -294,23 +293,18 @@ public class GameScreenController extends ScreenController implements HTKListene
 			player.play();
 			
 			// make the main label shake to indicate answer was incorrect
-			TranslateTransition moveRight = new TranslateTransition(Duration.millis(50), questionLabel);
-			moveRight.setByX(20);
-			moveRight.setAutoReverse(true);
-			moveRight.setCycleCount(2);
+	
 			
-			TranslateTransition moveLeft = new TranslateTransition(Duration.millis(50), questionLabel);
-			moveLeft.setByX(-20);
-			moveLeft.setAutoReverse(true);
-			moveLeft.setCycleCount(2);
-			
+			// make the main label shake to indicate answer was incorrect
 			Timeline shakeAnimation = new Timeline();
 			shakeAnimation.getKeyFrames().addAll(
-				new KeyFrame(Duration.ZERO, e -> moveRight.play()),
-				new KeyFrame(Duration.millis(100), e -> moveLeft.play())
+				new KeyFrame(Duration.ZERO, new KeyValue(questionLabel.translateXProperty(), 0)),
+				new KeyFrame(Duration.millis(30), new KeyValue(questionLabel.translateXProperty(), 10)),
+				new KeyFrame(Duration.millis(60), new KeyValue(questionLabel.translateXProperty(), -10)),
+				new KeyFrame(Duration.millis(90), new KeyValue(questionLabel.translateXProperty(), 0))
 			);
-			
-			shakeAnimation.setOnFinished(e -> questionLabel.setTranslateX(0));			
+					
+			shakeAnimation.setCycleCount(2);		
 			shakeAnimation.play();
 			
 			lblGamePrompts.setText(INCORRECT);
